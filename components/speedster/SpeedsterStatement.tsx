@@ -69,7 +69,7 @@ export default function SpeedsterStatement() {
           className="font-semibold leading-[1.06]"
           style={{
             fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-            fontSize: "clamp(2.25rem, 7vw, 6.25rem)",
+            fontSize: "clamp(3.0375rem, 9.45vw, 8.4375rem)",
             letterSpacing: "-0.05em",
             color: "#ff5d00", // fallback — motion spans override
           }}

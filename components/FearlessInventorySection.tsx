@@ -13,8 +13,6 @@ const imageVariant = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: EASE, delay: 0.1 } },
 };
 
-// Olive-green tag pill data — Figma: bg #6f7142, rounded-[29px], px-22 py-5
-const TAGS = ["research", "user testing", "figma"] as const;
 
 /* ── Animation variants ──────────────────────────────────────────────────── */
 const textStagger = {
@@ -128,39 +126,6 @@ export default function FearlessInventorySection() {
             <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
           </motion.a>
 
-          {/* Olive-green tag pills — Figma: bg #6f7142, rounded-[29px], px-22 py-5 */}
-          <motion.div
-            variants={fadeUp}
-            className="flex flex-wrap"
-            style={{ gap: "15px" }}
-          >
-            {TAGS.map((tag) => (
-              <div
-                key={tag}
-                className="flex items-center justify-center shrink-0"
-                style={{
-                  backgroundColor: "#6f7142",
-                  borderRadius: "29px",
-                  paddingLeft: "22px",
-                  paddingRight: "22px",
-                  paddingTop: "5px",
-                  paddingBottom: "5px",
-                }}
-              >
-                <p
-                  className="font-semibold uppercase text-white whitespace-nowrap"
-                  style={{
-                    fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                    fontSize: "1rem",
-                    letterSpacing: "-0.48px",
-                    lineHeight: "1.1",
-                  }}
-                >
-                  {tag}
-                </p>
-              </div>
-            ))}
-          </motion.div>
         </motion.div>
 
         {/* ── Right: mockup image — above text on mobile, right on desktop ── */}

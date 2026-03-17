@@ -135,7 +135,7 @@ export default function SpeedsterSection() {
             </motion.p>
             <motion.a
               variants={textLine}
-              href="#speedster"
+              href="/work/speedster"
               className="flex items-center font-medium group w-fit"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",

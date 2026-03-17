@@ -42,6 +42,21 @@ export default function AboutSection() {
         className="flex flex-col shrink-0 order-2 md:order-1 lg:order-1"
         style={{ maxWidth: "568px", width: "100%", gap: "21px" }}
       >
+        <motion.p
+          variants={fadeUp}
+          className="font-normal"
+          style={{
+            fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+            fontSize: "2.3125rem",
+            letterSpacing: "-1.11px",
+            lineHeight: "1",
+            color: "var(--text-primary)",
+            transition: "color 200ms ease",
+          }}
+        >
+          About
+        </motion.p>
+
         <div className="flex flex-col" style={{ gap: "6px" }}>
           <motion.p
             variants={fadeUp}

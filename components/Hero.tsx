@@ -245,9 +245,11 @@ function FoldPanel({
 function MobileFoldPanel({
   panel,
   revealDelay = 0,
+  cropRight = 0,
 }: {
   panel: (typeof panels)[number];
   revealDelay?: number;
+  cropRight?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-48px" });
@@ -276,7 +278,11 @@ function MobileFoldPanel({
           loop
           playsInline
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 h-full object-cover"
+          style={cropRight > 0
+            ? { width: `${100 + cropRight}%`, objectPosition: "left center", left: 0, right: "auto" }
+            : { width: "100%" }
+          }
         />
       </motion.div>
 
@@ -388,10 +394,13 @@ function MobileHeroText({ phase }: { phase: number }) {
   const FONT = "var(--font-instrument-sans), 'Instrument Sans', sans-serif";
 
   return (
+    /* Fill viewport height minus nav (46px) minus Speedster peek (72px).
+       100dvh = dynamic viewport height — accounts for mobile browser chrome.
+       Flex + justify-center keeps the animation stage true-centered. */
     <div
+      className="flex flex-col items-center justify-center"
       style={{
-        paddingTop: "48px",
-        paddingBottom: "48px",
+        minHeight: "calc(100dvh - 46px - 72px)",
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease",
       }}
@@ -488,8 +497,8 @@ export default function Hero() {
         {/* Phase animation — above both panels, plays on load */}
         <MobileHeroText phase={phase} />
 
-        {/* Speedster — reveals on scroll */}
-        <MobileFoldPanel panel={panels[1]} revealDelay={0} />
+        {/* Speedster — reveals on scroll, crop 15% from right for clean framing */}
+        <MobileFoldPanel panel={panels[1]} revealDelay={0} cropRight={15} />
       </div>
 
       {/* ── DESKTOP layout — absolute positioning, visible at lg+ ── */}

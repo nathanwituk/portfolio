@@ -100,6 +100,7 @@ export default function Nav() {
         <div className="hidden md:flex items-center">
           {navLinks.map(({ label, href, iconDefault, iconHover, hoverTextColor, comingSoon }, i) => {
             const isHovered = hoveredIndex === i;
+            const isGreyed = comingSoon;
             return (
               <a
                 key={label}
@@ -111,12 +112,14 @@ export default function Nav() {
                   paddingRight: "18px",
                   paddingBottom: "4px",
                   gap: "10px",
+                  pointerEvents: isGreyed ? "none" : "auto",
+                  opacity: isGreyed ? 0.45 : 1,
                 }}
-                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseEnter={() => !isGreyed && setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <img
-                  src={isHovered ? iconHover : iconDefault}
+                  src={iconDefault}
                   alt=""
                   aria-hidden="true"
                   className="shrink-0"
@@ -129,8 +132,8 @@ export default function Nav() {
                     fontSize: "1rem",
                     letterSpacing: "-0.48px",
                     lineHeight: "1.1",
-                    color: isHovered ? hoverTextColor : "var(--nav-text-muted)",
-                    textDecoration: isHovered ? "underline" : "none",
+                    color: (!isGreyed && isHovered) ? hoverTextColor : "var(--nav-text-muted)",
+                    textDecoration: (!isGreyed && isHovered) ? "underline" : "none",
                     transition: "color 0.15s ease, text-decoration-color 0.15s ease",
                   }}
                 >
@@ -205,19 +208,25 @@ export default function Nav() {
             }}
           >
             <div className="flex flex-col px-5 py-4">
-              {navLinks.map(({ label, href, iconHover, comingSoon }, i) => (
+              {navLinks.map(({ label, href, iconDefault, iconHover, comingSoon }, i) => (
                 <motion.a
                   key={label}
                   href={href}
                   className="flex items-center"
-                  style={{ height: "52px", gap: "12px", borderBottom: i < navLinks.length - 1 ? "1px solid color-mix(in srgb, var(--nav-border) 15%, transparent)" : "none" }}
+                  style={{
+                    height: "52px",
+                    gap: "12px",
+                    borderBottom: i < navLinks.length - 1 ? "1px solid color-mix(in srgb, var(--nav-border) 15%, transparent)" : "none",
+                    opacity: comingSoon ? 0.45 : 1,
+                    pointerEvents: comingSoon ? "none" : "auto",
+                  }}
                   onClick={() => setMenuOpen(false)}
                   initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  animate={{ opacity: comingSoon ? 0.45 : 1, x: 0 }}
                   transition={{ delay: i * 0.06, duration: 0.25 }}
                 >
                   <img
-                    src={iconHover}
+                    src={comingSoon ? iconDefault : iconHover}
                     alt=""
                     aria-hidden="true"
                     className="shrink-0"

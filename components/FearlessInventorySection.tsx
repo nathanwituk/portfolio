@@ -49,12 +49,12 @@ export default function FearlessInventorySection() {
           gap: "46px",
         }}
       >
-        {/* ── Left: text column ── */}
+        {/* ── Left: text column — below image on mobile, left on desktop ── */}
         <motion.div
           variants={textStagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="flex flex-col"
+          className="flex flex-col order-last lg:order-first"
           style={{ flex: "1 0 0", gap: "37px", minWidth: "0" }}
         >
           {/* Category + Title */}
@@ -163,14 +163,14 @@ export default function FearlessInventorySection() {
           </motion.div>
         </motion.div>
 
-        {/* ── Right: mockup image ── */}
+        {/* ── Right: mockup image — above text on mobile, right on desktop ── */}
         <motion.div
           variants={imageVariant}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="shrink-0 hidden md:block"
+          className="shrink-0 order-first lg:order-last w-full lg:w-auto"
         >
-          <div className="relative w-[300px] h-[262px] md:w-[420px] md:h-[368px] lg:w-[595px] lg:h-[522px]">
+          <div className="relative w-full h-[280px] md:w-[420px] md:h-[368px] lg:w-[595px] lg:h-[522px]">
             <Image
               src={IPHONE_IMG}
               alt="Fearless Inventory app mockup"

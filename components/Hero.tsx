@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { HERO_ASSETS } from "@/lib/assets";
+import FigmaButton from "@/components/ui/FigmaButton";
 
 /* ─────────────────────────────────────────────
    Panel data — video paths come from lib/assets.ts
@@ -17,6 +18,7 @@ const panels = [
       "Designing an intuitive quick-glance dashboard for college students who have trouble tracking and managing their academic schedule and workload.",
     href: "#study-sync",
     comingSoon: true,
+    accentColor: "#6f7142",
     // Figma: Dashboard_HeaderLeftFold — portrait video rotated 7.18deg default, 2.1deg on hover
     videoSrc: HERO_ASSETS.dashboardVideo,
     // Aspect ratio from Figma: 413.08 / 505.05 ≈ 0.818 (portrait)
@@ -32,6 +34,7 @@ const panels = [
     description:
       "Designing a small but useful tool that helps the user orient themselves in time or space. I'm making a new kind of calendar or clock or compass.",
     href: "/work/speedster",
+    accentColor: "#ff5d00",
     // Figma: Speedster_HeaderRightFold — portrait video, no rotation
     videoSrc: HERO_ASSETS.speedsterArmVideo,
     // Aspect ratio from Figma: 1080 / 1400 ≈ 0.771 (portrait)
@@ -212,21 +215,14 @@ function FoldPanel({
                   Coming Soon
                 </span>
               ) : (
-                <a
+                <FigmaButton
                   href={panel.href}
-                  className="flex items-center font-medium group"
-                  style={{
-                    fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                    fontSize: "1rem",
-                    letterSpacing: "-0.48px",
-                    lineHeight: "1.1",
-                    color: "#ff5d00",
-                    gap: "3px",
-                  }}
+                  external={false}
+                  accentColor={panel.accentColor}
+                  accentColorHover={panel.accentColor === "#ff5d00" ? "#e05200" : "#838653"}
                 >
-                  <span>See Project</span>
-                  <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-                </a>
+                  See Project
+                </FigmaButton>
               )}
             </div>
           </div>
@@ -354,21 +350,14 @@ function MobileFoldPanel({
               Coming Soon
             </span>
           ) : (
-            <a
+            <FigmaButton
               href={panel.href}
-              className="flex items-center font-medium group w-fit"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1rem",
-                letterSpacing: "-0.48px",
-                lineHeight: "1.1",
-                color: "#ff5d00",
-                gap: "3px",
-              }}
+              external={false}
+              accentColor={panel.accentColor}
+              accentColorHover={panel.accentColor === "#ff5d00" ? "#e05200" : "#838653"}
             >
-              <span>See Project</span>
-              <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-            </a>
+              See Project
+            </FigmaButton>
           )}
         </div>
       </motion.div>

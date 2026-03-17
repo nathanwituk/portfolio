@@ -401,8 +401,6 @@ function MobileHeroText({ phase }: { phase: number }) {
       className="flex flex-col items-center justify-center"
       style={{
         minHeight: "calc(100dvh - 46px - 25vw)",
-        backgroundColor: "var(--bg-primary)",
-        transition: "background-color 200ms ease",
       }}
     >
       {/* Fixed-height animation stage — overflow:hidden clips elements
@@ -526,8 +524,6 @@ export default function Hero() {
           left: "calc(50% + 20px)",
           top: "calc(50% - 27.5px)",
           transform: "translate(-50%, -50%)",
-          backgroundColor: "var(--bg-primary)",
-          transition: "background-color 200ms ease",
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 0.01, delay: 0.7 } }}

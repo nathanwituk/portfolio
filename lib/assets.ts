@@ -40,7 +40,7 @@ export const PROJECT_ASSETS = {
    * Speedster — homepage second section video (replaces grey box).
    * Format: .mov
    */
-  speedsterSection2Video: "/videos/hero/SpeedsterSection2.mov",
+  speedsterSection2Video: "/videos/hero/SpeedsterSection2.mp4",
 } as const;
 
 // ── Navigation ───────────────────────────────────────────────────────────────

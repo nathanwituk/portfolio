@@ -279,7 +279,7 @@ export default function BrandingSection({
                       src={s.src}
                       alt={s.alt}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                       sizes={`${w}px`}
                     />
                   </div>

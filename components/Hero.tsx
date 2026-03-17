@@ -508,6 +508,11 @@ export default function Hero() {
         <FoldPanel panel={panels[0]} />
       </div>
 
+      {/* Right fold — Speedster */}
+      <div className="hidden lg:block">
+        <FoldPanel panel={panels[1]} />
+      </div>
+
       {/* ── Center panel ──
           392×538px white rectangle centered in the hero.
           Sits between fold panels on desktop.

@@ -66,12 +66,11 @@ export default function FeatureHighlights({ features, screenshots }: FeatureHigh
                 <NumberBadge n={f.number} />
                 {/* Title */}
                 <p
-                  className="font-bold text-white text-center leading-[1.1]"
+                  className="font-normal text-white text-center leading-none"
                   style={{
                     fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                    fontSize: "2rem",
-                    letterSpacing: "0.12em",
-                    textTransform: "uppercase",
+                    fontSize: "2.3125rem",
+                    letterSpacing: "-1.11px",
                   }}
                 >
                   {f.title}

@@ -11,8 +11,7 @@ const ITEMS = Array.from({ length: 8 }, (_, i) => i);
 export default function TickerBanner() {
   return (
     <div
-      className="hidden lg:flex bg-black w-full shrink-0 overflow-hidden items-center"
-      style={{ height: "66px" }}
+      className="flex bg-black w-full shrink-0 overflow-hidden items-center h-10 lg:h-[66px]"
       aria-label="Site notice"
     >
       {/* Outer track — we animate a 50% shift, then loop.
@@ -21,7 +20,7 @@ export default function TickerBanner() {
         className="flex shrink-0 whitespace-nowrap"
         style={{
           fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-          fontSize: "1.875rem",
+          fontSize: "clamp(0.75rem, 2vw, 1.875rem)",
           letterSpacing: "-0.6px",
           lineHeight: "1",
           color: "#fff",
@@ -36,13 +35,13 @@ export default function TickerBanner() {
       >
         {/* First set */}
         {ITEMS.map((i) => (
-          <span key={`a-${i}`} className="shrink-0" style={{ paddingRight: "80px" }}>
+          <span key={`a-${i}`} className="shrink-0" style={{ paddingRight: "clamp(24px, 4vw, 80px)" }}>
             {MESSAGE}
           </span>
         ))}
         {/* Duplicate — makes the loop seamless */}
         {ITEMS.map((i) => (
-          <span key={`b-${i}`} className="shrink-0" style={{ paddingRight: "80px" }}>
+          <span key={`b-${i}`} className="shrink-0" style={{ paddingRight: "clamp(24px, 4vw, 80px)" }}>
             {MESSAGE}
           </span>
         ))}

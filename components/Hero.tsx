@@ -519,15 +519,15 @@ export default function Hero() {
         animate={{ opacity: 1, transition: { duration: 0.01, delay: 0.7 } }}
       >
         {/* ── Phase-driven text animation ──────────────────────────────────────
-            All elements are absolutely positioned within the 392×538 panel.
-            x/y = Framer Motion transforms from top-left origin (left:0, top:0).
-            Figma Variant5 final positions:
-              "OMG,"            x:42  y:173  42.624px
-              "you found"       x:161 y:179  42.807px
-              "my portfolio 😏" x:4   y:229  62.772px italic
+            All elements span full width with textAlign:center.
+            Stacked vertically, centered block within the 392×538 panel:
+              Content height ≈ 203px → starts at y:168 (centered in 538px)
+              "OMG,"            y:168  42.624px
+              "you found"       y:233  42.807px
+              "my portfolio 😏" y:290  62.772px italic
         ─────────────────────────────────────────────────────────────────── */}
 
-        {/* "OMG," — ph1: large+centered, ph2+: final small position */}
+        {/* "OMG," — ph1: large centered, ph2+: settled small centered */}
         <motion.p
           className="absolute font-normal whitespace-nowrap"
           style={{
@@ -535,21 +535,24 @@ export default function Hero() {
             letterSpacing: "-1.5px",
             lineHeight: "1.29",
             color: "var(--text-primary)",
+            left: 0,
+            right: 0,
+            textAlign: "center",
           }}
-          initial={{ opacity: 0, x: 96, y: 290, fontSize: "86.842px" }}
+          initial={{ opacity: 0, y: 600, fontSize: "86.842px" }}
           animate={
             phase === 0
-              ? { opacity: 0, x: 96, y: 290, fontSize: "86.842px" }
+              ? { opacity: 0, y: 600, fontSize: "86.842px" }
               : phase === 1
-              ? { opacity: 1, x: 96, y: 185, fontSize: "86.842px" }
-              : { opacity: 1, x: 42, y: 173, fontSize: "42.624px" }
+              ? { opacity: 1, y: 213, fontSize: "86.842px" }
+              : { opacity: 1, y: 168, fontSize: "42.624px" }
           }
           transition={CENTER_TRANS}
         >
           OMG,
         </motion.p>
 
-        {/* "you found" — ph2: large entry, ph3: final small position */}
+        {/* "you found" — ph2: large entry below OMG, ph3: settled small */}
         <motion.p
           className="absolute font-normal whitespace-nowrap"
           style={{
@@ -557,14 +560,17 @@ export default function Hero() {
             letterSpacing: "-0.6px",
             lineHeight: "1",
             color: "var(--text-primary)",
+            left: 0,
+            right: 0,
+            textAlign: "center",
           }}
-          initial={{ opacity: 0, x: 20, y: 320, fontSize: "78.48px" }}
+          initial={{ opacity: 0, y: 600, fontSize: "78.48px" }}
           animate={
             phase < 2
-              ? { opacity: 0, x: 20, y: 320, fontSize: "78.48px" }
+              ? { opacity: 0, y: 600, fontSize: "78.48px" }
               : phase === 2
-              ? { opacity: 1, x: 20, y: 229, fontSize: "78.48px" }
-              : { opacity: 1, x: 161, y: 179, fontSize: "42.807px" }
+              ? { opacity: 1, y: 233, fontSize: "78.48px" }
+              : { opacity: 1, y: 233, fontSize: "42.807px" }
           }
           transition={CENTER_TRANS}
         >
@@ -581,12 +587,15 @@ export default function Hero() {
             lineHeight: "1.29",
             fontStyle: "italic",
             color: "var(--text-primary)",
+            left: 0,
+            right: 0,
+            textAlign: "center",
           }}
-          initial={{ opacity: 0, x: 4, y: 320 }}
+          initial={{ opacity: 0, y: 600 }}
           animate={
             phase < 3
-              ? { opacity: 0, x: 4, y: 320 }
-              : { opacity: 1, x: 4, y: 229 }
+              ? { opacity: 0, y: 600 }
+              : { opacity: 1, y: 290 }
           }
           transition={CENTER_TRANS}
         >

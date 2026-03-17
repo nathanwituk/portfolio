@@ -27,7 +27,7 @@ export default function BackToTop() {
       {/* Mobile: no top margin (64px bar only), desktop: 19px top space */}
       <div className="h-[64px] mt-0 md:mt-[19px]">
         <motion.div
-          className="bg-black w-full h-full flex items-center justify-between px-[80px]"
+          className="bg-black w-full h-full flex items-center justify-between px-5 md:px-[80px]"
           variants={{
             hovered: { backgroundColor: "#ff5d00" },
           }}

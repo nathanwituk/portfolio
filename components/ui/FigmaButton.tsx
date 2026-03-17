@@ -90,6 +90,7 @@ interface FigmaButtonProps {
   className?: string;
   accentColor?: string;
   accentColorHover?: string;
+  external?: boolean;
 }
 
 export default function FigmaButton({
@@ -98,6 +99,7 @@ export default function FigmaButton({
   className = "",
   accentColor = "#6f7142",
   accentColorHover = "#838653",
+  external = true,
 }: FigmaButtonProps) {
   const eyeRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -117,8 +119,7 @@ export default function FigmaButton({
   return (
     <motion.a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       whileHover={{ scale: 1.04 }}

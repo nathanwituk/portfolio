@@ -44,7 +44,7 @@ export default function AboutSection() {
       >
         <motion.p
           variants={fadeUp}
-          className="font-semibold"
+          className="font-normal"
           style={{
             fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
             fontSize: "3.25rem",
@@ -83,7 +83,7 @@ export default function AboutSection() {
             transition: "color 200ms ease",
           }}
         >
-          <strong className="font-semibold">Nathan Wituk</strong> is a Kansas-based UI/UX and visual designer who blends research,
+          Nathan Wituk is a Kansas-based UI/UX and visual designer who blends research,
           storytelling, and digital culture to shape thoughtful, user-centered
           experiences. He studies Interaction Design at the University of Kansas
           and brings a background in award-winning journalism, social content,

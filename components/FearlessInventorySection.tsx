@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
+import FigmaButton from "@/components/ui/FigmaButton";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
@@ -109,22 +110,16 @@ export default function FearlessInventorySection() {
           </motion.div>
 
           {/* CTA */}
-          <motion.a
-            variants={fadeUp}
-            href="/work/fearless-inventory"
-            className="flex items-center font-medium group w-fit"
-            style={{
-              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-              fontSize: "1rem",
-              letterSpacing: "-0.48px",
-              lineHeight: "1.1",
-              color: "#ff5d00",
-              gap: "3px",
-            }}
-          >
-            <span>See Project</span>
-            <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-          </motion.a>
+          <motion.div variants={fadeUp}>
+            <FigmaButton
+              href="/work/fearless-inventory"
+              external={false}
+              accentColor="#6f7142"
+              accentColorHover="#838653"
+            >
+              See Project
+            </FigmaButton>
+          </motion.div>
 
         </motion.div>
 

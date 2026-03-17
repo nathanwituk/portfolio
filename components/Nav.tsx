@@ -10,6 +10,7 @@ const navLinks = [
     iconDefault: "/images/nav/Icons/Grey_Speedster.svg",
     iconHover:   "/images/nav/Icons/Speedster.svg",
     hoverTextColor: "#1D1D1D",
+    comingSoon: false,
   },
   {
     label: "Fearless Inventory",
@@ -17,6 +18,7 @@ const navLinks = [
     iconDefault: "/images/nav/Icons/Grey_Inventory.svg",
     iconHover:   "/images/nav/Icons/Inventory.svg",
     hoverTextColor: "#1D1D1D",
+    comingSoon: false,
   },
   {
     label: "Study Sync Dashboard",
@@ -24,6 +26,7 @@ const navLinks = [
     iconDefault: "/images/nav/Icons/Grey_Dashboard.svg",
     iconHover:   "/images/nav/Icons/Dashboard.svg",
     hoverTextColor: "#1D1D1D",
+    comingSoon: true,
   },
   {
     label: "KU SafeRide Redesign",
@@ -31,6 +34,7 @@ const navLinks = [
     iconDefault: "/images/nav/Icons/Grey_Saferide.svg",
     iconHover:   "/images/nav/Icons/Saferide.svg",
     hoverTextColor: "#6363FF",
+    comingSoon: true,
   },
 ];
 
@@ -94,7 +98,7 @@ export default function Nav() {
 
         {/* Desktop project links */}
         <div className="hidden md:flex items-center">
-          {navLinks.map(({ label, href, iconDefault, iconHover, hoverTextColor }, i) => {
+          {navLinks.map(({ label, href, iconDefault, iconHover, hoverTextColor, comingSoon }, i) => {
             const isHovered = hoveredIndex === i;
             return (
               <a
@@ -132,6 +136,24 @@ export default function Nav() {
                 >
                   {label}
                 </span>
+                {comingSoon && (
+                  <span
+                    className="shrink-0"
+                    style={{
+                      fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                      fontSize: "0.625rem",
+                      letterSpacing: "0.05em",
+                      lineHeight: "1",
+                      textTransform: "uppercase",
+                      color: "var(--text-tertiary)",
+                      backgroundColor: "var(--bg-secondary)",
+                      padding: "3px 7px",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    Soon
+                  </span>
+                )}
               </a>
             );
           })}
@@ -183,7 +205,7 @@ export default function Nav() {
             }}
           >
             <div className="flex flex-col px-5 py-4">
-              {navLinks.map(({ label, href, iconDefault }, i) => (
+              {navLinks.map(({ label, href, iconDefault, comingSoon }, i) => (
                 <motion.a
                   key={label}
                   href={href}
@@ -212,6 +234,24 @@ export default function Nav() {
                   >
                     {label}
                   </span>
+                  {comingSoon && (
+                    <span
+                      className="shrink-0"
+                      style={{
+                        fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                        fontSize: "0.625rem",
+                        letterSpacing: "0.05em",
+                        lineHeight: "1",
+                        textTransform: "uppercase",
+                        color: "var(--text-tertiary)",
+                        backgroundColor: "var(--bg-secondary)",
+                        padding: "3px 7px",
+                        borderRadius: "4px",
+                      }}
+                    >
+                      Soon
+                    </span>
+                  )}
                 </motion.a>
               ))}
             </div>

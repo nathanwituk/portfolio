@@ -150,18 +150,20 @@ export default function Footer() {
           left: "0",
         }}
       >
-        {/* Giant name: clamps from ~80px mobile → 143px tablet → 230px desktop */}
+        {/* Giant name: 18.5vw makes text ~107% viewport width at all sizes,
+            so N and K bleed off the edges equally. text-align:center
+            splits the overflow evenly left and right. */}
         <motion.p
           variants={nameReveal}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="font-semibold whitespace-nowrap select-none"
+          className="font-semibold whitespace-nowrap select-none w-full"
           style={{
             fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-            fontSize: "clamp(72px, 18vw, 230.529px)",
+            fontSize: "18.5vw",
             letterSpacing: "-0.06em",
             lineHeight: "1",
-            paddingLeft: "clamp(15px, 4vw, 80px)",
+            textAlign: "center",
             color: "var(--text-primary)",
             transition: "color 200ms ease",
           }}

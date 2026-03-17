@@ -56,7 +56,7 @@ export default function InsightsSection({ rows }: Props) {
             </p>
           </div>
           <div className="flex items-center gap-[10px] flex-1">
-            <img src="/images/fearless-inventory/InformationInsight-Icon.svg" alt="" aria-hidden="true" width={30} height={37} className="shrink-0" />
+            <img src="/images/fearless-inventory/InformationInsight-Icon-Olive.svg" alt="" aria-hidden="true" width={30} height={37} className="shrink-0" />
             <p
               className="font-semibold leading-none tracking-[-0.03em] text-[1rem]"
               style={{ fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif", color: "var(--text-tertiary)", transition: "color 200ms ease" }}

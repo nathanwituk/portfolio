@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { PROJECT_ASSETS } from "@/lib/assets";
+import FigmaButton from "@/components/ui/FigmaButton";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
@@ -124,22 +125,16 @@ export default function SpeedsterSection() {
               the design of a minimal, intuitive tool inspired by calendars,
               clocks, and compasses.
             </motion.p>
-            <motion.a
-              variants={textLine}
-              href="/work/speedster"
-              className="flex items-center font-medium group w-fit"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1rem",
-                letterSpacing: "-0.48px",
-                lineHeight: "1.1",
-                color: "#ff5d00",
-                gap: "3px",
-              }}
-            >
-              <span>See Project</span>
-              <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-            </motion.a>
+            <motion.div variants={textLine}>
+              <FigmaButton
+                href="/work/speedster"
+                external={false}
+                accentColor="#ff5d00"
+                accentColorHover="#e05200"
+              >
+                See Project
+              </FigmaButton>
+            </motion.div>
           </div>
         </motion.div>
       </div>

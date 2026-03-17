@@ -44,10 +44,10 @@ export default function AboutSection() {
       >
         <motion.p
           variants={fadeUp}
-          className="font-normal"
+          className="font-semibold"
           style={{
             fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-            fontSize: "2.3125rem",
+            fontSize: "3.25rem",
             letterSpacing: "-1.11px",
             lineHeight: "1",
             color: "var(--text-primary)",
@@ -91,7 +91,7 @@ export default function AboutSection() {
           className="font-normal"
           style={{
             fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-            fontSize: "0.875rem",
+            fontSize: "14px",
             letterSpacing: "0.28px",
             lineHeight: "1.4",
             color: "var(--text-primary)",

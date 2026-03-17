@@ -116,8 +116,8 @@ export default function SpeedsterKeyPoints() {
                 className="font-normal leading-[1.45] text-center"
                 style={{
                   fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "0.875rem",
-                  letterSpacing: "0.01em",
+                  fontSize: "14px",
+                  letterSpacing: "0.28px",
                   color: "var(--text-secondary)",
                   transition: "color 200ms ease",
                   maxWidth: "280px",

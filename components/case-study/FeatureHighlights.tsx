@@ -80,8 +80,8 @@ export default function FeatureHighlights({ features, screenshots }: FeatureHigh
                   className="font-normal text-white/80 leading-[1.4] text-center"
                   style={{
                     fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                    fontSize: "0.875rem",
-                    letterSpacing: "0.02em",
+                    fontSize: "14px",
+                    letterSpacing: "0.28px",
                   }}
                 >
                   {f.description}

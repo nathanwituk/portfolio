@@ -193,7 +193,7 @@ export default function BrandingSection({
               className="flex flex-col gap-[8px] font-normal"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "0.875rem",
+                fontSize: "14px",
                 letterSpacing: "0.28px",
                 lineHeight: "1.4",
                 color: "var(--text-primary)",

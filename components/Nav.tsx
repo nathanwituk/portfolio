@@ -81,7 +81,7 @@ export default function Nav() {
               className="font-semibold leading-none whitespace-nowrap"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1.0625rem",
+                fontSize: "1.375rem",
                 letterSpacing: "-0.34px",
                 color: "var(--nav-text)",
                 transition: "color 200ms ease",

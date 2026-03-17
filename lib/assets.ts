@@ -31,11 +31,9 @@ export const HERO_ASSETS = {
 export const PROJECT_ASSETS = {
   /**
    * Speedster — phone demo video / animation.
-   * Source: "Final Animation Video 2" in Figma
-   * Display: 490.891 × 424.5px, rounded-[7.344px]
-   * Format: .mp4 (H.264)
+   * Format: .mov
    */
-  speedsterDemoVideo: "/videos/projects/speedster-demo.mp4",
+  speedsterDemoVideo: "/videos/projects/speedster-hero-mockup.mov",
 } as const;
 
 // ── Navigation ───────────────────────────────────────────────────────────────

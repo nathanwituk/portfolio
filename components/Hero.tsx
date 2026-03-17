@@ -16,6 +16,7 @@ const panels = [
     description:
       "Designing an intuitive quick-glance dashboard for college students who have trouble tracking and managing their academic schedule and workload.",
     href: "#study-sync",
+    comingSoon: true,
     // Figma: Dashboard_HeaderLeftFold — portrait video rotated 7.18deg default, 2.1deg on hover
     videoSrc: HERO_ASSETS.dashboardVideo,
     // Aspect ratio from Figma: 413.08 / 505.05 ≈ 0.818 (portrait)
@@ -198,21 +199,35 @@ function FoldPanel({
               >
                 {panel.description}
               </p>
-              <a
-                href={panel.href}
-                className="flex items-center font-medium group"
-                style={{
-                  fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "1rem",
-                  letterSpacing: "-0.48px",
-                  lineHeight: "1.1",
-                  color: "#ff5d00",
-                  gap: "3px",
-                }}
-              >
-                <span>See Project</span>
-                <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-              </a>
+              {panel.comingSoon ? (
+                <span
+                  style={{
+                    fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                    fontSize: "1rem",
+                    letterSpacing: "-0.48px",
+                    lineHeight: "1.1",
+                    color: "var(--text-tertiary)",
+                  }}
+                >
+                  Coming Soon
+                </span>
+              ) : (
+                <a
+                  href={panel.href}
+                  className="flex items-center font-medium group"
+                  style={{
+                    fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                    fontSize: "1rem",
+                    letterSpacing: "-0.48px",
+                    lineHeight: "1.1",
+                    color: "#ff5d00",
+                    gap: "3px",
+                  }}
+                >
+                  <span>See Project</span>
+                  <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                </a>
+              )}
             </div>
           </div>
         </motion.div>
@@ -320,21 +335,35 @@ function MobileFoldPanel({
           </p>
 
           {/* CTA */}
-          <a
-            href={panel.href}
-            className="flex items-center font-medium group w-fit"
-            style={{
-              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-              fontSize: "1rem",
-              letterSpacing: "-0.48px",
-              lineHeight: "1.1",
-              color: "#ff5d00",
-              gap: "3px",
-            }}
-          >
-            <span>See Project</span>
-            <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-          </a>
+          {panel.comingSoon ? (
+            <span
+              style={{
+                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                fontSize: "1rem",
+                letterSpacing: "-0.48px",
+                lineHeight: "1.1",
+                color: "var(--text-tertiary)",
+              }}
+            >
+              Coming Soon
+            </span>
+          ) : (
+            <a
+              href={panel.href}
+              className="flex items-center font-medium group w-fit"
+              style={{
+                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                fontSize: "1rem",
+                letterSpacing: "-0.48px",
+                lineHeight: "1.1",
+                color: "#ff5d00",
+                gap: "3px",
+              }}
+            >
+              <span>See Project</span>
+              <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </a>
+          )}
         </div>
       </motion.div>
     </div>
@@ -361,31 +390,32 @@ function MobileHeroText({ phase }: { phase: number }) {
   return (
     <div
       style={{
-        paddingTop: "32px",
-        paddingBottom: "8px",
+        paddingTop: "48px",
+        paddingBottom: "48px",
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease",
       }}
     >
       {/* Fixed-height animation stage — overflow:hidden clips elements
-          that are below y:240 so the slide-up reveals look clean. */}
+          that are below y:280 so the slide-up reveals look clean.
+          Text is centered horizontally via left:0 right:0 + textAlign:center. */}
       <div
-        className="relative w-full overflow-hidden px-5"
-        style={{ height: "240px" }}
+        className="relative w-full overflow-hidden"
+        style={{ height: "280px" }}
       >
         {/* "OMG,"
-            ph1: enters large (5.5rem), centred at y:60
-            ph2+: settles small (2.4375rem) at y:40 */}
+            ph1: enters large (5.5rem), vertically centered at y:92
+            ph3: settles small (2.4375rem) at y:60 */}
         <motion.p
           className="absolute font-normal whitespace-nowrap"
-          style={{ fontFamily: FONT, letterSpacing: "-0.04em", lineHeight: 1, color: "var(--text-primary)", transition: "color 200ms ease" }}
-          initial={{ opacity: 0, x: 0, y: 280, fontSize: "5.5rem" }}
+          style={{ fontFamily: FONT, letterSpacing: "-0.04em", lineHeight: 1, color: "var(--text-primary)", transition: "color 200ms ease", left: 0, right: 0, textAlign: "center" }}
+          initial={{ opacity: 0, y: 320, fontSize: "5.5rem" }}
           animate={
             phase === 0
-              ? { opacity: 0,  x: 0, y: 280, fontSize: "5.5rem"    }
+              ? { opacity: 0,  y: 320, fontSize: "5.5rem"    }
               : phase === 1
-              ? { opacity: 1,  x: 0, y: 60,  fontSize: "5.5rem"    }
-              : { opacity: 1,  x: 0, y: 40,  fontSize: "2.4375rem" }
+              ? { opacity: 1,  y: 92,  fontSize: "5.5rem"    }
+              : { opacity: 1,  y: 60,  fontSize: "2.4375rem" }
           }
           transition={CENTER_TRANS}
         >
@@ -393,18 +423,18 @@ function MobileHeroText({ phase }: { phase: number }) {
         </motion.p>
 
         {/* "you found"
-            ph2: enters large (4.5rem) at y:90, below settled "OMG,"
-            ph3: shrinks (2.4375rem) and settles at y:84 */}
+            ph2: enters large (4.5rem) at y:109 (below settled "OMG,")
+            ph3: shrinks (2.4375rem) and settles at y:109 */}
         <motion.p
           className="absolute font-normal whitespace-nowrap"
-          style={{ fontFamily: FONT, letterSpacing: "-0.03em", lineHeight: 1, color: "var(--text-primary)", transition: "color 200ms ease" }}
-          initial={{ opacity: 0, x: 0, y: 280, fontSize: "4.5rem" }}
+          style={{ fontFamily: FONT, letterSpacing: "-0.03em", lineHeight: 1, color: "var(--text-primary)", transition: "color 200ms ease", left: 0, right: 0, textAlign: "center" }}
+          initial={{ opacity: 0, y: 320, fontSize: "4.5rem" }}
           animate={
             phase < 2
-              ? { opacity: 0, x: 0, y: 280, fontSize: "4.5rem"    }
+              ? { opacity: 0, y: 320, fontSize: "4.5rem"    }
               : phase === 2
-              ? { opacity: 1, x: 0, y: 90,  fontSize: "4.5rem"    }
-              : { opacity: 1, x: 0, y: 84,  fontSize: "2.4375rem" }
+              ? { opacity: 1, y: 109, fontSize: "4.5rem"    }
+              : { opacity: 1, y: 109, fontSize: "2.4375rem" }
           }
           transition={CENTER_TRANS}
         >
@@ -412,15 +442,15 @@ function MobileHeroText({ phase }: { phase: number }) {
         </motion.p>
 
         {/* "my portfolio 😏"
-            ph3: slides up from below into y:132 */}
+            ph3: slides up from below into y:158 */}
         <motion.p
           className="absolute whitespace-nowrap"
-          style={{ fontFamily: FONT, fontSize: "3.25rem", letterSpacing: "-0.04em", lineHeight: 1.2, fontStyle: "italic", color: "var(--text-primary)", transition: "color 200ms ease" }}
-          initial={{ opacity: 0, x: 0, y: 280 }}
+          style={{ fontFamily: FONT, fontSize: "3.25rem", letterSpacing: "-0.04em", lineHeight: 1.2, fontStyle: "italic", color: "var(--text-primary)", transition: "color 200ms ease", left: 0, right: 0, textAlign: "center" }}
+          initial={{ opacity: 0, y: 320 }}
           animate={
             phase < 3
-              ? { opacity: 0, x: 0, y: 280 }
-              : { opacity: 1, x: 0, y: 132 }
+              ? { opacity: 0, y: 320 }
+              : { opacity: 1, y: 158 }
           }
           transition={CENTER_TRANS}
         >
@@ -458,10 +488,7 @@ export default function Hero() {
         {/* Phase animation — above both panels, plays on load */}
         <MobileHeroText phase={phase} />
 
-        {/* Panel 1 — Study Sync Dashboard */}
-        <MobileFoldPanel panel={panels[0]} revealDelay={0.2} />
-
-        {/* Panel 2 — Speedster (reveals on scroll) */}
+        {/* Speedster — reveals on scroll */}
         <MobileFoldPanel panel={panels[1]} revealDelay={0} />
       </div>
 
@@ -470,11 +497,6 @@ export default function Hero() {
       {/* Left fold — Study Sync */}
       <div className="hidden lg:block">
         <FoldPanel panel={panels[0]} />
-      </div>
-
-      {/* Right fold — Speedster */}
-      <div className="hidden lg:block">
-        <FoldPanel panel={panels[1]} />
       </div>
 
       {/* ── Center panel ──

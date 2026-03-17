@@ -67,7 +67,7 @@ export default function SpeedsterKeyPoints() {
         variants={stagger}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-start justify-center gap-[40px] md:gap-[32px]"
+        className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-center gap-[40px] md:gap-[32px]"
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
@@ -77,54 +77,57 @@ export default function SpeedsterKeyPoints() {
           <motion.div
             key={point.number}
             variants={fadeUp}
-            className="flex flex-col items-center gap-[20px] flex-1 min-w-0"
+            className="flex flex-col items-center gap-[24px] flex-1 min-w-0"
           >
-            {/* Number badge + title row */}
-            <div className="flex items-center gap-[10px]">
-              <span
-                className="flex items-center justify-center shrink-0 font-semibold leading-none"
+            {/* Headline + body grouped — 30% tighter than before (8px → 6px) */}
+            <div className="flex flex-col items-center gap-[6px]">
+              {/* Number badge + title */}
+              <div className="flex items-center gap-[10px]">
+                <span
+                  className="flex items-center justify-center shrink-0 font-semibold leading-none"
+                  style={{
+                    width: "28px",
+                    height: "28px",
+                    borderRadius: "50%",
+                    backgroundColor: "#ff5d00",
+                    color: "#ffffff",
+                    fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                    fontSize: "0.875rem",
+                  }}
+                >
+                  {point.number}
+                </span>
+                <h3
+                  className="font-semibold leading-none text-center"
+                  style={{
+                    fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.03em",
+                    color: "var(--text-primary)",
+                    transition: "color 200ms ease",
+                  }}
+                >
+                  {point.title}
+                </h3>
+              </div>
+
+              {/* Description */}
+              <p
+                className="font-normal leading-[1.45] text-center"
                 style={{
-                  width: "28px",
-                  height: "28px",
-                  borderRadius: "50%",
-                  backgroundColor: "#ff5d00",
-                  color: "#ffffff",
                   fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
                   fontSize: "0.875rem",
-                }}
-              >
-                {point.number}
-              </span>
-              <h3
-                className="font-semibold leading-none"
-                style={{
-                  fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "1.25rem",
-                  letterSpacing: "-0.03em",
-                  color: "var(--text-primary)",
+                  letterSpacing: "0.01em",
+                  color: "var(--text-secondary)",
                   transition: "color 200ms ease",
+                  maxWidth: "280px",
                 }}
               >
-                {point.title}
-              </h3>
+                {point.description}
+              </p>
             </div>
 
-            {/* Description */}
-            <p
-              className="font-normal leading-[1.45] text-center"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "0.875rem",
-                letterSpacing: "0.01em",
-                color: "var(--text-secondary)",
-                transition: "color 200ms ease",
-                maxWidth: "280px",
-              }}
-            >
-              {point.description}
-            </p>
-
-            {/* Phone mockup */}
+            {/* Phone mockup — below headline and body */}
             <div
               className="relative rounded-[20px] overflow-hidden"
               style={{

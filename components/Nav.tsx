@@ -2,37 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "@/contexts/ThemeContext";
-
-function SunIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
-      <line x1="12" y1="2"  x2="12" y2="5"  stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <line x1="2"  y1="12" x2="5"  y2="12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <line x1="19" y1="12" x2="22" y2="12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <line x1="4.22"  y1="4.22"  x2="6.34"  y2="6.34"  stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <line x1="4.22"  y1="19.78" x2="6.34"  y2="17.66" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <line x1="17.66" y1="6.34"  x2="19.78" y2="4.22"  stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function MoonIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 const navLinks = [
   {
@@ -70,8 +39,6 @@ export default function Nav() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [visible, setVisible] = useState(true);
   const lastScrollY = useRef(0);
-  const { theme, toggleTheme } = useTheme();
-  const isDark = theme === "dark";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -102,44 +69,8 @@ export default function Nav() {
       {/* ── Desktop nav ── */}
       <nav className="flex items-center justify-between h-[46px] px-5 md:pl-[80px] md:pr-[40px]">
 
-        {/* Left side: theme toggle + wordmark */}
+        {/* Left side: wordmark */}
         <div className="flex items-center gap-[14px]">
-          {/* Dark / light toggle */}
-          <motion.button
-            onClick={toggleTheme}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.92 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "32px",
-              height: "32px",
-              borderRadius: "8px",
-              border: "1.5px solid var(--nav-border)",
-              backgroundColor: "transparent",
-              color: "var(--nav-text)",
-              cursor: "pointer",
-              flexShrink: 0,
-              transition: "border-color 200ms ease, color 200ms ease",
-            }}
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.span
-                key={isDark ? "sun" : "moon"}
-                initial={{ opacity: 0, rotate: -30, scale: 0.7 }}
-                animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                exit={{ opacity: 0, rotate: 30, scale: 0.7 }}
-                transition={{ duration: 0.18 }}
-                style={{ display: "flex" }}
-              >
-                {isDark ? <SunIcon /> : <MoonIcon />}
-              </motion.span>
-            </AnimatePresence>
-          </motion.button>
-
           {/* Wordmark */}
           <a
             href="/"

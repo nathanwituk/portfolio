@@ -30,10 +30,11 @@ export const HERO_ASSETS = {
 // ── Project sections ─────────────────────────────────────────────────────────
 export const PROJECT_ASSETS = {
   /**
-   * Speedster — phone demo video / animation.
+   * Speedster — hero mockup video used on homepage section + case study hero.
+   * Crop 25% from each side before displaying (show center 50% of width).
    * Format: .mov
    */
-  speedsterDemoVideo: "/videos/projects/speedster-hero-mockup.mov",
+  speedsterHeroVideo: "/videos/speedster/speedster-hero-mockup.mov",
 } as const;
 
 // ── Navigation ───────────────────────────────────────────────────────────────

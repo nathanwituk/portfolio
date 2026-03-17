@@ -119,6 +119,8 @@ export default function BrandingSection({
     });
   }, [inView]);
 
+  const PADDING = "max(clamp(20px, 6.25vw, 80px), calc((100% - 1280px) / 2 + 80px))";
+
   return (
     <section
       className="w-full"
@@ -134,27 +136,22 @@ export default function BrandingSection({
         variants={stagger}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        className="flex items-center"
-        style={{
-          gap: "77px",
-          // Match the left edge of max-w-[1280px] mx-auto containers:
-          // at vw ≤ 1280px → same as clamp(20px,6.25vw,80px)
-          // at vw > 1280px → shifts right with the centered container
-          paddingLeft: "max(clamp(20px, 6.25vw, 80px), calc((100% - 1280px) / 2 + 80px))",
-          // No paddingRight — images bleed to the right edge
-        }}
+        className="flex flex-col"
+        style={{ gap: "32px" }}
       >
-        {/* ── Left info card ── */}
+        {/* ── Info card — full width, sits on top ── */}
         <motion.div
           variants={fadeUp}
-          className="shrink-0 flex flex-col"
-          style={{ width: "clamp(260px, 30vw, 400px)", minHeight: `${CARD_HEIGHT}px` }}
+          className="flex flex-col"
+          style={{
+            paddingLeft: PADDING,
+            paddingRight: PADDING,
+          }}
         >
           {/* Grey top section */}
           <div
             className="flex flex-col gap-[22px]"
             style={{
-              minHeight: `${TOP_HEIGHT}px`,
               padding: "21px 29px",
               borderRadius: "20px 20px 0 0",
               backgroundColor: "var(--bg-secondary)",
@@ -216,12 +213,10 @@ export default function BrandingSection({
           <div
             className="bg-[#6f7142] flex items-start gap-[10px]"
             style={{
-              minHeight: `${BOTTOM_HEIGHT}px`,
               padding: "12px 20px 16px",
               borderRadius: "0 0 12px 12px",
             }}
           >
-            {/* Info icon */}
             <svg
               width="24"
               height="24"
@@ -248,13 +243,17 @@ export default function BrandingSection({
           </div>
         </motion.div>
 
-        {/* ── Scrollable image rail + custom scrollbar ── */}
+        {/* ── Scrollable image rail + custom scrollbar — beneath the card ── */}
         <motion.div
           variants={fadeUp}
-          className="flex-1 min-w-0 flex flex-col"
-          style={{ gap: "10px" }}
+          className="flex flex-col"
+          style={{
+            gap: "10px",
+            paddingLeft: PADDING,
+            // No paddingRight — images bleed to the right edge
+          }}
         >
-          {/* Image rail — native scrollbar hidden, custom one below */}
+          {/* Image rail */}
           <div
             ref={scrollRef}
             className="overflow-x-scroll branding-rail"
@@ -289,7 +288,7 @@ export default function BrandingSection({
             </div>
           </div>
 
-          {/* Custom scrollbar — always visible */}
+          {/* Custom scrollbar */}
           <div
             ref={trackRef}
             style={{

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { PROJECT_ASSETS } from "@/lib/assets";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
@@ -36,7 +37,7 @@ export default function SpeedsterHero() {
         transition: "background-color 200ms ease",
       }}
     >
-      {/* Mockup video — 20% clipped on both left and right, container resizes the result */}
+      {/* Mockup video — 25% clipped on both left and right, showing center 50% */}
       <motion.div
         variants={slideIn}
         initial="hidden"
@@ -44,19 +45,19 @@ export default function SpeedsterHero() {
         className="shrink-0 w-full lg:w-[520px]"
         style={{ height: "600px", position: "relative", overflow: "hidden" }}
       >
-        {/* Inner clip wrapper — expands to 166.67% wide and re-centres,
-            so exactly 20% overflows and is hidden on each side */}
+        {/* Inner div is 200% wide, offset left by 50% → crops exactly
+            25% from each side, showing only the center 50% of the video. */}
         <div
           style={{
             position: "absolute",
             top: 0,
-            left: "-33.33%",   /* (166.67 - 100) / 2 */
-            width: "166.67%",  /* 100 / 0.6        */
+            left: "-50%",
+            width: "200%",
             height: "100%",
           }}
         >
           <video
-            src="/images/speedster/speedster-hero-mockup.mov"
+            src={PROJECT_ASSETS.speedsterHeroVideo}
             autoPlay
             loop
             muted

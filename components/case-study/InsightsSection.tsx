@@ -44,20 +44,26 @@ export default function InsightsSection({ rows }: Props) {
         {/* Column headers */}
         <div
           ref={ref}
-          className="flex gap-[94px] h-[45px] items-center"
+          className="flex gap-[94px] items-center"
         >
-          <p
-            className="font-semibold leading-none tracking-[-0.03em] text-[1rem] flex-1"
-            style={{ fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif", color: "var(--text-tertiary)", transition: "color 200ms ease" }}
-          >
-            Strong Design Insight
-          </p>
-          <p
-            className="font-semibold leading-none tracking-[-0.03em] text-[1rem] flex-1"
-            style={{ fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif", color: "var(--text-tertiary)", transition: "color 200ms ease" }}
-          >
-            Areas for Improvement
-          </p>
+          <div className="flex items-center gap-[10px] flex-1">
+            <img src="/images/fearless-inventory/Lightbulb-Icon.svg" alt="" aria-hidden="true" width={32} height={34} className="shrink-0" />
+            <p
+              className="font-semibold leading-none tracking-[-0.03em] text-[1rem]"
+              style={{ fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif", color: "var(--text-tertiary)", transition: "color 200ms ease" }}
+            >
+              Strong Design Insight
+            </p>
+          </div>
+          <div className="flex items-center gap-[10px] flex-1">
+            <img src="/images/fearless-inventory/InformationInsight-Icon.svg" alt="" aria-hidden="true" width={30} height={37} className="shrink-0" />
+            <p
+              className="font-semibold leading-none tracking-[-0.03em] text-[1rem]"
+              style={{ fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif", color: "var(--text-tertiary)", transition: "color 200ms ease" }}
+            >
+              Areas for Improvement
+            </p>
+          </div>
         </div>
 
         {/* Card rows */}

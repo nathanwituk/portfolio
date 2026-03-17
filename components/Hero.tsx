@@ -498,7 +498,7 @@ export default function Hero() {
         <MobileHeroText phase={phase} />
 
         {/* Speedster — reveals on scroll, crop 15% from right for clean framing */}
-        <MobileFoldPanel panel={panels[1]} revealDelay={0} cropRight={15} />
+        <MobileFoldPanel panel={panels[1]} revealDelay={0} cropRight={25} />
       </div>
 
       {/* ── DESKTOP layout — absolute positioning, visible at lg+ ── */}

@@ -88,8 +88,8 @@ export default function FearlessInventoryPage() {
         col2={
           <>
             The design process involved conducting user research, building wireframe prototypes,
-            running guerrilla usability tests, and iterating based on feedback. Two brand systems —
-            Black Rock Coffee and Philz Coffee — were audited and applied to simulate real-world
+            running guerrilla usability tests, and iterating based on feedback. Two brand systems,
+            Black Rock Coffee and Philz Coffee, were audited and applied to simulate real-world
             client brand changes throughout the project.
           </>
         }

@@ -54,21 +54,29 @@ export default function SpeedsterSection() {
             backgroundColor: "#1a1a1a",
           }}
         >
-          {/* Natural aspect ratio on mobile — no fixed height cropping.
-              Video source is 490.891 × 424.5 px (ratio 1.156, landscape).
-              On mobile (full-width): aspect-ratio gives ~337 px height = 0 crop.
-              On desktop: outer div is 490.891 px wide so height resolves to
-              424.5 px automatically from the same aspect-ratio rule. */}
-          <div className="relative" style={{ aspectRatio: "490.891 / 424.5" }}>
-            <video
-              src={PROJECT_ASSETS.speedsterDemoVideo}
-              autoPlay
-              muted
-              loop
-              playsInline
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+          {/* Aspect ratio container — sets the visible frame dimensions. */}
+          <div className="relative overflow-hidden" style={{ aspectRatio: "490.891 / 424.5" }}>
+            {/* Inner div is 200% wide, offset left by 50% → crops exactly
+                25% from each side, showing only the center 50% of the video. */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: "-50%",
+                width: "200%",
+                height: "100%",
+              }}
+            >
+              <video
+                src={PROJECT_ASSETS.speedsterHeroVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                aria-hidden="true"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            </div>
           </div>
         </motion.div>
 

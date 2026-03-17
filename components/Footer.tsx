@@ -17,9 +17,10 @@ const containerVariants = {
 
 // Giant name slides up from below footer overflow-clip
 const nameReveal = {
-  hidden: { y: "100%" },
+  hidden: { y: "100%", x: "-50%" },
   visible: {
     y: 0,
+    x: "-50%",
     transition: { duration: 1.0, ease: EASE, delay: 0.15 },
   },
 };
@@ -143,27 +144,31 @@ export default function Footer() {
           The container has overflow-hidden so the entrance is a reveal.
           left: calc(50% - 664px) = slightly past the left edge at 1280px wide.
       ── */}
+      {/* Parent height = font-size so overflow-hidden clips the reveal correctly.
+          motion.p is absolutely positioned with left:50% + x:-50% so the
+          text center is always exactly at the viewport center — guaranteed
+          equal bleed on N (left) and K (right) at every viewport width. */}
       <div
         className="absolute overflow-hidden w-full"
         style={{
           bottom: "0",
           left: "0",
+          height: "18.5vw",
         }}
       >
-        {/* Giant name: 18.5vw makes text ~107% viewport width at all sizes,
-            so N and K bleed off the edges equally. text-align:center
-            splits the overflow evenly left and right. */}
         <motion.p
           variants={nameReveal}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="font-semibold whitespace-nowrap select-none w-full"
+          className="font-semibold whitespace-nowrap select-none"
           style={{
+            position: "absolute",
+            left: "50%",
+            bottom: 0,
             fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
             fontSize: "18.5vw",
             letterSpacing: "-0.06em",
             lineHeight: "1",
-            textAlign: "center",
             color: "var(--text-primary)",
             transition: "color 200ms ease",
           }}

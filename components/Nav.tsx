@@ -205,7 +205,7 @@ export default function Nav() {
             }}
           >
             <div className="flex flex-col px-5 py-4">
-              {navLinks.map(({ label, href, iconDefault, comingSoon }, i) => (
+              {navLinks.map(({ label, href, iconHover, comingSoon }, i) => (
                 <motion.a
                   key={label}
                   href={href}
@@ -217,7 +217,7 @@ export default function Nav() {
                   transition={{ delay: i * 0.06, duration: 0.25 }}
                 >
                   <img
-                    src={iconDefault}
+                    src={iconHover}
                     alt=""
                     aria-hidden="true"
                     className="shrink-0"

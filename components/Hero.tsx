@@ -31,7 +31,7 @@ const panels = [
     title: "Speedster",
     description:
       "Designing a small but useful tool that helps the user orient themselves in time or space. I'm making a new kind of calendar or clock or compass.",
-    href: "#speedster",
+    href: "/work/speedster",
     // Figma: Speedster_HeaderRightFold — portrait video, no rotation
     videoSrc: HERO_ASSETS.speedsterArmVideo,
     // Aspect ratio from Figma: 1080 / 1400 ≈ 0.771 (portrait)

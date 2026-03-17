@@ -35,6 +35,12 @@ export const PROJECT_ASSETS = {
    * Format: .mov
    */
   speedsterHeroVideo: "/videos/speedster/speedster-hero-mockup.mov",
+
+  /**
+   * Speedster — homepage second section video (replaces grey box).
+   * Format: .mov
+   */
+  speedsterSection2Video: "/videos/hero/SpeedsterSection2.mov",
 } as const;
 
 // ── Navigation ───────────────────────────────────────────────────────────────

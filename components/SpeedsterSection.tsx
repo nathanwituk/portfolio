@@ -54,29 +54,16 @@ export default function SpeedsterSection() {
             backgroundColor: "#1a1a1a",
           }}
         >
-          {/* Aspect ratio container — sets the visible frame dimensions. */}
           <div className="relative overflow-hidden" style={{ aspectRatio: "490.891 / 424.5" }}>
-            {/* Inner div is 200% wide, offset left by 50% → crops exactly
-                25% from each side, showing only the center 50% of the video. */}
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: "-50%",
-                width: "200%",
-                height: "100%",
-              }}
-            >
-              <video
-                src={PROJECT_ASSETS.speedsterHeroVideo}
-                autoPlay
-                muted
-                loop
-                playsInline
-                aria-hidden="true"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            </div>
+            <video
+              src={PROJECT_ASSETS.speedsterSection2Video}
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
           </div>
         </motion.div>
 

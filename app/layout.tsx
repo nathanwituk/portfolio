@@ -26,10 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Prevent flash of wrong theme — runs before React hydrates */}
+        {/* Force light mode — clear any stored dark preference */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}`,
+            __html: `try{localStorage.removeItem('theme');document.documentElement.classList.remove('dark');}catch(e){}`,
           }}
         />
       </head>

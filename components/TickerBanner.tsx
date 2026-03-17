@@ -20,7 +20,7 @@ export default function TickerBanner() {
         className="flex shrink-0 whitespace-nowrap"
         style={{
           fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-          fontSize: "clamp(0.75rem, 2vw, 1.875rem)",
+          fontSize: "clamp(0.9375rem, 2vw, 1.875rem)",
           letterSpacing: "-0.6px",
           lineHeight: "1",
           color: "#fff",

@@ -400,7 +400,7 @@ function MobileHeroText({ phase }: { phase: number }) {
     <div
       className="flex flex-col items-center justify-center"
       style={{
-        minHeight: "calc(100dvh - 46px - 72px)",
+        minHeight: "calc(100dvh - 46px - 25vw)",
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease",
       }}

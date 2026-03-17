@@ -32,7 +32,7 @@ const panels = [
     category: "DIGITAL REBRAND & UX",
     title: "Speedster",
     description:
-      "Designing a small but useful tool that helps the user orient themselves in time or space. I'm making a new kind of calendar or clock or compass.",
+      "Exploring a new approach to time and spatial awareness through the design of a minimal, intuitive tool inspired by calendars, clocks, and compasses.",
     href: "/work/speedster",
     accentColor: "#ff5d00",
     // Figma: Speedster_HeaderRightFold — portrait video, no rotation

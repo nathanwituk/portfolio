@@ -187,8 +187,8 @@ export default function Nav() {
                 <motion.a
                   key={label}
                   href={href}
-                  className="flex items-center last:border-0"
-                  style={{ height: "52px", gap: "12px", borderBottom: "1px solid color-mix(in srgb, var(--nav-border) 15%, transparent)" }}
+                  className="flex items-center"
+                  style={{ height: "52px", gap: "12px", borderBottom: i < navLinks.length - 1 ? "1px solid color-mix(in srgb, var(--nav-border) 15%, transparent)" : "none" }}
                   onClick={() => setMenuOpen(false)}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}

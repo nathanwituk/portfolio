@@ -124,9 +124,9 @@ export default function SpeedsterSection() {
                 transition: "color 200ms ease",
               }}
             >
-              Designing a small but useful tool that helps the user orient
-              themselves in time or space. I&apos;m making a new kind of
-              calendar or clock or compass.
+              Exploring a new approach to time and spatial awareness through
+              the design of a minimal, intuitive tool inspired by calendars,
+              clocks, and compasses.
             </motion.p>
             <motion.a
               variants={textLine}

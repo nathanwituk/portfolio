@@ -107,8 +107,17 @@ export default function SpeedsterFirstPrototype() {
                 transition: "color 200ms ease",
               }}
             >
-              *Note: No user testing was conducted for this app design. Check out other pages for
-              projects that contain user testing.
+              *Note: No user testing was conducted for this app design.{" "}
+              <a
+                href="/work/fearless-inventory"
+                style={{
+                  color: "#ff5d00",
+                  textDecoration: "underline",
+                  fontStyle: "italic",
+                }}
+              >
+                Check out other pages for projects that contain user testing.
+              </a>
             </p>
           </motion.div>
 

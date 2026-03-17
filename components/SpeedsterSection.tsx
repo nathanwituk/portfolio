@@ -48,13 +48,9 @@ export default function SpeedsterSection() {
           variants={imageVariant}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="relative shrink-0 overflow-hidden w-full lg:w-[490.891px]"
-          style={{
-            borderRadius: "7.344px",
-            backgroundColor: "#1a1a1a",
-          }}
+          className="relative shrink-0 w-full lg:w-[490.891px]"
         >
-          <div className="relative overflow-hidden" style={{ aspectRatio: "490.891 / 424.5" }}>
+          <div className="relative overflow-hidden" style={{ aspectRatio: "490.891 / 424.5", borderRadius: "7.344px" }}>
             <video
               src={PROJECT_ASSETS.speedsterSection2Video}
               autoPlay

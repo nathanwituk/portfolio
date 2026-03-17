@@ -1,17 +1,27 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+
+const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
 export default function BackToTop() {
+  const ref = useRef<HTMLButtonElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <motion.button
+      ref={ref}
       onClick={scrollToTop}
       className="w-full overflow-hidden shrink-0 cursor-pointer group"
       style={{ height: "105px", backgroundColor: "var(--bg-primary)", transition: "background-color 200ms ease" }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.55, ease: EASE }}
       whileHover="hovered"
     >
       {/* Mobile: no top margin (64px bar only), desktop: 19px top space */}

@@ -1,6 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+
+const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
 const MESSAGE =
   "You're viewing an early version of this site. Some pages may still be incomplete as the experience continues to be designed and refined.";
@@ -9,10 +12,17 @@ const MESSAGE =
 const ITEMS = Array.from({ length: 8 }, (_, i) => i);
 
 export default function TickerBanner() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-20px" });
+
   return (
-    <div
+    <motion.div
+      ref={ref}
       className="flex bg-black w-full shrink-0 overflow-hidden items-center h-10 lg:h-[66px]"
       aria-label="Site notice"
+      initial={{ opacity: 0 }}
+      animate={inView ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 0.5, ease: EASE }}
     >
       {/* Outer track — we animate a 50% shift, then loop.
           The total width is ~200% because we duplicate items below. */}
@@ -46,6 +56,6 @@ export default function TickerBanner() {
           </span>
         ))}
       </motion.div>
-    </div>
+    </motion.div>
   );
 }

@@ -57,34 +57,19 @@ export default function AboutSection() {
           About
         </motion.p>
 
-        <div className="flex flex-col" style={{ gap: "6px" }}>
-          <motion.p
-            variants={fadeUp}
-            className="font-semibold uppercase"
-            style={{
-              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-              fontSize: "1rem",
-              letterSpacing: "-0.48px",
-              lineHeight: "1.1",
-              color: "var(--text-secondary)",
-            }}
-          >
-            Junior | University of Kansas
-          </motion.p>
-          <motion.p
-            variants={fadeUp}
-            className="font-normal"
-            style={{
-              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-              fontSize: "2.3125rem",
-              letterSpacing: "-1.11px",
-              lineHeight: "1",
-              color: "var(--text-primary)",
-            }}
-          >
-            Nathan Wituk
-          </motion.p>
-        </div>
+        <motion.p
+          variants={fadeUp}
+          className="font-semibold uppercase"
+          style={{
+            fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+            fontSize: "1rem",
+            letterSpacing: "-0.48px",
+            lineHeight: "1.1",
+            color: "var(--text-secondary)",
+          }}
+        >
+          Junior | University of Kansas
+        </motion.p>
 
         <motion.p
           variants={fadeUp}
@@ -98,7 +83,7 @@ export default function AboutSection() {
             transition: "color 200ms ease",
           }}
         >
-          is a Kansas-based UI/UX and visual designer who blends research,
+          <strong className="font-semibold">Nathan Wituk</strong> is a Kansas-based UI/UX and visual designer who blends research,
           storytelling, and digital culture to shape thoughtful, user-centered
           experiences. He studies Interaction Design at the University of Kansas
           and brings a background in award-winning journalism, social content,

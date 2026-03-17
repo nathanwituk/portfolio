@@ -36,6 +36,9 @@ export default function SpeedsterFirstPrototype() {
         paddingTop: "80px",
         paddingBottom: "80px",
         transition: "background-color 200ms ease",
+        borderBottomLeftRadius: "100px",
+        borderBottomRightRadius: "100px",
+        overflow: "hidden",
       }}
     >
       <div

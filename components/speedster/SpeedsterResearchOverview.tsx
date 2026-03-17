@@ -111,7 +111,6 @@ export default function SpeedsterResearchOverview() {
             style={{
               backgroundColor: "var(--bg-secondary)",
               padding: "21px 29px",
-              minHeight: "345px",
               transition: "background-color 200ms ease",
             }}
           >

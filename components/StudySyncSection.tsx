@@ -29,37 +29,34 @@ export default function StudySyncSection() {
   return (
     <section
       id="study-sync"
-      className="lg:hidden flex items-center justify-center w-full"
+      className="lg:hidden flex flex-col w-full"
       style={{
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease, color 200ms ease",
       }}
     >
-      <div
+      {/* Video — full bleed to left edge */}
+      <motion.div
         ref={ref}
-        className="flex flex-col w-full px-5 py-12"
-        style={{ maxWidth: "1280px", gap: "0" }}
+        variants={imageVariant}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        className="relative w-full overflow-hidden"
+        style={{ borderRadius: "7.344px", aspectRatio: "490.891 / 424.5" }}
       >
-        {/* Video */}
-        <motion.div
-          variants={imageVariant}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="relative w-full overflow-hidden"
-          style={{ borderRadius: "7.344px", aspectRatio: "490.891 / 424.5" }}
-        >
-          <video
-            src={HERO_ASSETS.dashboardVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        </motion.div>
+        <video
+          src={HERO_ASSETS.dashboardVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </motion.div>
 
-        {/* Text */}
+      {/* Text — 20px inset */}
+      <div className="px-5 py-12">
         <motion.div
           variants={textStagger}
           initial="hidden"
@@ -135,5 +132,6 @@ export default function StudySyncSection() {
         </motion.div>
       </div>
     </section>
+
   );
 }

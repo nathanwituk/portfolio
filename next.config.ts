@@ -21,10 +21,10 @@ import type { NextConfig } from "next";
 //   Removing this exception would require rewriting all Framer Motion
 //   animations to use CSS classes — a significant refactor.
 //
-// EXCEPTION  frame-src embed.figma.com
-//   WireframePrototypeBlock renders <iframe src="embed.figma.com/proto/...">
-//   for interactive Figma prototype embeds. Scoped to the embed subdomain
-//   only — the broader figma.com domain is not permitted.
+// EXCEPTION  frame-src embed.figma.com www.figma.com
+//   WireframePrototypeBlock and SafeRide sections render <iframe src="embed.figma.com/proto/...">
+//   for interactive Figma prototype embeds. www.figma.com is included because
+//   Figma's embed CDN may redirect through it before settling on embed.figma.com.
 //
 // EXCEPTION  img-src data:
 //   Next.js Image component may emit data: URIs for blur-up placeholder
@@ -46,7 +46,7 @@ const ContentSecurityPolicy = [
   "font-src 'self'",
   "img-src 'self' data:",
   "media-src 'self'",
-  "frame-src embed.figma.com",
+  "frame-src https://embed.figma.com https://www.figma.com",
   "connect-src 'self'",
   "worker-src 'self' blob:",
   "base-uri 'self'",
@@ -91,11 +91,12 @@ const securityHeaders = [
 
   // ── Permissions Policy ───────────────────────────────────────────────────────
   // Explicitly deny every browser capability this site does not use.
-  // The Figma iframe embed may request fullscreen — if that breaks, add
-  // fullscreen=(self "https://embed.figma.com") to this list.
+  // fullscreen is allowed for embed.figma.com — Figma prototype iframes
+  // declare allowfullscreen and will show a blocked state without this.
   {
     key: "Permissions-Policy",
     value: [
+      "fullscreen=(self \"https://embed.figma.com\")",
       "camera=()",
       "microphone=()",
       "geolocation=()",

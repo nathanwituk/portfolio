@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Nathan Wituk — UI/UX Designer",
   description:
     "Portfolio of Nathan Wituk, a Kansas-based UI/UX and visual designer studying Interaction Design at the University of Kansas.",
+  icons: {
+    icon: "/images/nav/Favicon.jpg",
+  },
 };
 
 export default function RootLayout({

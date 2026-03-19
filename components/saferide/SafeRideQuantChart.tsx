@@ -10,7 +10,7 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
 };
 
-const TESTERS = ["Logan", "Maya", "Syd", "Maya W", "Sophia"];
+const TESTERS = ["Logan", "Maya H", "Syd", "Maya W", "Sophia"];
 
 // [soberOld, soberNew, intoOld, intoNew, usedNewBtn]
 const DATA: [number, number, number, number, boolean][] = [

@@ -72,18 +72,18 @@ export default function Footer() {
             >
               Contact
             </p>
-            <p
-              className="font-normal leading-none"
+            <a
+              href="mailto:nathan.wituk@ku.edu"
+              className="font-normal leading-none underline decoration-solid hover:text-[#ff5d00] transition-colors duration-200"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
                 fontSize: "1.25rem",
                 letterSpacing: "-1px",
                 color: "var(--text-primary)",
-                transition: "color 200ms ease",
               }}
             >
               nathan.wituk@ku.edu
-            </p>
+            </a>
           </motion.div>
 
           {/* Social */}
@@ -106,7 +106,7 @@ export default function Footer() {
             </p>
             <div className="flex flex-col" style={{ gap: "10px" }}>
               <a
-                href="https://behance.net"
+                href="https://www.behance.net/nathanwituk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-normal leading-none underline decoration-solid hover:text-[#ff5d00] transition-colors duration-200"
@@ -120,7 +120,7 @@ export default function Footer() {
                 Behance
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/nathan-wituk/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-normal leading-none underline decoration-solid hover:text-[#ff5d00] transition-colors duration-200"

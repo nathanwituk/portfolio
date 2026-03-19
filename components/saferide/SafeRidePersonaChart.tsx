@@ -160,11 +160,11 @@ export default function SafeRidePersonaChart() {
             {GRID_ITEMS.map((item) => (
               <div key={item.title} className="flex flex-col gap-[8px]">
                 <p
-                  className="font-normal leading-none"
+                  className="font-medium leading-none"
                   style={{
                     fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                    fontSize: "2.3125rem",
-                    letterSpacing: "-0.03em",
+                    fontSize: "1.25rem",
+                    letterSpacing: "-0.04em",
                     color: "var(--text-primary)",
                     transition: "color 200ms ease",
                   }}
@@ -174,11 +174,11 @@ export default function SafeRidePersonaChart() {
                 {item.bullets.map((b) => (
                   <p
                     key={b}
-                    className="font-normal leading-[1.21]"
+                    className="font-normal leading-[1.4]"
                     style={{
                       fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                      fontSize: "1rem",
-                      letterSpacing: "-0.025em",
+                      fontSize: "0.875rem",
+                      letterSpacing: "0.02em",
                       color: "var(--text-secondary)",
                       transition: "color 200ms ease",
                     }}

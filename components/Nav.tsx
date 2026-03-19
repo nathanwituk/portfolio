@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ── Inline SVG icons — all strokes use currentColor ────────────────────────
@@ -95,6 +96,7 @@ const navLinks = [
 const NAV_H = 46; // px — must match h-[46px] on the <nav> element
 
 export default function Nav() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [visible, setVisible] = useState(true);
@@ -174,7 +176,9 @@ export default function Nav() {
           {navLinks.map(({ label, href, icon: Icon, hoverColor, comingSoon }, i) => {
             const isHovered = hoveredIndex === i;
             const isGreyed = comingSoon;
-            const color = (!isGreyed && isHovered) ? hoverColor : "var(--nav-text-muted)";
+            const isActive = !isGreyed && pathname.startsWith(href);
+            const isLit = !isGreyed && (isHovered || isActive);
+            const color = isLit ? hoverColor : "var(--nav-text-muted)";
 
             return (
               <a
@@ -206,7 +210,7 @@ export default function Nav() {
                     fontSize: "1rem",
                     letterSpacing: "-0.48px",
                     lineHeight: "1.1",
-                    textDecoration: (!isGreyed && isHovered) ? "underline" : "none",
+                    textDecoration: isLit ? "underline" : "none",
                   }}
                 >
                   {label}
@@ -277,7 +281,9 @@ export default function Nav() {
             transition={{ duration: 0.35, ease: [0.25, 0, 0, 1] as [number, number, number, number] }}
           >
             <div className="flex flex-col px-5 py-4">
-              {navLinks.map(({ label, href, icon: Icon, hoverColor, comingSoon }, i) => (
+              {navLinks.map(({ label, href, icon: Icon, hoverColor, comingSoon }, i) => {
+                const isActive = !comingSoon && pathname.startsWith(href);
+                return (
                 <motion.a
                   key={label}
                   href={href}
@@ -302,11 +308,12 @@ export default function Nav() {
                   </span>
                   <span
                     style={{
-                      color: "var(--nav-text)",
+                      color: isActive ? hoverColor : "var(--nav-text)",
                       fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
                       fontSize: "1.25rem",
                       letterSpacing: "-0.6px",
                       lineHeight: "1",
+                      textDecoration: isActive ? "underline" : "none",
                     }}
                   >
                     {label}
@@ -330,7 +337,8 @@ export default function Nav() {
                     </span>
                   )}
                 </motion.a>
-              ))}
+                );
+              })}
             </div>
           </motion.div>
         )}

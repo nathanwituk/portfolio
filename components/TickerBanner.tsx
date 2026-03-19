@@ -37,7 +37,7 @@ export default function TickerBanner() {
         }}
         animate={{ x: ["0%", "-50%"] }}
         transition={{
-          duration: 60,
+          duration: 86,
           ease: "linear",
           repeat: Infinity,
           repeatType: "loop",

@@ -30,11 +30,11 @@ const navLinks = [
   },
   {
     label: "KU SafeRide Redesign",
-    href: "#ku-saferide",
+    href: "/work/saferide",
     iconDefault: "/images/nav/Icons/Grey_Saferide.svg",
     iconHover:   "/images/nav/Icons/Saferide.svg",
     hoverTextColor: "#6363FF",
-    comingSoon: true,
+    comingSoon: false,
   },
 ];
 
@@ -119,11 +119,11 @@ export default function Nav() {
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <img
-                  src={iconDefault}
+                  src={(!isGreyed && isHovered) ? iconHover : iconDefault}
                   alt=""
                   aria-hidden="true"
                   className="shrink-0"
-                  style={{ width: "18px", height: "18px" }}
+                  style={{ width: "18px", height: "18px", transition: "opacity 0.15s ease" }}
                 />
                 <span
                   className="whitespace-nowrap"

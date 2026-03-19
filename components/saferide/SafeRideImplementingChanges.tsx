@@ -20,16 +20,6 @@ const slideIn = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: EASE, delay: 0.1 } },
 };
 
-// Valid 7 days — replace with local assets if expired
-const PHONE_MAIN = "https://www.figma.com/api/mcp/asset/88eab329-4c3e-44e1-9596-bc9215369727";
-const PHONE_CARD = "https://www.figma.com/api/mcp/asset/087cda90-d555-4072-b4e3-e486caff8148";
-
-const ANNOTATIONS = [
-  "Added Schedule ride now button",
-  'Added an "Active Trips" button so users can get back to their previous scheduled rides.',
-  "Red highlight increases legibility and promotes a sense of urgency",
-];
-
 export default function SafeRideImplementingChanges() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -115,121 +105,25 @@ export default function SafeRideImplementingChanges() {
           </motion.div>
         </motion.div>
 
-        {/* Right: annotated phone mockups */}
+        {/* Right: Changes.png */}
         <motion.div
           variants={slideIn}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="shrink-0 flex flex-col gap-[32px]"
-          style={{ maxWidth: "380px", width: "100%" }}
+          className="shrink-0 flex items-center justify-center"
+          style={{ maxWidth: "480px", width: "100%" }}
         >
-          {/* Main phone with annotations */}
-          <div className="flex flex-col gap-[16px]">
-            {/* Annotation 1 */}
-            <div className="flex items-center gap-[10px]">
-              <span
-                style={{
-                  display: "inline-block",
-                  width: "24px",
-                  height: "1px",
-                  backgroundColor: "var(--text-tertiary)",
-                  flexShrink: 0,
-                }}
-              />
-              <p
-                className="font-normal leading-[1.21]"
-                style={{
-                  fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "0.875rem",
-                  letterSpacing: "-0.025em",
-                  color: "var(--text-secondary)",
-                  transition: "color 200ms ease",
-                }}
-              >
-                {ANNOTATIONS[0]}
-              </p>
-            </div>
-
-            {/* Main phone mockup */}
-            <div
-              style={{
-                borderRadius: "26px",
-                overflow: "hidden",
-                boxShadow: "0 0 21px rgba(0,0,0,0.15)",
-              }}
-            >
-              <img
-                src={PHONE_MAIN}
-                alt="SafeRide redesigned home screen with Schedule ride now button"
-                style={{ width: "100%", height: "auto", display: "block" }}
-              />
-            </div>
-
-            {/* Annotation 2 */}
-            <div className="flex items-center gap-[10px]">
-              <span
-                style={{
-                  display: "inline-block",
-                  width: "24px",
-                  height: "1px",
-                  backgroundColor: "var(--text-tertiary)",
-                  flexShrink: 0,
-                }}
-              />
-              <p
-                className="font-normal leading-[1.21]"
-                style={{
-                  fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "0.875rem",
-                  letterSpacing: "-0.025em",
-                  color: "var(--text-secondary)",
-                  transition: "color 200ms ease",
-                }}
-              >
-                {ANNOTATIONS[1]}
-              </p>
-            </div>
-          </div>
-
-          {/* Annotation 3 + small card mockup */}
-          <div className="flex flex-col gap-[12px]">
-            <div className="flex items-center gap-[10px]">
-              <span
-                style={{
-                  display: "inline-block",
-                  width: "24px",
-                  height: "1px",
-                  backgroundColor: "var(--text-tertiary)",
-                  flexShrink: 0,
-                }}
-              />
-              <p
-                className="font-normal leading-[1.21]"
-                style={{
-                  fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "0.875rem",
-                  letterSpacing: "-0.025em",
-                  color: "var(--text-secondary)",
-                  transition: "color 200ms ease",
-                }}
-              >
-                {ANNOTATIONS[2]}
-              </p>
-            </div>
-            <div
-              style={{
-                borderRadius: "14px",
-                overflow: "hidden",
-                boxShadow: "0 0 21px rgba(0,0,0,0.15)",
-              }}
-            >
-              <img
-                src={PHONE_CARD}
-                alt="SafeRide driver is arriving card with red highlight"
-                style={{ width: "100%", height: "auto", display: "block" }}
-              />
-            </div>
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/Saferide/Changes.png"
+            alt="Implementing changes — SafeRide redesign"
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+              borderRadius: "16px",
+            }}
+          />
         </motion.div>
       </div>
     </section>

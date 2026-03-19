@@ -51,7 +51,7 @@ export default function SafeRideHeuristicEvaluation() {
     >
       <div
         ref={ref}
-        className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center gap-[60px] md:gap-[80px]"
+        className="max-w-[1280px] mx-auto flex flex-col md:flex-row-reverse items-center gap-[60px] md:gap-[80px]"
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
@@ -125,28 +125,29 @@ export default function SafeRideHeuristicEvaluation() {
           </motion.div>
         </motion.div>
 
-        {/* Right: demo video */}
+        {/* Right: heuristic evaluation screenshots */}
         <motion.div
           variants={slideIn}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="shrink-0 flex items-center justify-center"
-          style={{ maxWidth: "280px", width: "100%" }}
+          className="shrink-0 flex items-center justify-center gap-[14px]"
+          style={{ maxWidth: "320px", width: "100%" }}
         >
-          <video
-            src="/video/SafeRide/SafeRideFirstDemo.mov"
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={{
-              width: "100%",
-              height: "auto",
-              borderRadius: "26px",
-              boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
-              display: "block",
-            }}
-          />
+          {["/images/Saferide/HeuristicEval-1.jpg", "/images/Saferide/HeuristicEval-2.jpg"].map((src, i) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={i}
+              src={src}
+              alt={`Heuristic Evaluation screenshot ${i + 1}`}
+              style={{
+                width: "calc(50% - 7px)",
+                height: "auto",
+                borderRadius: "20px",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+                display: "block",
+              }}
+            />
+          ))}
         </motion.div>
       </div>
     </section>

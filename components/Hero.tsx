@@ -465,9 +465,9 @@ export default function Hero() {
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 700);   // OMG, slides up large
-    const t2 = setTimeout(() => setPhase(2), 1450);  // OMG, shrinks, you found enters
-    const t3 = setTimeout(() => setPhase(3), 2200);  // all settle at Variant5
+    const t1 = setTimeout(() => setPhase(1), 0);     // OMG, slides up large — immediate
+    const t2 = setTimeout(() => setPhase(2), 750);   // OMG, shrinks, you found enters
+    const t3 = setTimeout(() => setPhase(3), 1500);  // all settle at Variant5
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
 
@@ -514,8 +514,8 @@ export default function Hero() {
           top: "calc(50% - 27.5px)",
           transform: "translate(-50%, -50%)",
         }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { duration: 0.01, delay: 0.7 } }}
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
       >
         {/* ── Phase-driven text animation ──────────────────────────────────────
             All elements span full width with textAlign:center.

@@ -35,9 +35,6 @@ const HEURISTICS = [
   },
 ];
 
-// Valid for 7 days from fetch — replace with a local asset if expired
-const PHONE_IMG = "https://www.figma.com/api/mcp/asset/9c1785d1-21f2-4692-9b29-3139b2e14dd9";
-
 export default function SafeRideHeuristicEvaluation() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -128,7 +125,7 @@ export default function SafeRideHeuristicEvaluation() {
           </motion.div>
         </motion.div>
 
-        {/* Right: phone mockup */}
+        {/* Right: demo video */}
         <motion.div
           variants={slideIn}
           initial="hidden"
@@ -136,14 +133,18 @@ export default function SafeRideHeuristicEvaluation() {
           className="shrink-0 flex items-center justify-center"
           style={{ maxWidth: "280px", width: "100%" }}
         >
-          <img
-            src={PHONE_IMG}
-            alt="SafeRide app screenshot on iPhone"
+          <video
+            src="/video/SafeRide/SafeRideFirstDemo.mov"
+            autoPlay
+            muted
+            loop
+            playsInline
             style={{
               width: "100%",
               height: "auto",
               borderRadius: "26px",
               boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
+              display: "block",
             }}
           />
         </motion.div>

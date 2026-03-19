@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { PROJECT_ASSETS } from "@/lib/assets";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
@@ -24,8 +23,6 @@ const slideIn = {
 const TAGS = ["FIGMA", "UI/UX", "3 WEEKS"];
 
 export default function SpeedsterHero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
 
   return (
     <section
@@ -41,7 +38,7 @@ export default function SpeedsterHero() {
       <motion.div
         variants={slideIn}
         initial="hidden"
-        animate={inView ? "visible" : "hidden"}
+        animate="visible"
         className="shrink-0 w-full lg:w-[520px]"
         style={{ height: "600px", position: "relative", overflow: "hidden" }}
       >
@@ -69,10 +66,9 @@ export default function SpeedsterHero() {
 
       {/* Text */}
       <motion.div
-        ref={ref}
         variants={stagger}
         initial="hidden"
-        animate={inView ? "visible" : "hidden"}
+        animate="visible"
         className="flex flex-col gap-[37px] flex-1 min-w-0"
       >
         {/* Label + Title */}

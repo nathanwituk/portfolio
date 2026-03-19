@@ -213,7 +213,7 @@ export default function FearlessInventoryPage() {
         title="Fulfillment Prototype 1"
         body="Early stages of finding solutions for how this interface should work and feel to the user. I was more focused on functional design rather than aesthetic design."
         figmaHref="https://www.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?node-id=43-255&p=f&viewport=-29%2C-316%2C0.06&t=GOYoEQzpTk2zX713-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=43%3A255&page-id=1%3A2"
-        embedSrc="https://embed.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?node-id=43-255&p=f&viewport=-29%2C-316%2C0.06&scaling=scale-down&content-scaling=fixed&starting-point-node-id=43%3A255&page-id=1%3A2&embed-host=share"
+        embedSrc="https://embed.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?content-scaling=fixed&kind=proto&node-id=43-255&page-id=1%3A2&scaling=scale-down&starting-point-node-id=43%3A255&embed-host=share"
         bg="#ffffff"
       />
 
@@ -223,7 +223,7 @@ export default function FearlessInventoryPage() {
         title="Fulfillment Prototype 2"
         body="During the second phase, I refined the design style to be easy to interpret for user testing. Making the design more modern and aesthetic while still being a wireframe in mostly black and white, helps users navigate through a more realistic experience, further improving usability results."
         figmaHref="https://www.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?node-id=113-3626&p=f&viewport=306%2C180%2C0.11&t=VS4tgGSGewzuD3qD-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=113%3A3626&show-proto-sidebar=1&page-id=113%3A3603"
-        embedSrc="https://embed.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?node-id=113-3626&p=f&viewport=306%2C180%2C0.11&scaling=scale-down&content-scaling=fixed&starting-point-node-id=113%3A3626&show-proto-sidebar=1&page-id=113%3A3603&embed-host=share"
+        embedSrc="https://embed.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?content-scaling=fixed&kind=proto&node-id=113-3626&page-id=113%3A3603&scaling=scale-down&show-proto-sidebar=1&starting-point-node-id=113%3A3626&embed-host=share"
         bg="#f7f7f5"
       />
 
@@ -302,7 +302,7 @@ export default function FearlessInventoryPage() {
         title="Fulfillment Prototype"
         body="This prototype showcases the entire flow for the fulfillment portion. All branding from Philz Coffee."
         figmaHref="https://www.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?node-id=609-4408&viewport=-1746%2C777%2C0.38&t=8fpew5p7td0oieC2-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=609%3A4408&page-id=609%3A3"
-        embedSrc="https://embed.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?node-id=609-4408&viewport=-1746%2C777%2C0.38&scaling=scale-down&content-scaling=fixed&starting-point-node-id=609%3A4408&page-id=609%3A3&embed-host=share"
+        embedSrc="https://embed.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?content-scaling=fixed&kind=proto&node-id=609-4408&page-id=609%3A3&scaling=scale-down&starting-point-node-id=609%3A4408&embed-host=share"
         bg="#ffffff"
       />
 
@@ -312,7 +312,7 @@ export default function FearlessInventoryPage() {
         title="Management Prototype"
         body="This prototype showcases the entire flow for the management portion. Add SKU's, visualize inventory easily, and get alerted when items are understocked or overstocked."
         figmaHref="https://www.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?node-id=828-15126&viewport=-703%2C-747%2C0.21&t=7eNYfJcm0xE7tnvs-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=828%3A15126&page-id=828%3A3173"
-        embedSrc="https://embed.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?node-id=828-15126&viewport=-703%2C-747%2C0.21&scaling=scale-down&content-scaling=fixed&starting-point-node-id=828%3A15126&page-id=828%3A3173&embed-host=share"
+        embedSrc="https://embed.figma.com/proto/ZUDcrJxaqzxeDFYoh42zpc/Fearless-Inventory?content-scaling=fixed&kind=proto&node-id=828-15126&page-id=828%3A3173&scaling=scale-down&starting-point-node-id=828%3A15126&embed-host=share"
         bg="#f7f7f5"
       />
 

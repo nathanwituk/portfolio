@@ -21,11 +21,10 @@ const slideIn = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: EASE, delay: 0.1 } },
 };
 
-// Replace with actual Figma prototype embed URL when available
 const FIGMA_EMBED_SRC =
-  "https://embed.figma.com/proto/nb7kLRXiAVeezPVWRQCUkX/Playground---Portfolio?node-id=396-50709&embed-host=share";
+  "https://embed.figma.com/proto/QmElHQ78Q5VCvMTFYRf9EY/Nathan-Wituk-Final-Project?page-id=36%3A139&node-id=523-1035&viewport=241%2C-1377%2C0.43&scaling=scale-down&content-scaling=fixed&starting-point-node-id=523%3A1007&show-proto-sidebar=1&embed-host=share";
 const FIGMA_HREF =
-  "https://www.figma.com/design/nb7kLRXiAVeezPVWRQCUkX/Playground---Portfolio?node-id=396-50709";
+  "https://www.figma.com/proto/QmElHQ78Q5VCvMTFYRf9EY/Nathan-Wituk-Final-Project?page-id=36%3A139&node-id=523-1035";
 
 export default function SafeRideFinalPrototype() {
   const ref = useRef<HTMLDivElement>(null);

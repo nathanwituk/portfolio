@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
@@ -17,75 +16,65 @@ const fadeUp = {
 
 const slideIn = {
   hidden: { opacity: 0, x: 40 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: EASE, delay: 0.1 } },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: EASE, delay: 0.15 } },
 };
 
 export default function SafeRideHero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
-
   return (
     <section
-      className="w-full flex flex-col lg:flex-row items-stretch justify-between gap-[40px]"
+      className="w-full flex flex-col lg:flex-row items-center justify-between gap-[48px]"
       style={{
         paddingTop: "110px",
-        paddingBottom: "0",
+        paddingBottom: "80px",
         paddingLeft: "clamp(20px, 6.25vw, 80px)",
         paddingRight: "clamp(20px, 6.25vw, 80px)",
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease",
       }}
     >
-      {/* Left: Title */}
+      {/* Left: title + description card */}
       <motion.div
-        ref={ref}
         variants={stagger}
         initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="flex flex-col gap-[20px] pb-[110px] shrink-0"
-        style={{ maxWidth: "595px" }}
+        animate="visible"
+        className="flex flex-col gap-[40px] shrink-0"
+        style={{ maxWidth: "560px" }}
       >
-        <motion.p
-          variants={fadeUp}
-          className="font-normal uppercase"
-          style={{
-            fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-            fontSize: "1rem",
-            letterSpacing: "-0.03em",
-            color: "var(--text-primary)",
-            transition: "color 200ms ease",
-          }}
-        >
-          IXD414 — Designing with Systems
-        </motion.p>
-        <motion.h1
-          variants={fadeUp}
-          className="font-semibold leading-[1.05]"
-          style={{
-            fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-            fontSize: "clamp(2.5rem, 6.5vw, 4rem)",
-            letterSpacing: "-0.05em",
-            color: "var(--text-primary)",
-            transition: "color 200ms ease",
-          }}
-        >
-          SafeRide Redesign
-        </motion.h1>
-      </motion.div>
+        {/* Label + title */}
+        <motion.div variants={fadeUp} className="flex flex-col gap-[10px]">
+          <p
+            className="font-normal uppercase"
+            style={{
+              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+              fontSize: "1rem",
+              letterSpacing: "-0.03em",
+              color: "var(--text-primary)",
+              transition: "color 200ms ease",
+            }}
+          >
+            IXD414 — Designing with Systems
+          </p>
+          <h1
+            className="font-semibold leading-[1.05]"
+            style={{
+              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+              fontSize: "clamp(2.5rem, 6.5vw, 4rem)",
+              letterSpacing: "-0.05em",
+              color: "var(--text-primary)",
+              transition: "color 200ms ease",
+            }}
+          >
+            SafeRide Redesign
+          </h1>
+        </motion.div>
 
-      {/* Right: Description card — flush to bottom of section */}
-      <motion.div
-        variants={slideIn}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="lg:flex-1 flex justify-center lg:justify-end items-end"
-        style={{ maxWidth: "567px", width: "100%" }}
-      >
-        <div
-          className="w-full flex flex-col gap-[44px] rounded-tl-[20px] rounded-tr-[20px]"
+        {/* Description card */}
+        <motion.div
+          variants={fadeUp}
+          className="w-full flex flex-col gap-[44px] rounded-[20px]"
           style={{
             backgroundColor: "var(--bg-secondary)",
-            padding: "50px 30px",
+            padding: "36px 30px",
             transition: "background-color 200ms ease",
           }}
         >
@@ -126,7 +115,31 @@ export default function SafeRideHero() {
             <p>Website</p>
             <p>Interaction Design</p>
           </div>
-        </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Right: demo video */}
+      <motion.div
+        variants={slideIn}
+        initial="hidden"
+        animate="visible"
+        className="shrink-0 flex items-center justify-center"
+        style={{ maxWidth: "300px", width: "100%" }}
+      >
+        <video
+          src="/videos/SafeRide/SafeRideDemoVid.mov"
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            width: "100%",
+            height: "auto",
+            borderRadius: "28px",
+            boxShadow: "0 12px 48px rgba(0,0,0,0.14)",
+            display: "block",
+          }}
+        />
       </motion.div>
     </section>
   );

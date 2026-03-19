@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large video files (over GitHub 100MB limit)
+public/videos/SafeRide/SafeRideFirstDemo.mov
+public/videos/hero/SpeedsterSection2.mov
+public/videos/projects/speedster-hero-mockup.mov
+public/videos/speedster/speedster-hero-mockup.mov

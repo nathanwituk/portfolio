@@ -103,9 +103,10 @@ export default function SafeRideHero() {
               transition: "color 200ms ease",
             }}
           >
-            This project explores how digital tools can help people orient themselves
-            whether in space or in time through the language of calendars, clocks, or
-            compasses.
+            The project shows how design solutions can be easily executed in new ways by
+            eliminating how many tasks a user must complete before the desired end goal is
+            achieved. In this study, I used interviews and evaluations to better understand
+            how user goals were being met, and how to make them easier to attain.
           </p>
         </motion.div>
 

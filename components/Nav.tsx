@@ -177,8 +177,9 @@ export default function Nav() {
             const isHovered = hoveredIndex === i;
             const isGreyed = comingSoon;
             const isActive = !isGreyed && pathname.startsWith(href);
-            const isLit = !isGreyed && (isHovered || isActive);
-            const color = isLit ? hoverColor : "var(--nav-text-muted)";
+            // Pill state: active page — filled capsule, white text/icon
+            // Hover state: accent color text/icon + underline, no pill
+            const color = isActive ? "#f5f5f5" : isHovered ? hoverColor : "var(--nav-text-muted)";
 
             return (
               <a
@@ -186,15 +187,16 @@ export default function Nav() {
                 href={href}
                 className="flex items-center"
                 style={{
-                  height: "43px",
+                  height: "28px",
                   paddingLeft: "18px",
                   paddingRight: "18px",
-                  paddingBottom: "4px",
                   gap: "10px",
                   color,
+                  backgroundColor: isActive ? hoverColor : "transparent",
+                  borderRadius: isActive ? "14px" : "0",
                   pointerEvents: isGreyed ? "none" : "auto",
                   opacity: isGreyed ? 0.45 : 1,
-                  transition: "color 0.15s ease",
+                  transition: "color 0.15s ease, background-color 0.15s ease",
                 }}
                 onMouseEnter={() => !isGreyed && setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
@@ -210,7 +212,7 @@ export default function Nav() {
                     fontSize: "1rem",
                     letterSpacing: "-0.48px",
                     lineHeight: "1.1",
-                    textDecoration: isLit ? "underline" : "none",
+                    textDecoration: !isActive && isHovered ? "underline" : "none",
                   }}
                 >
                   {label}
@@ -289,10 +291,14 @@ export default function Nav() {
                   href={href}
                   className="flex items-center"
                   style={{
-                    height: "52px",
+                    height: "34px",
                     gap: "12px",
-                    color: comingSoon ? "var(--nav-text-muted)" : hoverColor,
-                    borderBottom: i < navLinks.length - 1
+                    paddingLeft: "12px",
+                    paddingRight: "12px",
+                    color: isActive ? "#f5f5f5" : comingSoon ? "var(--nav-text-muted)" : hoverColor,
+                    backgroundColor: isActive ? hoverColor : "transparent",
+                    borderRadius: isActive ? "9px" : "0",
+                    borderBottom: !isActive && i < navLinks.length - 1
                       ? "1px solid color-mix(in srgb, var(--nav-border) 15%, transparent)"
                       : "none",
                     opacity: comingSoon ? 0.45 : 1,

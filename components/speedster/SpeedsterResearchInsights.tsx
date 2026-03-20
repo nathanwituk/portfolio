@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
@@ -15,10 +15,10 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
 };
 
-const CARD_TRANSITION = "transform 300ms ease-out, box-shadow 300ms ease-out, background-color 300ms ease-out";
-const ICON_TRANSITION = "transform 300ms ease-out";
+const CARD_TRANSITION = "transform 500ms ease-out, box-shadow 500ms ease-out, background-color 500ms ease-out";
+const ICON_TRANSITION = "transform 500ms ease-out, filter 500ms ease-out";
 
-function QuoteIcon({ hovered }: { hovered: boolean }) {
+function QuoteIcon({ active }: { active: boolean }) {
   return (
     <svg
       width="40"
@@ -28,9 +28,9 @@ function QuoteIcon({ hovered }: { hovered: boolean }) {
       aria-hidden="true"
       style={{
         flexShrink: 0,
-        transform: hovered ? "scale(1.08) rotate(6deg)" : "scale(1) rotate(0deg)",
+        transform: active ? "scale(1.08) rotate(6deg)" : "scale(1) rotate(0deg)",
         transition: ICON_TRANSITION,
-        filter: hovered ? "drop-shadow(0 0 6px rgba(255,93,0,0.55))" : "none",
+        filter: active ? "drop-shadow(0 0 6px rgba(255,93,0,0.55))" : "none",
       }}
     >
       <path
@@ -41,7 +41,7 @@ function QuoteIcon({ hovered }: { hovered: boolean }) {
   );
 }
 
-function LightbulbIcon({ hovered }: { hovered: boolean }) {
+function LightbulbIcon({ active }: { active: boolean }) {
   return (
     <svg
       width="32"
@@ -51,9 +51,9 @@ function LightbulbIcon({ hovered }: { hovered: boolean }) {
       aria-hidden="true"
       style={{
         flexShrink: 0,
-        transform: hovered ? "scale(1.08) rotate(6deg)" : "scale(1) rotate(0deg)",
+        transform: active ? "scale(1.08) rotate(6deg)" : "scale(1) rotate(0deg)",
         transition: ICON_TRANSITION,
-        filter: hovered ? "drop-shadow(0 0 8px rgba(255,255,255,0.6))" : "none",
+        filter: active ? "drop-shadow(0 0 8px rgba(255,255,255,0.6))" : "none",
       }}
     >
       <path
@@ -109,23 +109,22 @@ const ROWS = [
 ];
 
 function FindingCard({ row }: { row: typeof ROWS[number] }) {
-  const [hovered, setHovered] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const active = useInView(ref, { once: true, margin: "-60px" });
 
   return (
     <div
+      ref={ref}
       className="flex-1 flex flex-col gap-[20px] rounded-[20px] relative overflow-hidden"
       style={{
         backgroundColor: "var(--bg-secondary)",
         padding: "21px 29px",
-        transform: hovered ? "translateY(-7px) scale(1.02)" : "translateY(0) scale(1)",
-        boxShadow: hovered
+        transform: active ? "translateY(-7px) scale(1.02)" : "translateY(0) scale(1)",
+        boxShadow: active
           ? "0 16px 40px rgba(0,0,0,0.14)"
           : "0 0px 0px rgba(0,0,0,0)",
         transition: CARD_TRANSITION,
-        cursor: "default",
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       {/* Sweep highlight */}
       <div
@@ -135,15 +134,15 @@ function FindingCard({ row }: { row: typeof ROWS[number] }) {
           background:
             "linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.07) 50%, transparent 70%)",
           backgroundSize: "200% 100%",
-          backgroundPosition: hovered ? "0% 0%" : "100% 0%",
-          transition: "background-position 500ms ease-out",
+          backgroundPosition: active ? "0% 0%" : "100% 0%",
+          transition: "background-position 600ms ease-out",
           pointerEvents: "none",
           borderRadius: "20px",
         }}
       />
 
       <div className="flex gap-[22px] items-start relative">
-        <QuoteIcon hovered={hovered} />
+        <QuoteIcon active={active} />
         <p
           className="font-normal leading-[1.4]"
           style={{
@@ -174,23 +173,22 @@ function FindingCard({ row }: { row: typeof ROWS[number] }) {
 }
 
 function InsightCard({ row }: { row: typeof ROWS[number] }) {
-  const [hovered, setHovered] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const active = useInView(ref, { once: true, margin: "-60px" });
 
   return (
     <div
+      ref={ref}
       className="flex-1 flex gap-[20px] items-start rounded-[20px] relative overflow-hidden"
       style={{
-        backgroundColor: hovered ? "#ff6a14" : "#ff5d00",
+        backgroundColor: active ? "#ff6a14" : "#ff5d00",
         padding: "21px 29px",
-        transform: hovered ? "translateY(-7px) scale(1.02)" : "translateY(0) scale(1)",
-        boxShadow: hovered
+        transform: active ? "translateY(-7px) scale(1.02)" : "translateY(0) scale(1)",
+        boxShadow: active
           ? "0 16px 40px rgba(255,93,0,0.35)"
           : "0 0px 0px rgba(255,93,0,0)",
         transition: CARD_TRANSITION,
-        cursor: "default",
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       {/* Sweep highlight */}
       <div
@@ -200,15 +198,15 @@ function InsightCard({ row }: { row: typeof ROWS[number] }) {
           background:
             "linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%)",
           backgroundSize: "200% 100%",
-          backgroundPosition: hovered ? "0% 0%" : "100% 0%",
-          transition: "background-position 500ms ease-out",
+          backgroundPosition: active ? "0% 0%" : "100% 0%",
+          transition: "background-position 600ms ease-out",
           pointerEvents: "none",
           borderRadius: "20px",
         }}
       />
 
       <div className="relative">
-        <LightbulbIcon hovered={hovered} />
+        <LightbulbIcon active={active} />
       </div>
       <p
         className="font-normal leading-[1.4] relative"

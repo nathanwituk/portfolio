@@ -314,12 +314,11 @@ export default function Nav() {
                   </span>
                   <span
                     style={{
-                      color: isActive ? hoverColor : "var(--nav-text)",
+                      color: isActive ? "#ffffff" : "var(--nav-text)",
                       fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
                       fontSize: "1.25rem",
                       letterSpacing: "-0.6px",
                       lineHeight: "1",
-                      textDecoration: isActive ? "underline" : "none",
                     }}
                   >
                     {label}

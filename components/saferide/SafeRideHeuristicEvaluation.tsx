@@ -109,11 +109,11 @@ export default function SafeRideHeuristicEvaluation() {
                   {h.title}
                 </p>
                 <p
-                  className="font-normal leading-[1.21]"
+                  className="font-normal leading-[1.4]"
                   style={{
                     fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                    fontSize: "1rem",
-                    letterSpacing: "-0.025em",
+                    fontSize: "0.875rem",
+                    letterSpacing: "0.02em",
                     color: "var(--text-secondary)",
                     transition: "color 200ms ease",
                   }}

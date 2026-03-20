@@ -112,11 +112,11 @@ export default function SafeRideInterview() {
           <div className="flex flex-col gap-[16px] min-w-0 flex-1">
             <QuoteMark />
             <p
-              className="font-normal leading-[1.5]"
+              className="font-normal leading-[1.4]"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "0.9375rem",
-                letterSpacing: "-0.02em",
+                fontSize: "0.875rem",
+                letterSpacing: "0.02em",
                 color: "var(--text-primary)",
                 transition: "color 200ms ease",
               }}

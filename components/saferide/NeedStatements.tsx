@@ -112,6 +112,15 @@ export default function NeedStatements() {
       //
       const mouse = Matter.Mouse.create(container);
 
+      // Matter.Mouse.create attaches a 'mousewheel' listener with { passive: false }
+      // that calls e.preventDefault() unconditionally, blocking page scroll anywhere
+      // inside the container. Remove it — we don't need wheel-based physics interaction.
+      const src = (mouse as any).sourceEvents;
+      if (src?.mousewheel) {
+        container.removeEventListener("mousewheel",      src.mousewheel);
+        container.removeEventListener("DOMMouseScroll",  src.mousewheel);
+      }
+
       const mc = Matter.MouseConstraint.create(engine, {
         mouse,
         constraint: {

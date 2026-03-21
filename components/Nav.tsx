@@ -77,10 +77,10 @@ const navLinks = [
   },
   {
     label: "Study Sync Dashboard",
-    href: "#study-sync",
+    href: "/saferide",
     icon: DashboardIcon,
     hoverColor: "#1D1D1D",
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     label: "KU SafeRide Redesign",

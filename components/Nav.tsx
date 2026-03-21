@@ -283,7 +283,7 @@ export default function Nav() {
             exit={{ height: 0 }}
             transition={{ duration: 0.35, ease: [0.25, 0, 0, 1] as [number, number, number, number] }}
           >
-            <div className="flex flex-col px-5 py-4">
+            <div className="flex flex-col gap-[20px] px-5 py-4">
               {navLinks.map(({ label, href, icon: Icon, hoverColor, activeLabelColor, comingSoon }, i) => {
                 const isActive = !comingSoon && pathname.startsWith(href);
                 return (
@@ -299,9 +299,6 @@ export default function Nav() {
                     color: isActive ? (activeLabelColor ?? "#f5f5f5") : comingSoon ? "var(--nav-text-muted)" : hoverColor,
                     backgroundColor: isActive ? hoverColor : "transparent",
                     borderRadius: isActive ? "9px" : "0",
-                    borderBottom: !isActive && i < navLinks.length - 1
-                      ? "1px solid color-mix(in srgb, var(--nav-border) 15%, transparent)"
-                      : "none",
                     opacity: comingSoon ? 0.45 : 1,
                     pointerEvents: comingSoon ? "none" : "auto",
                   }}

@@ -88,7 +88,7 @@ export default function NeedStatements() {
 
       // ── Engine ──────────────────────────────────────────────────────────────
       const engine = Matter.Engine.create({
-        gravity:            { x: 0, y: 2.2 },
+        gravity:            { x: 0, y: 1.1 },
         positionIterations: 10,
         velocityIterations: 8,
       });

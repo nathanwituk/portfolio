@@ -9,7 +9,6 @@ import Matter from "matter-js";
 const WALL_T     = 60;
 const STAGGER_MS = 200;
 const FONT_PX    = 14;   // fixed — never changes with viewport
-const CHAR_W     = 8.1;  // avg px per char at 14px Instrument Sans
 
 const QUESTIONS = [
   "How many tasks do I have left in my Bio class for this week?",
@@ -26,8 +25,28 @@ function pillDims(containerW: number) {
   return                        { h: 44, padX: 24 };
 }
 
-function pillW(text: string, padX: number, maxW: number): number {
-  return Math.min(Math.ceil(text.length * CHAR_W + padX * 2), maxW - 32);
+// Measure actual rendered text widths so pills hug text precisely on every screen size
+function measureTextWidths(texts: string[], padX: number, maxW: number): number[] {
+  const span = document.createElement("span");
+  Object.assign(span.style, {
+    position:      "absolute",
+    top:           "-9999px",
+    left:          "-9999px",
+    visibility:    "hidden",
+    whiteSpace:    "nowrap",
+    fontFamily:    "'Instrument Sans', sans-serif",
+    fontSize:      `${FONT_PX}px`,
+    letterSpacing: "0.02em",
+    pointerEvents: "none",
+  });
+  document.body.appendChild(span);
+  const widths = texts.map((t) => {
+    span.textContent = t;
+    const w = span.getBoundingClientRect().width;
+    return Math.min(Math.ceil(w + padX * 2), maxW - 16);
+  });
+  document.body.removeChild(span);
+  return widths;
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -56,8 +75,8 @@ export default function NeedStatements() {
       // Responsive pill dimensions — font stays fixed, body/padding scale with W
       const { h: PILL_H, padX: PAD_X } = pillDims(W);
 
-      // Compute widths and sync all pill dimensions + font size to DOM elements
-      const widths = QUESTIONS.map((t) => pillW(t, PAD_X, W));
+      // Measure exact rendered text widths — no char-width estimation needed
+      const widths = measureTextWidths(QUESTIONS, PAD_X, W);
       bubbleRefs.current.forEach((el, i) => {
         if (!el) return;
         el.style.width        = `${widths[i]}px`;
@@ -119,8 +138,8 @@ export default function NeedStatements() {
       };
       container.addEventListener("mousemove", onMouseMove);
 
-      // Prevent page scroll while touch-dragging
-      const noScroll = (e: TouchEvent) => e.preventDefault();
+      // Prevent page scroll only while a pill is actively being dragged
+      const noScroll = (e: TouchEvent) => { if (mc.body) e.preventDefault(); };
       container.addEventListener("touchmove", noScroll, { passive: false });
 
       // ── Runner ───────────────────────────────────────────────────────────────
@@ -235,11 +254,10 @@ export default function NeedStatements() {
       <div
         ref={containerRef}
         style={{
-          position:    "absolute",
-          inset:       0,
-          zIndex:      1,
-          touchAction: "none",
-          cursor:      "default",
+          position: "absolute",
+          inset:    0,
+          zIndex:   1,
+          cursor:   "default",
         }}
       >
         {QUESTIONS.map((text, i) => (
@@ -250,8 +268,8 @@ export default function NeedStatements() {
               position:        "absolute",
               top:             0,
               left:            0,
-              // Placeholder dimensions — overwritten by the effect before becoming visible
-              width:           Math.ceil(text.length * CHAR_W + 24 * 2),
+              // Placeholder — overwritten by the effect before becoming visible
+              width:           200,
               height:          44,
               backgroundColor: "#000000",
               borderRadius:    22,

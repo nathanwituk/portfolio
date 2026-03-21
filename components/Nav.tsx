@@ -77,7 +77,7 @@ const navLinks = [
   },
   {
     label: "Study Sync Dashboard",
-    href: "/saferide",
+    href: "/work/studysync",
     icon: DashboardIcon,
     hoverColor: "#1D1D1D",
     comingSoon: false,

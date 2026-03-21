@@ -6,24 +6,22 @@ export default function ResearchHeadline() {
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
-          paddingTop: "40px",
-          paddingBottom: "40px",
+          paddingTop: "36px",
+          paddingBottom: "36px",
         }}
       >
         <p
+          className="font-normal leading-none"
           style={{
             fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-            fontSize: "1.875rem",
-            fontWeight: 400,
-            lineHeight: 1,
-            letterSpacing: "-0.6px",
+            fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+            letterSpacing: "-0.03em",
             color: "#000000",
             whiteSpace: "nowrap",
           }}
         >
           Research
         </p>
-        {/* Down arrow */}
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
           <path
             d="M14 4V24M14 24L6 16M14 24L22 16"

@@ -8,7 +8,6 @@ import Matter from "matter-js";
 
 const WALL_T     = 60;
 const STAGGER_MS = 200;
-const FONT_PX    = 14;   // fixed — never changes with viewport
 
 const QUESTIONS = [
   "How many tasks do I have left in my Bio class for this week?",
@@ -18,15 +17,19 @@ const QUESTIONS = [
   "How many classes do I need to take until I can graduate?",
 ];
 
-// Pill height + padding scale slightly with container width (font stays fixed)
+// Pill dims scale with container width.
+// Above 1280px everything grows by 30% for a more impactful desktop presence.
 function pillDims(containerW: number) {
-  if (containerW < 480)  return { h: 36, padX: 16 };
-  if (containerW < 768)  return { h: 40, padX: 20 };
-  return                        { h: 44, padX: 24 };
+  if (containerW < 480)  return { h: 36, padX: 16, fontSize: 14 };
+  if (containerW < 768)  return { h: 40, padX: 20, fontSize: 14 };
+  if (containerW <= 1280) return { h: 44, padX: 24, fontSize: 14 };
+  // > 1280px: +30%
+  return                        { h: 57, padX: 31, fontSize: 18 };
 }
 
-// Measure actual rendered text widths so pills hug text precisely on every screen size
-function measureTextWidths(texts: string[], padX: number, maxW: number): number[] {
+// Measure actual rendered text widths — uses the runtime fontSize so measurement
+// is accurate at every size tier (including the large desktop tier).
+function measureTextWidths(texts: string[], padX: number, fontSize: number, maxW: number): number[] {
   const span = document.createElement("span");
   Object.assign(span.style, {
     position:      "absolute",
@@ -35,7 +38,7 @@ function measureTextWidths(texts: string[], padX: number, maxW: number): number[
     visibility:    "hidden",
     whiteSpace:    "nowrap",
     fontFamily:    "'Instrument Sans', sans-serif",
-    fontSize:      `${FONT_PX}px`,
+    fontSize:      `${fontSize}px`,
     letterSpacing: "0.02em",
     pointerEvents: "none",
   });
@@ -72,11 +75,11 @@ export default function NeedStatements() {
       const W = container.offsetWidth;
       const H = container.offsetHeight;
 
-      // Responsive pill dimensions — font stays fixed, body/padding scale with W
-      const { h: PILL_H, padX: PAD_X } = pillDims(W);
+      // Responsive pill dimensions — 30% larger above 1280px
+      const { h: PILL_H, padX: PAD_X, fontSize: FONT_PX } = pillDims(W);
 
-      // Measure exact rendered text widths — no char-width estimation needed
-      const widths = measureTextWidths(QUESTIONS, PAD_X, W);
+      // Measure exact rendered text widths using the runtime font size
+      const widths = measureTextWidths(QUESTIONS, PAD_X, FONT_PX, W);
       bubbleRefs.current.forEach((el, i) => {
         if (!el) return;
         el.style.width        = `${widths[i]}px`;

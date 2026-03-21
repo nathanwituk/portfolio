@@ -30,7 +30,7 @@ export default function HeroSection() {
   return (
     <section
       ref={ref}
-      className="w-full flex flex-col lg:flex-row flex-wrap items-center justify-between gap-y-[46px] px-5 md:px-[80px]"
+      className="w-full flex flex-col lg:flex-row flex-wrap items-center gap-x-[75px] gap-y-[46px] px-5 md:px-[80px]"
       style={{
         paddingTop: "110px",
         paddingBottom: "129px",

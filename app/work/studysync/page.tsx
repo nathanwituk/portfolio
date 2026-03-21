@@ -1,4 +1,7 @@
-import HeroSection          from "@/components/saferide/HeroSection";
+import Nav                  from "@/components/Nav";
+import BackToTop             from "@/components/BackToTop";
+import Footer                from "@/components/Footer";
+import HeroSection           from "@/components/saferide/HeroSection";
 import KeyFeatures           from "@/components/saferide/KeyFeatures";
 import ResearchHeadline      from "@/components/saferide/ResearchHeadline";
 import OverviewSection       from "@/components/saferide/OverviewSection";
@@ -12,7 +15,8 @@ import FullPrototype         from "@/components/saferide/FullPrototype";
 
 export default function StudySyncCaseStudy() {
   return (
-    <main>
+    <main className="flex flex-col min-h-screen overflow-x-hidden" style={{ backgroundColor: "var(--bg-primary)" }}>
+      <Nav />
       <HeroSection />
       <KeyFeatures />
       <ResearchHeadline />
@@ -24,6 +28,8 @@ export default function StudySyncCaseStudy() {
       <WireframeDescription />
       <WireframeContent />
       <FullPrototype />
+      <BackToTop />
+      <Footer />
     </main>
   );
 }

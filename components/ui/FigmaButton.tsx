@@ -90,6 +90,7 @@ interface FigmaButtonProps {
   className?: string;
   accentColor?: string;
   accentColorHover?: string;
+  inkColor?: string;  // color of eye strokes, text, and underline (default: "white")
   external?: boolean;
 }
 
@@ -99,6 +100,7 @@ export default function FigmaButton({
   className = "",
   accentColor = "#6f7142",
   accentColorHover = "#838653",
+  inkColor = "white",
   external = true,
 }: FigmaButtonProps) {
   const eyeRef = useRef<HTMLDivElement>(null);
@@ -126,7 +128,7 @@ export default function FigmaButton({
       whileFocus={{ scale: 1.04 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 340, damping: 22 }}
-      className={`group inline-flex w-fit items-center gap-[10px] rounded-[10px] text-white self-start ${className}`}
+      className={`group inline-flex w-fit items-center gap-[10px] rounded-[10px] self-start ${className}`}
       style={{
         padding: "12px 20px",
         fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
@@ -134,6 +136,7 @@ export default function FigmaButton({
         textDecoration: "none",
         cursor: "pointer",
         userSelect: "none",
+        color: inkColor,
         backgroundColor: isHovered ? accentColorHover : accentColor,
         boxShadow: isHovered
           ? "0 8px 24px rgba(0,0,0,0.22)"
@@ -163,7 +166,7 @@ export default function FigmaButton({
           >
             <path
               d={EYE_PATH}
-              stroke="white"
+              stroke={inkColor}
               strokeWidth="1.25"
               strokeLinejoin="round"
               vectorEffect="non-scaling-stroke"
@@ -180,7 +183,7 @@ export default function FigmaButton({
                 key={i}
                 x1={l.x1} y1={l.y1}
                 x2={l.x2} y2={l.y2}
-                stroke="white"
+                stroke={inkColor}
                 strokeWidth="1.1"
                 strokeLinecap="round"
               />
@@ -197,7 +200,7 @@ export default function FigmaButton({
                 key={i}
                 x1={l.x1} y1={l.y1}
                 x2={l.x2} y2={l.y2}
-                stroke="white"
+                stroke={inkColor}
                 strokeWidth="1.1"
                 strokeLinecap="round"
               />
@@ -210,7 +213,7 @@ export default function FigmaButton({
             cy={CY}
             r={2.4}
             fill="none"
-            stroke="white"
+            stroke={inkColor}
             strokeWidth="1.2"
             animate={{
               x:       px,
@@ -225,8 +228,8 @@ export default function FigmaButton({
       <span className="relative">
         {children}
         <span
-          className="absolute bottom-0 left-0 w-full h-px bg-white origin-left scale-x-0 group-hover:scale-x-100"
-          style={{ transition: "transform 150ms ease-out" }}
+          className="absolute bottom-0 left-0 w-full h-px origin-left scale-x-0 group-hover:scale-x-100"
+          style={{ transition: "transform 150ms ease-out", backgroundColor: inkColor }}
         />
       </span>
     </motion.a>

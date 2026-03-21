@@ -4,13 +4,12 @@ import { useRef, useEffect } from "react";
 import { useInView } from "framer-motion";
 import Matter from "matter-js";
 
-// ── Physics constants ────────────────────────────────────────────────────────
+// ── Constants ─────────────────────────────────────────────────────────────────
 
-const PILL_H     = 44;
-const PAD_X      = 26;
-const CHAR_W     = 8.6;   // avg px per char at 0.875rem Instrument Sans
-const WALL_T     = 80;
-const STAGGER_MS = 220;
+const WALL_T     = 60;
+const STAGGER_MS = 200;
+const FONT_PX    = 14;   // fixed — never changes with viewport
+const CHAR_W     = 8.1;  // avg px per char at 14px Instrument Sans
 
 const QUESTIONS = [
   "How many tasks do I have left in my Bio class for this week?",
@@ -20,16 +19,22 @@ const QUESTIONS = [
   "How many classes do I need to take until I can graduate?",
 ];
 
-function calcPillW(text: string, maxW: number): number {
-  return Math.min(Math.ceil(text.length * CHAR_W + PAD_X * 2), maxW - 20);
+// Pill height + padding scale slightly with container width (font stays fixed)
+function pillDims(containerW: number) {
+  if (containerW < 480)  return { h: 36, padX: 16 };
+  if (containerW < 768)  return { h: 40, padX: 20 };
+  return                        { h: 44, padX: 24 };
 }
 
-// ── Component ────────────────────────────────────────────────────────────────
+function pillW(text: string, padX: number, maxW: number): number {
+  return Math.min(Math.ceil(text.length * CHAR_W + padX * 2), maxW - 32);
+}
+
+// ── Component ─────────────────────────────────────────────────────────────────
 
 export default function NeedStatements() {
   const sectionRef   = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef    = useRef<HTMLCanvasElement>(null);
   const bubbleRefs   = useRef<(HTMLDivElement | null)[]>([]);
   const cleanupRef   = useRef<() => void>(() => {});
   const hasRun       = useRef(false);
@@ -40,100 +45,114 @@ export default function NeedStatements() {
     if (!inView || hasRun.current) return;
     hasRun.current = true;
 
-    // Wait one frame so the section has finished laying out
+    // Wait one frame for layout to settle
     const frameId = requestAnimationFrame(() => {
       const container = containerRef.current;
-      const canvas    = canvasRef.current;
-      if (!container || !canvas) return;
+      if (!container) return;
 
       const W = container.offsetWidth;
       const H = container.offsetHeight;
 
-      // Match canvas resolution to physics world exactly
-      canvas.width  = W;
-      canvas.height = H;
+      // Responsive pill dimensions — font stays fixed, body/padding scale with W
+      const { h: PILL_H, padX: PAD_X } = pillDims(W);
 
-      // ── Pre-compute each pill width and sync to DOM elements ─────────────
-      const widths = QUESTIONS.map((t) => calcPillW(t, W));
+      // Compute widths and sync all pill dimensions + font size to DOM elements
+      const widths = QUESTIONS.map((t) => pillW(t, PAD_X, W));
       bubbleRefs.current.forEach((el, i) => {
-        if (el) el.style.width = `${widths[i]}px`;
+        if (!el) return;
+        el.style.width        = `${widths[i]}px`;
+        el.style.height       = `${PILL_H}px`;
+        el.style.borderRadius = `${PILL_H / 2}px`;
+        const span = el.firstElementChild as HTMLElement | null;
+        if (span) span.style.fontSize = `${FONT_PX}px`;
       });
 
-      // ── Engine ────────────────────────────────────────────────────────────
+      // ── Engine ──────────────────────────────────────────────────────────────
       const engine = Matter.Engine.create({
-        gravity:            { x: 0, y: 2.6 },
-        positionIterations: 12,
-        velocityIterations: 12,
+        gravity:            { x: 0, y: 2.2 },
+        positionIterations: 10,
+        velocityIterations: 8,
       });
       const world = engine.world;
 
-      // ── Static boundary walls — all four sides ───────────────────────────
-      const wo = { isStatic: true, friction: 0.9, restitution: 0.02, label: "wall" };
+      // ── Walls ───────────────────────────────────────────────────────────────
+      const wo = { isStatic: true, friction: 0.8, restitution: 0.0, label: "wall" };
       Matter.Composite.add(world, [
-        Matter.Bodies.rectangle(W / 2,          H + WALL_T / 2,  W + WALL_T * 2, WALL_T, wo), // floor
-        Matter.Bodies.rectangle(W / 2,         -WALL_T / 2,      W + WALL_T * 2, WALL_T, wo), // ceiling
-        Matter.Bodies.rectangle(-WALL_T / 2,    H / 2,           WALL_T,         H * 3,  wo), // left
-        Matter.Bodies.rectangle(W + WALL_T / 2, H / 2,           WALL_T,         H * 3,  wo), // right
+        Matter.Bodies.rectangle(W / 2,          H + WALL_T / 2, W * 2,  WALL_T, wo), // floor
+        Matter.Bodies.rectangle(W / 2,         -WALL_T / 2,     W * 2,  WALL_T, wo), // ceiling
+        Matter.Bodies.rectangle(-WALL_T / 2,    H / 2,          WALL_T, H * 3,  wo), // left
+        Matter.Bodies.rectangle(W + WALL_T / 2, H / 2,          WALL_T, H * 3,  wo), // right
       ]);
 
-      // ── Mouse / touch constraint ──────────────────────────────────────────
-      const mouse = Matter.Mouse.create(canvas);
-      mouse.pixelRatio = window.devicePixelRatio || 1;
+      // ── Mouse / touch — attached directly to the container div ──────────────
+      //
+      // Key fix: no invisible canvas needed. Matter.Mouse.create works on any
+      // DOM element. The pill divs are pointerEvents:none so all clicks/touches
+      // fall through to this container. pixelRatio is NOT set (defaults to 1)
+      // because the container div uses CSS pixels, not device pixels.
+      //
+      const mouse = Matter.Mouse.create(container);
 
       const mc = Matter.MouseConstraint.create(engine, {
         mouse,
         constraint: {
-          stiffness: 0.3,   // firm enough to push other bodies
-          damping:   0.12,
+          stiffness: 0.9,   // high = pill follows pointer tightly
+          damping:   0.2,
           render:    { visible: false },
         },
       });
       Matter.Composite.add(world, mc);
 
-      // ── Cursor: grab only when hovering a bubble body ─────────────────────
+      // ── Cursor feedback ──────────────────────────────────────────────────────
       const onMouseMove = (e: MouseEvent) => {
-        if (mc.body) { canvas.style.cursor = "grabbing"; return; }
-        const rect = canvas.getBoundingClientRect();
+        if (mc.body) {
+          container.style.cursor = "grabbing";
+          return;
+        }
+        const rect = container.getBoundingClientRect();
         const pt   = { x: e.clientX - rect.left, y: e.clientY - rect.top };
         const over = Matter.Query.point(
           Matter.Composite.allBodies(world).filter((b) => !b.isStatic),
           pt,
         ).length > 0;
-        canvas.style.cursor = over ? "grab" : "default";
+        container.style.cursor = over ? "grab" : "default";
       };
-      canvas.addEventListener("mousemove", onMouseMove);
+      container.addEventListener("mousemove", onMouseMove);
 
-      // Prevent page scroll while touch-dragging on mobile
+      // Prevent page scroll while touch-dragging
       const noScroll = (e: TouchEvent) => e.preventDefault();
-      canvas.addEventListener("touchmove", noScroll, { passive: false });
+      container.addEventListener("touchmove", noScroll, { passive: false });
 
-      // ── Runner ────────────────────────────────────────────────────────────
+      // ── Runner ───────────────────────────────────────────────────────────────
       const runner = Matter.Runner.create({ delta: 1000 / 60 });
       Matter.Runner.run(runner, engine);
 
-      // ── Drop bubbles with stagger ─────────────────────────────────────────
+      // ── Drop pills with stagger ──────────────────────────────────────────────
       const bodies: Matter.Body[] = [];
       const timers: ReturnType<typeof setTimeout>[] = [];
 
       QUESTIONS.forEach((_, i) => {
         const t = setTimeout(() => {
-          const w   = widths[i];
-          const lo  = w / 2 + 8;
-          const hi  = W - w / 2 - 8;
-          const x   = lo + Math.random() * Math.max(0, hi - lo);
-          const y   = -(PILL_H / 2 + 10);
+          const w  = widths[i];
+          const lo = w / 2 + 8;
+          const hi = W - w / 2 - 8;
+          const x  = lo + Math.random() * Math.max(0, hi - lo);
+          const y  = -(PILL_H / 2 + 4);
 
           const body = Matter.Bodies.rectangle(x, y, w, PILL_H, {
-            chamfer:       { radius: PILL_H / 2 - 1 },
-            friction:      0.88,
-            frictionStatic: 0.65,
-            frictionAir:   0.018,
-            restitution:   0.04,
-            density:       0.0035,
-            label:         `bubble-${i}`,
+            chamfer:        { radius: PILL_H / 2 - 2 },
+            friction:       0.9,
+            frictionStatic: 0.7,
+            frictionAir:    0.025,
+            restitution:    0.02,
+            density:        0.004,
+            label:          `bubble-${i}`,
           });
 
+          Matter.Body.setInertia(body, Infinity);
+
           (body as any)._w = w;
+          (body as any)._h = PILL_H;
           (body as any)._i = i;
 
           bodies.push(body);
@@ -143,36 +162,31 @@ export default function NeedStatements() {
         timers.push(t);
       });
 
-      // ── rAF loop — direct DOM writes only, no React state ────────────────
+      // ── rAF sync loop ────────────────────────────────────────────────────────
+      // No rotation to handle — just translate each DOM pill to the body center.
       let raf = 0;
       const tick = () => {
         for (const body of bodies) {
-          const idx  = (body as any)._i as number;
-          const w    = (body as any)._w as number;
-          const el   = bubbleRefs.current[idx];
+          const idx = (body as any)._i as number;
+          const w   = (body as any)._w as number;
+          const h   = (body as any)._h as number;
+          const el  = bubbleRefs.current[idx];
           if (!el) continue;
 
           const { x, y } = body.position;
-          const a = body.angle;
-
-          // Move & rotate the pill shell
-          el.style.transform  = `translate(${x - w / 2}px,${y - PILL_H / 2}px) rotate(${a}rad)`;
+          el.style.transform  = `translate(${x - w / 2}px, ${y - h / 2}px)`;
           el.style.visibility = "visible";
-
-          // Counter-rotate the inner text div so it stays upright
-          const inner = el.firstElementChild as HTMLElement | null;
-          if (inner) inner.style.transform = `rotate(${-a}rad)`;
         }
         raf = requestAnimationFrame(tick);
       };
       raf = requestAnimationFrame(tick);
 
-      // ── Cleanup ───────────────────────────────────────────────────────────
+      // ── Cleanup ──────────────────────────────────────────────────────────────
       cleanupRef.current = () => {
         cancelAnimationFrame(raf);
         timers.forEach(clearTimeout);
-        canvas.removeEventListener("mousemove", onMouseMove);
-        canvas.removeEventListener("touchmove", noScroll);
+        container.removeEventListener("mousemove", onMouseMove);
+        container.removeEventListener("touchmove", noScroll);
         Matter.Runner.stop(runner);
         Matter.Engine.clear(engine);
         Matter.Composite.clear(world, false);
@@ -190,15 +204,13 @@ export default function NeedStatements() {
       className="w-full relative overflow-hidden"
       style={{ backgroundColor: "#b2e639" }}
     >
-      {/* ── Headline — z-index above physics, pointer-events off so clicks
-           pass through to the canvas beneath ──────────────────────────────── */}
+      {/* ── Headline — above physics, pointer-events off so drag passes through */}
       <div
         className="relative max-w-[1280px] mx-auto"
         style={{
           paddingLeft:   "clamp(20px, 6.25vw, 80px)",
           paddingRight:  "clamp(20px, 6.25vw, 80px)",
           paddingTop:    "88px",
-          // paddingBottom creates the height for the bubble pile area
           paddingBottom: "clamp(300px, 38vw, 420px)",
           zIndex:        10,
           pointerEvents: "none",
@@ -219,33 +231,17 @@ export default function NeedStatements() {
         </p>
       </div>
 
-      {/* ── Physics sandbox — absolute, fills the entire green section ───────
-           The invisible canvas captures all events; bubble divs are purely
-           visual and positioned by the physics tick loop each frame. ──────── */}
+      {/* ── Physics container — absolute fill, receives all pointer events ──── */}
       <div
         ref={containerRef}
         style={{
-          position: "absolute",
-          inset:    0,
-          zIndex:   1,
+          position:    "absolute",
+          inset:       0,
+          zIndex:      1,
+          touchAction: "none",
+          cursor:      "default",
         }}
       >
-        {/* Invisible canvas — sole purpose: Matter.js mouse/touch input */}
-        <canvas
-          ref={canvasRef}
-          style={{
-            position:    "absolute",
-            inset:       0,
-            width:       "100%",
-            height:      "100%",
-            opacity:     0,
-            zIndex:      2,
-            cursor:      "default",
-            touchAction: "none",
-          }}
-        />
-
-        {/* Pill DOM elements — width synced to physics body in the effect */}
         {QUESTIONS.map((text, i) => (
           <div
             key={i}
@@ -254,45 +250,35 @@ export default function NeedStatements() {
               position:        "absolute",
               top:             0,
               left:            0,
-              // Initial width — overwritten to the correct clamped value in the effect
-              width:           Math.ceil(text.length * CHAR_W + PAD_X * 2),
-              height:          PILL_H,
+              // Placeholder dimensions — overwritten by the effect before becoming visible
+              width:           Math.ceil(text.length * CHAR_W + 24 * 2),
+              height:          44,
               backgroundColor: "#000000",
-              borderRadius:    PILL_H / 2,
-              overflow:        "hidden",
+              borderRadius:    22,
               display:         "flex",
               alignItems:      "center",
               justifyContent:  "center",
+              overflow:        "hidden",
               pointerEvents:   "none",
               userSelect:      "none",
-              transformOrigin: "center",
               willChange:      "transform",
               visibility:      "hidden",
-              zIndex:          1,
             }}
           >
-            {/* Inner div fills pill exactly — counter-rotated in tick to stay upright */}
-            <div
+            <span
               style={{
-                width:           "100%",
-                height:          "100%",
-                display:         "flex",
-                alignItems:      "center",
-                justifyContent:  "center",
-                transformOrigin: "center",
-                fontFamily:      "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize:        "0.875rem",
-                letterSpacing:   "0.02em",
-                lineHeight:      1,
-                color:           "#ffffff",
-                whiteSpace:      "nowrap",
-                userSelect:      "none",
-                pointerEvents:   "none",
-                flexShrink:      0,
+                fontFamily:    "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                fontSize:      `${FONT_PX}px`,
+                letterSpacing: "0.02em",
+                lineHeight:    1,
+                color:         "#ffffff",
+                whiteSpace:    "nowrap",
+                userSelect:    "none",
+                pointerEvents: "none",
               }}
             >
               {text}
-            </div>
+            </span>
           </div>
         ))}
       </div>

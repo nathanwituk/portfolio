@@ -79,7 +79,8 @@ const navLinks = [
     label: "Study Sync Dashboard",
     href: "/work/studysync",
     icon: DashboardIcon,
-    hoverColor: "#1D1D1D",
+    hoverColor: "#b2e639",
+    activeLabelColor: "#000000",
     comingSoon: false,
   },
   {
@@ -173,13 +174,13 @@ export default function Nav() {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center">
-          {navLinks.map(({ label, href, icon: Icon, hoverColor, comingSoon }, i) => {
+          {navLinks.map(({ label, href, icon: Icon, hoverColor, activeLabelColor, comingSoon }, i) => {
             const isHovered = hoveredIndex === i;
             const isGreyed = comingSoon;
             const isActive = !isGreyed && pathname.startsWith(href);
-            // Pill state: active page — filled capsule, white text/icon
+            // Pill state: active page — filled capsule, white (or custom) text/icon
             // Hover state: accent color text/icon + underline, no pill
-            const color = isActive ? "#f5f5f5" : isHovered ? hoverColor : "var(--nav-text-muted)";
+            const color = isActive ? (activeLabelColor ?? "#f5f5f5") : isHovered ? hoverColor : "var(--nav-text-muted)";
 
             return (
               <a
@@ -283,7 +284,7 @@ export default function Nav() {
             transition={{ duration: 0.35, ease: [0.25, 0, 0, 1] as [number, number, number, number] }}
           >
             <div className="flex flex-col px-5 py-4">
-              {navLinks.map(({ label, href, icon: Icon, hoverColor, comingSoon }, i) => {
+              {navLinks.map(({ label, href, icon: Icon, hoverColor, activeLabelColor, comingSoon }, i) => {
                 const isActive = !comingSoon && pathname.startsWith(href);
                 return (
                 <motion.a
@@ -295,7 +296,7 @@ export default function Nav() {
                     gap: "12px",
                     paddingLeft: "12px",
                     paddingRight: "12px",
-                    color: isActive ? "#f5f5f5" : comingSoon ? "var(--nav-text-muted)" : hoverColor,
+                    color: isActive ? (activeLabelColor ?? "#f5f5f5") : comingSoon ? "var(--nav-text-muted)" : hoverColor,
                     backgroundColor: isActive ? hoverColor : "transparent",
                     borderRadius: isActive ? "9px" : "0",
                     borderBottom: !isActive && i < navLinks.length - 1
@@ -314,7 +315,7 @@ export default function Nav() {
                   </span>
                   <span
                     style={{
-                      color: isActive ? "#ffffff" : "var(--nav-text)",
+                      color: isActive ? (activeLabelColor ?? "#ffffff") : "var(--nav-text)",
                       fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
                       fontSize: "1.25rem",
                       letterSpacing: "-0.6px",

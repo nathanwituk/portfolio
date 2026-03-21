@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import Image from "next/image";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
@@ -30,7 +29,7 @@ export default function HeroSection() {
   return (
     <section
       ref={ref}
-      className="w-full flex flex-col lg:flex-row flex-wrap items-center gap-x-[75px] gap-y-[46px] px-5 md:px-[80px]"
+      className="w-full flex flex-col xl:flex-row flex-wrap items-center gap-x-[75px] gap-y-[46px] px-5 md:px-[80px]"
       style={{
         paddingTop: "110px",
         paddingBottom: "129px",
@@ -43,16 +42,21 @@ export default function HeroSection() {
         variants={slideIn}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        className="relative shrink-0 w-full lg:w-[595px]"
+        className="relative shrink-0 w-full xl:w-[595px]"
         style={{ height: "522px" }}
       >
-        <Image
-          src="/images/StudySyncDash/Dashboard Screens/MacBook Pro 16_ - 1.jpg"
-          alt="StudySync dashboard mockup"
-          fill
-          className="object-contain"
-          sizes="(max-width: 1024px) 100vw, 595px"
-          priority
+        <video
+          src="/videos/Study Sync/WalkThroughVideo.mov"
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+            borderRadius: "12px",
+          }}
         />
       </motion.div>
 

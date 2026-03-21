@@ -106,7 +106,8 @@ const ROWS = [
 
 function FindingCard({ row }: { row: typeof ROWS[number] }) {
   const ref = useRef<HTMLDivElement>(null);
-  const active = useInView(ref, { once: true, margin: "-60px" });
+  // Active while card is in the middle band: enters at 20% from bottom, exits at top 30%
+  const active = useInView(ref, { margin: "-30% 0px -20% 0px" });
 
   return (
     <div
@@ -170,7 +171,8 @@ function FindingCard({ row }: { row: typeof ROWS[number] }) {
 
 function InsightCard({ row }: { row: typeof ROWS[number] }) {
   const ref = useRef<HTMLDivElement>(null);
-  const active = useInView(ref, { once: true, margin: "-60px" });
+  // Active while card is in the middle band: enters at 20% from bottom, exits at top 30%
+  const active = useInView(ref, { margin: "-30% 0px -20% 0px" });
 
   return (
     <div
@@ -221,7 +223,8 @@ function InsightCard({ row }: { row: typeof ROWS[number] }) {
 
 function Row({ row }: { row: typeof ROWS[number] }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-120px" });
+  // Fade-up entrance triggers once at 20% from bottom
+  const inView = useInView(ref, { once: true, margin: "0px 0px -20% 0px" });
 
   return (
     <motion.div

@@ -112,14 +112,21 @@ export default function NeedStatements() {
       //
       const mouse = Matter.Mouse.create(container);
 
-      // Matter.Mouse.create attaches a 'mousewheel' listener with { passive: false }
-      // that calls e.preventDefault() unconditionally, blocking page scroll anywhere
-      // inside the container. Remove it — we don't need wheel-based physics interaction.
-      const src = (mouse as any).sourceEvents;
-      if (src?.mousewheel) {
-        container.removeEventListener("mousewheel",      src.mousewheel);
-        container.removeEventListener("DOMMouseScroll",  src.mousewheel);
-      }
+      // Matter.Mouse.create registers two non-passive listeners that call
+      // preventDefault(), blocking ALL scroll while the mouse is in the section:
+      //   • 'wheel'      → mouse.mousewheel  (blocks mouse-wheel + trackpad scroll)
+      //   • 'touchmove'  → mouse.mousemove   (blocks two-finger trackpad + touch scroll)
+      //
+      // clearSourceEvents() only nulls the sourceEvents record — it never calls
+      // removeEventListener, so the DOM listeners remain. We must remove them by
+      // their actual handler references stored directly on the mouse object.
+      container.removeEventListener("wheel",     (mouse as any).mousewheel);
+      container.removeEventListener("touchmove", (mouse as any).mousemove);
+
+      // Re-add touchmove with conditional preventDefault — only block scroll
+      // when a pill is actively being dragged.
+      const onTouchMove = (e: TouchEvent) => { if (mc.body) e.preventDefault(); };
+      container.addEventListener("touchmove", onTouchMove, { passive: false });
 
       const mc = Matter.MouseConstraint.create(engine, {
         mouse,
@@ -146,10 +153,6 @@ export default function NeedStatements() {
         container.style.cursor = over ? "grab" : "default";
       };
       container.addEventListener("mousemove", onMouseMove);
-
-      // Prevent page scroll only while a pill is actively being dragged
-      const noScroll = (e: TouchEvent) => { if (mc.body) e.preventDefault(); };
-      container.addEventListener("touchmove", noScroll, { passive: false });
 
       // ── Runner ───────────────────────────────────────────────────────────────
       const runner = Matter.Runner.create({ delta: 1000 / 60 });
@@ -214,7 +217,7 @@ export default function NeedStatements() {
         cancelAnimationFrame(raf);
         timers.forEach(clearTimeout);
         container.removeEventListener("mousemove", onMouseMove);
-        container.removeEventListener("touchmove", noScroll);
+        container.removeEventListener("touchmove", onTouchMove);
         Matter.Runner.stop(runner);
         Matter.Engine.clear(engine);
         Matter.Composite.clear(world, false);

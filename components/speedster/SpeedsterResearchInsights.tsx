@@ -5,10 +5,6 @@ import { motion, useInView } from "framer-motion";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -223,9 +219,25 @@ function InsightCard({ row }: { row: typeof ROWS[number] }) {
   );
 }
 
-export default function SpeedsterResearchInsights() {
+function Row({ row }: { row: typeof ROWS[number] }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-120px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={fadeUp}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      className="flex flex-col md:flex-row gap-[16px]"
+    >
+      <FindingCard row={row} />
+      <InsightCard row={row} />
+    </motion.div>
+  );
+}
+
+export default function SpeedsterResearchInsights() {
 
   return (
     <section
@@ -264,25 +276,12 @@ export default function SpeedsterResearchInsights() {
           ))}
         </div>
 
-        {/* Rows */}
-        <motion.div
-          ref={ref}
-          variants={stagger}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="flex flex-col gap-[16px]"
-        >
+        {/* Rows — each pair has its own scroll trigger */}
+        <div className="flex flex-col gap-[16px]">
           {ROWS.map((row, i) => (
-            <motion.div
-              key={i}
-              variants={fadeUp}
-              className="flex flex-col md:flex-row gap-[16px]"
-            >
-              <FindingCard row={row} />
-              <InsightCard row={row} />
-            </motion.div>
+            <Row key={i} row={row} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

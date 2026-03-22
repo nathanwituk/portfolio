@@ -301,7 +301,7 @@ export default function NeedStatements() {
             <span
               style={{
                 fontFamily:    "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize:      `${FONT_PX}px`,
+                fontSize:      "14px",
                 letterSpacing: "0.02em",
                 lineHeight:    1,
                 color:         "#ffffff",

@@ -2,26 +2,26 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { HERO_ASSETS } from "@/lib/assets";
+import { PROJECT_ASSETS } from "@/lib/assets";
+import FigmaButton from "@/components/ui/FigmaButton";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
-const imageVariant = {
-  hidden: { opacity: 0, x: -28 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: EASE } },
+const videoVariant = {
+  hidden: { opacity: 0, x: 32 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: EASE, delay: 0.1 } },
 };
 
 const textStagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.1 } },
 };
 
-const textLine = {
-  hidden: { opacity: 0, y: 18 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
+const fadeUp = {
+  hidden: { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
 };
 
-// Mobile-only — desktop shows the dashboard via the hero fold panel
 export default function StudySyncSection() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -29,45 +29,28 @@ export default function StudySyncSection() {
   return (
     <section
       id="study-sync"
-      className="lg:hidden flex flex-col w-full"
+      className="lg:hidden w-full"
       style={{
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease, color 200ms ease",
       }}
     >
-      {/* Video — full bleed to left edge */}
-      <motion.div
+      <div
         ref={ref}
-        variants={imageVariant}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="relative w-full overflow-hidden"
-        style={{ borderRadius: "7.344px", aspectRatio: "490.891 / 424.5" }}
+        className="flex flex-col lg:flex-row items-center justify-between w-full mx-auto px-5 md:px-[80px] py-12 lg:py-[40px]"
+        style={{ maxWidth: "1280px", gap: "46px" }}
       >
-        <video
-          src={HERO_ASSETS.dashboardVideo}
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      </motion.div>
-
-      {/* Text — 20px inset */}
-      <div className="px-5 py-12">
+        {/* ── Left: text — below video on mobile, left on desktop ── */}
         <motion.div
           variants={textStagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="flex flex-col pt-6 pb-6"
-          style={{ gap: "37px" }}
+          className="flex flex-col order-last lg:order-first"
+          style={{ flex: "1 0 0", gap: "37px", minWidth: "0" }}
         >
           {/* Category + Title */}
-          <div className="flex flex-col" style={{ gap: "6px" }}>
-            <motion.p
-              variants={textLine}
+          <motion.div variants={fadeUp} className="flex flex-col" style={{ gap: "6px" }}>
+            <p
               className="font-semibold uppercase"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
@@ -78,9 +61,8 @@ export default function StudySyncSection() {
               }}
             >
               User Interface &amp; Experience
-            </motion.p>
-            <motion.p
-              variants={textLine}
+            </p>
+            <p
               className="font-normal"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
@@ -92,13 +74,12 @@ export default function StudySyncSection() {
               }}
             >
               Study Sync Dashboard
-            </motion.p>
-          </div>
+            </p>
+          </motion.div>
 
-          {/* Description + Coming Soon */}
-          <div className="flex flex-col" style={{ gap: "22px" }}>
-            <motion.p
-              variants={textLine}
+          {/* Description */}
+          <motion.div variants={fadeUp}>
+            <p
               className="font-normal"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
@@ -112,26 +93,46 @@ export default function StudySyncSection() {
               Designing an intuitive quick-glance dashboard for college students
               who have trouble tracking and managing their academic schedule and
               workload.
-            </motion.p>
+            </p>
+          </motion.div>
 
-            {/* Coming Soon tag */}
-            <motion.span
-              variants={textLine}
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1rem",
-                letterSpacing: "-0.48px",
-                lineHeight: "1.1",
-                color: "var(--text-tertiary)",
-                transition: "color 200ms ease",
-              }}
+          {/* CTA */}
+          <motion.div variants={fadeUp}>
+            <FigmaButton
+              href="/work/studysync"
+              external={false}
+              accentColor="#b2e639"
+              accentColorHover="#c5f53f"
+              inkColor="#000000"
             >
-              Coming Soon
-            </motion.span>
+              See Project
+            </FigmaButton>
+          </motion.div>
+        </motion.div>
+
+        {/* ── Right: video — above text on mobile, right on desktop ── */}
+        <motion.div
+          variants={videoVariant}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="shrink-0 order-first lg:order-last w-full lg:w-auto"
+        >
+          <div
+            className="relative overflow-hidden w-full lg:w-[490px]"
+            style={{ aspectRatio: "490 / 424", borderRadius: "7.344px" }}
+          >
+            <video
+              src={PROJECT_ASSETS.studySyncVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
           </div>
         </motion.div>
       </div>
     </section>
-
   );
 }

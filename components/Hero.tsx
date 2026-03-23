@@ -16,9 +16,10 @@ const panels = [
     title: "Study Sync Dashboard",
     description:
       "Designing an intuitive quick-glance dashboard for college students who have trouble tracking and managing their academic schedule and workload.",
-    href: "#study-sync",
-    comingSoon: true,
-    accentColor: "#6f7142",
+    href: "/work/studysync",
+    accentColor: "#b2e639",
+    accentColorHover: "#c5f53f",
+    inkColor: "#000000",
     videoSrc: HERO_ASSETS.dashboardVideo,
     videoAspect: "413 / 505",
     defaultRotate: 7.18,
@@ -33,6 +34,7 @@ const panels = [
       "Exploring a new approach to time and spatial awareness through the design of a minimal, intuitive tool inspired by calendars, clocks, and compasses.",
     href: "/work/speedster",
     accentColor: "#ff5d00",
+    accentColorHover: "#e05200",
     videoSrc: HERO_ASSETS.speedsterArmVideo,
     videoAspect: "1080 / 1400",
     defaultRotate: 0,
@@ -169,28 +171,15 @@ function FoldPanel({
               >
                 {panel.description}
               </p>
-              {panel.comingSoon ? (
-                <span
-                  style={{
-                    fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                    fontSize: "1rem",
-                    letterSpacing: "-0.48px",
-                    lineHeight: "1.1",
-                    color: "var(--text-tertiary)",
-                  }}
-                >
-                  Coming Soon
-                </span>
-              ) : (
-                <FigmaButton
-                  href={panel.href}
-                  external={false}
-                  accentColor={panel.accentColor}
-                  accentColorHover={panel.accentColor === "#ff5d00" ? "#e05200" : "#838653"}
-                >
-                  See Project
-                </FigmaButton>
-              )}
+              <FigmaButton
+                href={panel.href}
+                external={false}
+                accentColor={panel.accentColor}
+                accentColorHover={panel.accentColorHover}
+                inkColor={panel.inkColor}
+              >
+                See Project
+              </FigmaButton>
             </div>
           </div>
         </motion.div>
@@ -287,28 +276,15 @@ function MobileFoldPanel({
           >
             {panel.description}
           </p>
-          {panel.comingSoon ? (
-            <span
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1rem",
-                letterSpacing: "-0.48px",
-                lineHeight: "1.1",
-                color: "var(--text-tertiary)",
-              }}
-            >
-              Coming Soon
-            </span>
-          ) : (
-            <FigmaButton
-              href={panel.href}
-              external={false}
-              accentColor={panel.accentColor}
-              accentColorHover={panel.accentColor === "#ff5d00" ? "#e05200" : "#838653"}
-            >
-              See Project
-            </FigmaButton>
-          )}
+          <FigmaButton
+            href={panel.href}
+            external={false}
+            accentColor={panel.accentColor}
+            accentColorHover={panel.accentColorHover}
+            inkColor={panel.inkColor}
+          >
+            See Project
+          </FigmaButton>
         </div>
       </motion.div>
     </div>

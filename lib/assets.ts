@@ -34,13 +34,20 @@ export const PROJECT_ASSETS = {
    * Crop 25% from each side before displaying (show center 50% of width).
    * Format: .mov
    */
-  speedsterHeroVideo: "/videos/speedster/speedster-hero-mockup.mp4",
+  speedsterHeroVideo: "/videos/speedster/V2_UpdateMarch23_speedster-hero-mockup.mov",
 
   /**
    * Speedster — homepage second section video (replaces grey box).
    * Format: .mov
    */
   speedsterSection2Video: "/videos/hero/SpeedsterSection2.mp4",
+
+  /**
+   * Study Sync Dashboard — walkthrough video used on the homepage section.
+   * Same source as HERO_ASSETS.dashboardVideo (portrait, 413 × 505).
+   * Format: .mp4 (H.264)
+   */
+  studySyncVideo: "/videos/hero/dashboard-walkthrough.mp4",
 } as const;
 
 // ── Navigation ───────────────────────────────────────────────────────────────

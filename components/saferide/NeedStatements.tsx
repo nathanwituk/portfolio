@@ -61,6 +61,7 @@ export default function NeedStatements() {
   const cleanupRef      = useRef<() => void>(() => {});
   const hasRun          = useRef(false);
   const resetBodiesRef  = useRef<(() => void) | null>(null);
+  const buttonRef       = useRef<HTMLButtonElement>(null);
   const [spinKey, setSpinKey] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isActive,  setIsActive]  = useState(false);
@@ -110,6 +111,30 @@ export default function NeedStatements() {
         Matter.Bodies.rectangle(W + WALL_T / 2, H / 2,          WALL_T, H * 3,  wo), // right
       ]);
 
+      // ── Button — static physics body matching the DOM button exactly ─────────
+      // buttonBounds is stored so the afterUpdate handler can resolve drag-through.
+      let buttonBounds: { minX: number; maxX: number; minY: number; maxY: number } | null = null;
+      const btnEl = buttonRef.current;
+      if (btnEl) {
+        const cRect = container.getBoundingClientRect();
+        const bRect = btnEl.getBoundingClientRect();
+        const bx = bRect.left - cRect.left + bRect.width  / 2;
+        const by = bRect.top  - cRect.top  + bRect.height / 2;
+        Matter.Composite.add(world, Matter.Bodies.rectangle(bx, by, bRect.width, bRect.height, {
+          isStatic:    true,
+          friction:    0.6,
+          restitution: 0.3,
+          label:       "button",
+          chamfer:     { radius: 20 }, // matches the 20px border-radius
+        }));
+        buttonBounds = {
+          minX: bx - bRect.width  / 2,
+          maxX: bx + bRect.width  / 2,
+          minY: by - bRect.height / 2,
+          maxY: by + bRect.height / 2,
+        };
+      }
+
       // ── Mouse / touch — attached directly to the container div ──────────────
       //
       // Key fix: no invisible canvas needed. Matter.Mouse.create works on any
@@ -144,6 +169,69 @@ export default function NeedStatements() {
         },
       });
       Matter.Composite.add(world, mc);
+
+      // ── Drag-through fix ─────────────────────────────────────────────────────
+      //
+      // The problem: MouseConstraint moves bodies by pulling them toward
+      // mc.mouse.position each tick (a spring). When the mouse enters the button,
+      // that target is now INSIDE the button. The afterUpdate handler pushes the
+      // body back out, but the spring immediately yanks it in again — causing the
+      // rapid shaking/oscillation the user sees.
+      //
+      // Root fix (beforeUpdate): clamp mc.mouse.position to never enter the button
+      // bounds BEFORE the constraint spring is applied. The body then has no target
+      // inside the button and simply rests against its edge — zero oscillation.
+      //
+      // Safety net (afterUpdate): if a body somehow still penetrates (e.g. from a
+      // fast non-drag collision), push it back out. No velocity zeroing here —
+      // that was the other half of the oscillation loop.
+      Matter.Events.on(engine, "beforeUpdate", () => {
+        if (!mc.body || !buttonBounds) return;
+
+        const pos = mc.mouse.position;
+
+        // Early-out: mouse is already outside the button
+        if (pos.x <= buttonBounds.minX || pos.x >= buttonBounds.maxX ||
+            pos.y <= buttonBounds.minY || pos.y >= buttonBounds.maxY) return;
+
+        // Mouse is inside the button — clamp to the nearest edge so the spring
+        // target stays outside and the body settles cleanly against the surface.
+        const dL = pos.x - buttonBounds.minX;
+        const dR = buttonBounds.maxX - pos.x;
+        const dT = pos.y - buttonBounds.minY;
+        const dB = buttonBounds.maxY - pos.y;
+        const minD = Math.min(dL, dR, dT, dB);
+
+        if      (minD === dL) pos.x = buttonBounds.minX;
+        else if (minD === dR) pos.x = buttonBounds.maxX;
+        else if (minD === dT) pos.y = buttonBounds.minY;
+        else                  pos.y = buttonBounds.maxY;
+      });
+
+      Matter.Events.on(engine, "afterUpdate", () => {
+        if (!mc.body || !buttonBounds) return;
+
+        const b = mc.body;
+        const { min, max } = b.bounds;
+
+        if (max.x <= buttonBounds.minX || min.x >= buttonBounds.maxX ||
+            max.y <= buttonBounds.minY || min.y >= buttonBounds.maxY) return;
+
+        const overlapL = max.x - buttonBounds.minX;
+        const overlapR = buttonBounds.maxX - min.x;
+        const overlapT = max.y - buttonBounds.minY;
+        const overlapB = buttonBounds.maxY - min.y;
+        const minOv    = Math.min(overlapL, overlapR, overlapT, overlapB);
+
+        let dx = 0, dy = 0;
+        if      (minOv === overlapL) dx = -overlapL;
+        else if (minOv === overlapR) dx =  overlapR;
+        else if (minOv === overlapT) dy = -overlapT;
+        else                         dy =  overlapB;
+
+        Matter.Body.setPosition(b, { x: b.position.x + dx, y: b.position.y + dy });
+        // No velocity zeroing — that was causing the oscillation loop.
+      });
 
       // ── Cursor feedback ──────────────────────────────────────────────────────
       const onMouseMove = (e: MouseEvent) => {
@@ -280,6 +368,7 @@ export default function NeedStatements() {
 
         {/* ── Reset button — inlaid/recessed tactile feel ──────────────────────── */}
         <button
+          ref={buttonRef}
           onClick={() => {
             setSpinKey((k) => k + 1);
             resetBodiesRef.current?.();
@@ -358,30 +447,30 @@ export default function NeedStatements() {
             ].join(", "),
           }}
         >
-          {/* Circular arrow icon — spins counter-clockwise on click */}
+          {/* Reset icon — 300° circle arc + arrowhead, spins on click */}
           <motion.svg
             key={spinKey}
             width="20"
             height="20"
-            viewBox="0 0 16 16"
+            viewBox="0 0 20 20"
             fill="none"
             initial={{ rotate: 0 }}
             animate={{ rotate: -360 }}
             transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
             style={{ flexShrink: 0 }}
           >
-            {/* ~300° counter-clockwise arc */}
+            {/* 300° arc: from top (10,3), CCW on screen, ending upper-right (16,6.5) */}
             <path
-              d="M8 2A6 6 0 1 0 13.2 5"
+              d="M10 3A7 7 0 1 0 16 6.5"
               stroke="#000000"
-              strokeWidth="1.4"
+              strokeWidth="1.5"
               strokeLinecap="round"
             />
-            {/* Arrowhead */}
+            {/* Arrowhead V at arc end (16,6.5) — tails point upper-left and upper-right */}
             <path
-              d="M11.2 4.4L13.2 5L13.8 3"
+              d="M13.5 4.5L16 6.5L18 4.5"
               stroke="#000000"
-              strokeWidth="1.4"
+              strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />

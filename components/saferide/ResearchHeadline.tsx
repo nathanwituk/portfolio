@@ -1,13 +1,11 @@
 export default function ResearchHeadline() {
   return (
-    <section className="w-full" style={{ backgroundColor: "#b2e639" }}>
+    <section className="w-full flex items-center" style={{ backgroundColor: "#b2e639", height: "105px" }}>
       <div
         className="max-w-[1280px] mx-auto flex items-center justify-center gap-[40px]"
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
-          paddingTop: "36px",
-          paddingBottom: "36px",
         }}
       >
         <p

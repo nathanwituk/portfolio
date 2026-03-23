@@ -28,7 +28,7 @@ export default function StudySyncCaseStudy() {
       <WireframeDescription />
       <WireframeContent />
       <FullPrototype />
-      <BackToTop />
+      <BackToTop accentColor="#b2e639" />
       <Footer />
     </main>
   );

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { useInView } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import Matter from "matter-js";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -55,11 +55,15 @@ function measureTextWidths(texts: string[], padX: number, fontSize: number, maxW
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function NeedStatements() {
-  const sectionRef   = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const bubbleRefs   = useRef<(HTMLDivElement | null)[]>([]);
-  const cleanupRef   = useRef<() => void>(() => {});
-  const hasRun       = useRef(false);
+  const sectionRef      = useRef<HTMLElement>(null);
+  const containerRef    = useRef<HTMLDivElement>(null);
+  const bubbleRefs      = useRef<(HTMLDivElement | null)[]>([]);
+  const cleanupRef      = useRef<() => void>(() => {});
+  const hasRun          = useRef(false);
+  const resetBodiesRef  = useRef<(() => void) | null>(null);
+  const [spinKey, setSpinKey] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isActive,  setIsActive]  = useState(false);
 
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
 
@@ -183,7 +187,8 @@ export default function NeedStatements() {
             label:          `bubble-${i}`,
           });
 
-          Matter.Body.setInertia(body, Infinity);
+          // Seed a small random spin so rotation is immediately visible
+          Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.08);
 
           (body as any)._w = w;
           (body as any)._h = PILL_H;
@@ -197,7 +202,6 @@ export default function NeedStatements() {
       });
 
       // ── rAF sync loop ────────────────────────────────────────────────────────
-      // No rotation to handle — just translate each DOM pill to the body center.
       let raf = 0;
       const tick = () => {
         for (const body of bodies) {
@@ -208,12 +212,22 @@ export default function NeedStatements() {
           if (!el) continue;
 
           const { x, y } = body.position;
-          el.style.transform  = `translate(${x - w / 2}px, ${y - h / 2}px)`;
+          el.style.transform  = `translate(${x - w / 2}px, ${y - h / 2}px) rotate(${body.angle}rad)`;
           el.style.visibility = "visible";
         }
         raf = requestAnimationFrame(tick);
       };
       raf = requestAnimationFrame(tick);
+
+      // ── Reset callback — exposed to the button ────────────────────────────────
+      // bodies is populated over time by stagger timeouts; this closure captures
+      // the live array so reset always acts on whatever has been added so far.
+      resetBodiesRef.current = () => {
+        for (const body of bodies) {
+          Matter.Body.setAngle(body, 0);
+          Matter.Body.setAngularVelocity(body, 0);
+        }
+      };
 
       // ── Cleanup ──────────────────────────────────────────────────────────────
       cleanupRef.current = () => {
@@ -263,6 +277,121 @@ export default function NeedStatements() {
         >
           Jordan needs to be able to answer the following:
         </p>
+
+        {/* ── Reset button — inlaid/recessed tactile feel ──────────────────────── */}
+        <button
+          onClick={() => {
+            setSpinKey((k) => k + 1);
+            resetBodiesRef.current?.();
+          }}
+          onMouseEnter={() => { setIsHovered(true);  setIsActive(false); }}
+          onMouseLeave={() => { setIsHovered(false); setIsActive(false); }}
+          onMouseDown={() => setIsActive(true)}
+          onMouseUp={()   => setIsActive(false)}
+          onFocus={(e)    => { e.currentTarget.style.outline = "2px solid rgba(0,0,0,0.5)"; e.currentTarget.style.outlineOffset = "3px"; }}
+          onBlur={(e)     => { e.currentTarget.style.outline = "none"; }}
+          style={{
+            // ── Layout ──────────────────────────────────────────────────────
+            marginTop:     "clamp(20px, 3vw, 32px)",
+            display:       "inline-flex",
+            alignItems:    "center",
+            gap:           "15px",
+            padding:       "13px 25px",
+            borderRadius:  "20px",
+            border:        "none",
+            cursor:        "pointer",
+            pointerEvents: "auto",
+            userSelect:    "none",
+
+            // ── Typography ──────────────────────────────────────────────────
+            fontFamily:    "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+            fontSize:      "20px",
+            fontWeight:    400,
+            letterSpacing: "-0.4px",
+            lineHeight:    1.31,
+            color:         "#000000",
+
+            // ── Background — same green in all states; depth is shadows only ──
+            backgroundColor: "#b2e639",
+
+            // ── Lift / press transform ───────────────────────────────────────
+            transform: isActive
+              ? "translateY(1px)"
+              : isHovered
+              ? "translateY(-2px)"
+              : "translateY(0px)",
+
+            // ── Layered shadow system (4 layers, same count across states) ───
+            //
+            // Layers 1–2: inset  → recessed/carved feel (Figma "inner" spec)
+            // Layers 3–4: outset → lifted/elevated feel  (Figma "outer" spec)
+            // States cross-fade by zeroing whichever pair is inactive.
+            //
+            // Default → inset ON,  outset OFF
+            // Hover   → inset OFF, outset ON
+            // Active  → inset ON (stronger), outset OFF
+            boxShadow: isActive
+              ? [
+                  "inset 0px -1px 40px 0px rgba(0,0,0,0.35)", // stronger bottom inset (pressed deeper)
+                  "inset 0px 5px 6px 0px rgba(0,0,0,0.45)",   // stronger top inset
+                  "0px 0px 0px 0px rgba(0,0,0,0)",            // outset ambient — off
+                  "0px 0px 0px 0px rgba(0,0,0,0)",            // outset drop — off
+                ].join(", ")
+              : isHovered
+              ? [
+                  "inset 0px 0px 0px 0px rgba(0,0,0,0)",      // inset bottom — off
+                  "inset 0px 0px 0px 0px rgba(0,0,0,0)",      // inset top — off
+                  "0px 0px 53.6px 0px rgba(0,0,0,0.25)",      // outset ambient glow (Figma spec)
+                  "0px 4px 7px 0px rgba(0,0,0,0.25)",         // outset drop shadow (Figma spec)
+                ].join(", ")
+              : [
+                  "inset 0px -1px 40px 0px rgba(0,0,0,0.25)", // inset bottom spread (Figma spec)
+                  "inset 0px 4px 4px 0px rgba(0,0,0,0.35)",   // inset top (Figma spec)
+                  "0px 0px 0px 0px rgba(0,0,0,0)",            // outset ambient — off
+                  "0px 0px 0px 0px rgba(0,0,0,0)",            // outset drop — off
+                ].join(", "),
+
+            // ── Transitions ─────────────────────────────────────────────────
+            transition: [
+              "box-shadow 200ms ease",
+              "transform 130ms ease",
+            ].join(", "),
+          }}
+        >
+          {/* Circular arrow icon — spins counter-clockwise on click */}
+          <motion.svg
+            key={spinKey}
+            width="20"
+            height="20"
+            viewBox="0 0 16 16"
+            fill="none"
+            initial={{ rotate: 0 }}
+            animate={{ rotate: -360 }}
+            transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
+            style={{ flexShrink: 0 }}
+          >
+            {/* ~300° counter-clockwise arc */}
+            <path
+              d="M8 2A6 6 0 1 0 13.2 5"
+              stroke="#000000"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+            />
+            {/* Arrowhead */}
+            <path
+              d="M11.2 4.4L13.2 5L13.8 3"
+              stroke="#000000"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </motion.svg>
+
+          {/* Label — always underlined per Figma spec */}
+          <span style={{ textDecoration: "underline" }}>
+            Reset
+          </span>
+        </button>
       </div>
 
       {/* ── Physics container — absolute fill, receives all pointer events ──── */}

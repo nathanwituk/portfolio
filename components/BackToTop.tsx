@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
-export default function BackToTop() {
+export default function BackToTop({ accentColor = "#ff5d00" }: { accentColor?: string }) {
   const ref = useRef<HTMLButtonElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
 
@@ -29,7 +29,7 @@ export default function BackToTop() {
         <motion.div
           className="bg-black w-full h-full flex items-center justify-between px-5 md:px-[80px]"
           variants={{
-            hovered: { backgroundColor: "#ff5d00" },
+            hovered: { backgroundColor: accentColor },
           }}
           transition={{ duration: 0.25 }}
         >

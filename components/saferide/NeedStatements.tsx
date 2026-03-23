@@ -155,11 +155,6 @@ export default function NeedStatements() {
       container.removeEventListener("wheel",     (mouse as any).mousewheel);
       container.removeEventListener("touchmove", (mouse as any).mousemove);
 
-      // Re-add touchmove with conditional preventDefault — only block scroll
-      // when a pill is actively being dragged.
-      const onTouchMove = (e: TouchEvent) => { if (mc.body) e.preventDefault(); };
-      container.addEventListener("touchmove", onTouchMove, { passive: false });
-
       const mc = Matter.MouseConstraint.create(engine, {
         mouse,
         constraint: {
@@ -169,6 +164,13 @@ export default function NeedStatements() {
         },
       });
       Matter.Composite.add(world, mc);
+
+      // Re-add touchmove: restore position tracking + only block scroll during active drag.
+      const onTouchMove = (e: TouchEvent) => {
+        (mouse as any).mousemove(e);   // update Matter.js cursor position during touch drag
+        if (mc.body) e.preventDefault(); // only block scroll when actively dragging
+      };
+      container.addEventListener("touchmove", onTouchMove, { passive: false });
 
       // ── Drag-through fix ─────────────────────────────────────────────────────
       //
@@ -186,16 +188,25 @@ export default function NeedStatements() {
       // fast non-drag collision), push it back out. No velocity zeroing here —
       // that was the other half of the oscillation loop.
       Matter.Events.on(engine, "beforeUpdate", () => {
-        if (!mc.body || !buttonBounds) return;
+        if (!mc.body) return;
 
         const pos = mc.mouse.position;
 
-        // Early-out: mouse is already outside the button
+        // 1 — Clamp drag target within container bounds.
+        //     Root cause of wall escape: MouseConstraint applies a spring toward
+        //     mc.mouse.position each tick, bypassing collision resolution. A fast
+        //     drag near an edge places the spring target outside the wall, pulling
+        //     the body through it in a single step. Clamping the target here keeps
+        //     the spring always pointing to a valid interior position.
+        const margin = PILL_H / 2 + 4;
+        pos.x = Math.max(margin, Math.min(W - margin, pos.x));
+        pos.y = Math.max(margin, Math.min(H - margin, pos.y));
+
+        // 2 — Clamp to stay outside button bounds (same principle as above)
+        if (!buttonBounds) return;
         if (pos.x <= buttonBounds.minX || pos.x >= buttonBounds.maxX ||
             pos.y <= buttonBounds.minY || pos.y >= buttonBounds.maxY) return;
 
-        // Mouse is inside the button — clamp to the nearest edge so the spring
-        // target stays outside and the body settles cleanly against the surface.
         const dL = pos.x - buttonBounds.minX;
         const dR = buttonBounds.maxX - pos.x;
         const dT = pos.y - buttonBounds.minY;
@@ -209,27 +220,44 @@ export default function NeedStatements() {
       });
 
       Matter.Events.on(engine, "afterUpdate", () => {
-        if (!mc.body || !buttonBounds) return;
+        if (!mc.body) return;
 
         const b = mc.body;
-        const { min, max } = b.bounds;
 
-        if (max.x <= buttonBounds.minX || min.x >= buttonBounds.maxX ||
-            max.y <= buttonBounds.minY || min.y >= buttonBounds.maxY) return;
+        // Safety net: push dragged body back inside container if it somehow escaped.
+        {
+          const { min, max } = b.bounds;
+          let dx = 0, dy = 0;
+          if      (min.x < 0)  dx = -min.x;
+          else if (max.x > W)  dx =  W - max.x;
+          if      (min.y < 0)  dy = -min.y;
+          else if (max.y > H)  dy =  H - max.y;
+          if (dx !== 0 || dy !== 0) {
+            Matter.Body.setPosition(b, { x: b.position.x + dx, y: b.position.y + dy });
+          }
+        }
 
-        const overlapL = max.x - buttonBounds.minX;
-        const overlapR = buttonBounds.maxX - min.x;
-        const overlapT = max.y - buttonBounds.minY;
-        const overlapB = buttonBounds.maxY - min.y;
-        const minOv    = Math.min(overlapL, overlapR, overlapT, overlapB);
+        // Safety net: push dragged body out of button if it somehow overlaps.
+        if (!buttonBounds) return;
+        {
+          const { min, max } = b.bounds;
+          if (max.x <= buttonBounds.minX || min.x >= buttonBounds.maxX ||
+              max.y <= buttonBounds.minY || min.y >= buttonBounds.maxY) return;
 
-        let dx = 0, dy = 0;
-        if      (minOv === overlapL) dx = -overlapL;
-        else if (minOv === overlapR) dx =  overlapR;
-        else if (minOv === overlapT) dy = -overlapT;
-        else                         dy =  overlapB;
+          const overlapL = max.x - buttonBounds.minX;
+          const overlapR = buttonBounds.maxX - min.x;
+          const overlapT = max.y - buttonBounds.minY;
+          const overlapB = buttonBounds.maxY - min.y;
+          const minOv    = Math.min(overlapL, overlapR, overlapT, overlapB);
 
-        Matter.Body.setPosition(b, { x: b.position.x + dx, y: b.position.y + dy });
+          let dx = 0, dy = 0;
+          if      (minOv === overlapL) dx = -overlapL;
+          else if (minOv === overlapR) dx =  overlapR;
+          else if (minOv === overlapT) dy = -overlapT;
+          else                         dy =  overlapB;
+
+          Matter.Body.setPosition(b, { x: b.position.x + dx, y: b.position.y + dy });
+        }
         // No velocity zeroing — that was causing the oscillation loop.
       });
 
@@ -308,13 +336,21 @@ export default function NeedStatements() {
       raf = requestAnimationFrame(tick);
 
       // ── Reset callback — exposed to the button ────────────────────────────────
-      // bodies is populated over time by stagger timeouts; this closure captures
-      // the live array so reset always acts on whatever has been added so far.
+      // Respawns every bubble at a random x position just above the top of the
+      // container (matching the initial drop), so they fall in fresh.
       resetBodiesRef.current = () => {
-        for (const body of bodies) {
+        bodies.forEach((body, idx) => {
+          const w  = (body as any)._w as number;
+          const lo = w / 2 + 8;
+          const hi = W - w / 2 - 8;
+          const x  = lo + Math.random() * Math.max(0, hi - lo);
+          // Stagger above the top so they don't all collide mid-air
+          const y  = -(PILL_H / 2 + 4) - idx * (PILL_H + 8);
+          Matter.Body.setPosition(body, { x, y });
+          Matter.Body.setVelocity(body, { x: 0, y: 0 });
           Matter.Body.setAngle(body, 0);
-          Matter.Body.setAngularVelocity(body, 0);
-        }
+          Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.08);
+        });
       };
 
       // ── Cleanup ──────────────────────────────────────────────────────────────

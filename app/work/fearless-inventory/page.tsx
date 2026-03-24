@@ -106,21 +106,10 @@ export default function FearlessInventoryPage() {
           "Accordions, Expand/Collapse sections, Avatars, Chat bubbles / messaging UI, Modal dialog windows, Pagination controls",
         ]}
         note="Note: First brand given was Black Rock Coffee. The example 'client' changed during the project, simulating real life brand change or project switch."
-        screenshots={[
-          { src: "/images/fearless-inventory/scroll-01-barista.png", alt: "Barista" },
-          { src: "/images/fearless-inventory/scroll-02-bag.png", alt: "Coffee bag" },
-          { src: "/images/fearless-inventory/scroll-03-site-a.png", alt: "Website screenshot" },
-          { src: "/images/fearless-inventory/scroll-04-site-b.png", alt: "Website screenshot" },
-          { src: "/images/fearless-inventory/scroll-05-site-c.png", alt: "Website screenshot" },
-          { src: "/images/fearless-inventory/scroll-06-app-a.png", alt: "App screenshot" },
-          { src: "/images/fearless-inventory/scroll-07-app-b.png", alt: "App screenshot" },
-          { src: "/images/fearless-inventory/scroll-08-site-d.png", alt: "Website screenshot" },
-          { src: "/images/fearless-inventory/scroll-09-site-e.png", alt: "Website screenshot" },
-          { src: "/images/fearless-inventory/scroll-10-site-f.png", alt: "Website screenshot" },
-          { src: "/images/fearless-inventory/scroll-11-brand-a.png", alt: "Brand identity" },
-          { src: "/images/fearless-inventory/scroll-12-brand-b.png", alt: "Brand identity" },
-          { src: "/images/fearless-inventory/scroll-13-brand-c.png", alt: "Brand identity" },
-        ]}
+        screenshots={[]}
+        svgSrc="/images/fearless-inventory/BlackRock Branding System/All Content.svg"
+        svgWidth={1994}
+        svgHeight={375}
       />
 
       {/* 7 ── User Stories ─────────────────────────────────────────────────── */}

@@ -339,13 +339,16 @@ export default function NeedStatements() {
       // Respawns every bubble at a random x position just above the top of the
       // container (matching the initial drop), so they fall in fresh.
       resetBodiesRef.current = () => {
-        bodies.forEach((body, idx) => {
+        // All bodies spawn at the same y as the initial drop (inside the ceiling
+        // wall region so the engine ejects them downward into the room).
+        // Staggering vertically above the ceiling puts bodies on top of the wall
+        // and they never enter the room — so we randomise x only.
+        bodies.forEach((body) => {
           const w  = (body as any)._w as number;
           const lo = w / 2 + 8;
           const hi = W - w / 2 - 8;
           const x  = lo + Math.random() * Math.max(0, hi - lo);
-          // Stagger above the top so they don't all collide mid-air
-          const y  = -(PILL_H / 2 + 4) - idx * (PILL_H + 8);
+          const y  = -(PILL_H / 2 + 4); // same as initial spawn
           Matter.Body.setPosition(body, { x, y });
           Matter.Body.setVelocity(body, { x: 0, y: 0 });
           Matter.Body.setAngle(body, 0);

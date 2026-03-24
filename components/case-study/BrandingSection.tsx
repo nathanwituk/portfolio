@@ -23,6 +23,12 @@ export interface BrandingSectionProps {
   bullets: string[];
   note?: string;
   screenshots: { src: string; alt: string }[];
+  /** When provided, replaces the screenshots rail with a single scrollable SVG. */
+  svgSrc?: string;
+  /** Native width of the SVG in px (used to size the scroll container content). */
+  svgWidth?: number;
+  /** Native height of the SVG in px (used to size the scroll container). */
+  svgHeight?: number;
 }
 
 // mdi:palette icon (24×24 viewBox)
@@ -54,6 +60,9 @@ export default function BrandingSection({
   bullets,
   note,
   screenshots,
+  svgSrc,
+  svgWidth = 1994,
+  svgHeight = 375,
 }: BrandingSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -258,34 +267,46 @@ export default function BrandingSection({
             ref={scrollRef}
             className="overflow-x-scroll branding-rail"
             style={{
-              height: `${CARD_HEIGHT}px`,
+              height: `${svgSrc ? svgHeight : CARD_HEIGHT}px`,
               scrollbarWidth: "none",
             }}
             onScroll={updateThumb}
           >
-            <div
-              className="flex h-full"
-              style={{ gap: "12px", width: "max-content", paddingRight: "80px" }}
-            >
-              {screenshots.map((s, i) => {
-                const w = SLOT_WIDTHS[i] ?? 300;
-                return (
-                  <div
-                    key={i}
-                    className="shrink-0 relative rounded-[14px] overflow-hidden"
-                    style={{ width: `${w}px`, height: `${CARD_HEIGHT}px` }}
-                  >
-                    <Image
-                      src={s.src}
-                      alt={s.alt}
-                      fill
-                      className="object-contain"
-                      sizes={`${w}px`}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+            {svgSrc ? (
+              /* Single SVG — rendered at native dimensions so it scrolls horizontally */
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={svgSrc}
+                alt="Branding system"
+                width={svgWidth}
+                height={svgHeight}
+                style={{ display: "block", height: `${svgHeight}px`, width: `${svgWidth}px`, maxWidth: "none" }}
+              />
+            ) : (
+              <div
+                className="flex h-full"
+                style={{ gap: "12px", width: "max-content", paddingRight: "80px" }}
+              >
+                {screenshots.map((s, i) => {
+                  const w = SLOT_WIDTHS[i] ?? 300;
+                  return (
+                    <div
+                      key={i}
+                      className="shrink-0 relative rounded-[14px] overflow-hidden"
+                      style={{ width: `${w}px`, height: `${CARD_HEIGHT}px` }}
+                    >
+                      <Image
+                        src={s.src}
+                        alt={s.alt}
+                        fill
+                        className="object-contain"
+                        sizes={`${w}px`}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Custom scrollbar */}

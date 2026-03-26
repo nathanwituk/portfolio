@@ -242,7 +242,7 @@ export default function QuickFeedback() {
               transition: "color 200ms ease",
             }}
           >
-            Leave a Note
+            Nathan is absent today :(
           </p>
           <p
             style={{
@@ -255,7 +255,7 @@ export default function QuickFeedback() {
               transition: "color 200ms ease",
             }}
           >
-            Got thoughts on the work? Say hi, leave feedback, or drop a compliment. This is a public board — keep it kind.
+            Leave some critique below.
           </p>
         </motion.div>
 

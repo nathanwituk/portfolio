@@ -47,7 +47,7 @@ export default function AboutSection() {
           className="font-normal"
           style={{
             fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-            fontSize: "3.25rem",
+            fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
             letterSpacing: "-1.11px",
             lineHeight: "1",
             color: "var(--text-primary)",
@@ -62,7 +62,7 @@ export default function AboutSection() {
           className="font-semibold uppercase"
           style={{
             fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-            fontSize: "1rem",
+            fontSize: "0.75rem",
             letterSpacing: "-0.48px",
             lineHeight: "1.1",
             color: "var(--text-secondary)",

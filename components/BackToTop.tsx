@@ -37,7 +37,7 @@ export default function BackToTop({ accentColor = "#ff5d00" }: { accentColor?: s
             className="font-normal text-white leading-none whitespace-nowrap"
             style={{
               fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-              fontSize: "1.875rem",
+              fontSize: "1.125rem",
               letterSpacing: "-0.6px",
             }}
           >

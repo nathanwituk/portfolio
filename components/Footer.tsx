@@ -64,7 +64,7 @@ export default function Footer() {
               className="font-semibold uppercase"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1.25rem",
+                fontSize: "0.9375rem",
                 letterSpacing: "-0.6px",
                 lineHeight: "1.1",
                 color: "#ff5d00",
@@ -77,7 +77,7 @@ export default function Footer() {
               className="font-normal leading-none underline decoration-solid hover:text-[#ff5d00] transition-colors duration-200"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1.25rem",
+                fontSize: "0.9375rem",
                 letterSpacing: "-1px",
                 color: "var(--text-primary)",
               }}
@@ -96,7 +96,7 @@ export default function Footer() {
               className="font-semibold uppercase"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1.25rem",
+                fontSize: "0.9375rem",
                 letterSpacing: "-0.6px",
                 lineHeight: "1.1",
                 color: "#ff5d00",
@@ -112,7 +112,7 @@ export default function Footer() {
                 className="font-normal leading-none underline decoration-solid hover:text-[#ff5d00] transition-colors duration-200"
                 style={{
                   fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "1.25rem",
+                  fontSize: "0.9375rem",
                   letterSpacing: "-1px",
                   color: "var(--text-primary)",
                 }}
@@ -126,7 +126,7 @@ export default function Footer() {
                 className="font-normal leading-none underline decoration-solid hover:text-[#ff5d00] transition-colors duration-200"
                 style={{
                   fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "1.25rem",
+                  fontSize: "0.9375rem",
                   letterSpacing: "-1px",
                   color: "var(--text-primary)",
                 }}

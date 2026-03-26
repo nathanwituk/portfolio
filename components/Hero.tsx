@@ -137,7 +137,7 @@ function FoldPanel({
                 className="font-semibold uppercase leading-[1.1]"
                 style={{
                   fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "1rem",
+                  fontSize: "0.75rem",
                   letterSpacing: "-0.48px",
                   color: "var(--text-tertiary)",
                 }}
@@ -148,7 +148,7 @@ function FoldPanel({
                 className="font-normal leading-none"
                 style={{
                   fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "2.3125rem",
+                  fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)",
                   letterSpacing: "-1.11px",
                   color: "var(--text-primary)",
                   transition: "color 200ms ease",
@@ -243,7 +243,7 @@ function MobileFoldPanel({
               className="font-semibold uppercase leading-[1.1]"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1rem",
+                fontSize: "0.75rem",
                 letterSpacing: "-0.48px",
                 color: "var(--text-tertiary)",
               }}
@@ -254,7 +254,7 @@ function MobileFoldPanel({
               className="font-normal leading-none"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "2.3125rem",
+                fontSize: "1.75rem",
                 letterSpacing: "-1.11px",
                 color: "var(--text-primary)",
                 transition: "color 200ms ease",

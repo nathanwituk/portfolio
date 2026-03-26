@@ -62,7 +62,7 @@ export default function FearlessInventorySection() {
               className="font-semibold uppercase"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1rem",
+                fontSize: "0.75rem",
                 letterSpacing: "-0.48px",
                 lineHeight: "1.1",
                 color: "var(--text-tertiary)",
@@ -74,7 +74,7 @@ export default function FearlessInventorySection() {
               className="font-normal"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "2.3125rem",
+                fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)",
                 letterSpacing: "-1.11px",
                 lineHeight: "1",
                 color: "var(--text-primary)",

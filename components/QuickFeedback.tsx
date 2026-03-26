@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
+import Image from "next/image";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
@@ -144,6 +146,7 @@ export default function QuickFeedback() {
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
   const [lastSubmitText, setLastSubmitText] = useState("");
   const [hovered, setHovered] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   // Load persisted feedback on mount
   useEffect(() => {
@@ -153,46 +156,41 @@ export default function QuickFeedback() {
   const remaining = CHAR_LIMIT - value.length;
   const canSubmit = value.trim().length > 0 && remaining >= 0 && status !== "submitting";
 
-  const handleSubmit = useCallback(async () => {
+  const handlePostClick = useCallback(() => {
     const trimmed = value.trim();
-
-    if (!trimmed) {
-      setErrorMsg("Please write something before submitting.");
-      return;
-    }
-    if (trimmed.length > CHAR_LIMIT) {
-      setErrorMsg(`Keep it under ${CHAR_LIMIT} characters.`);
-      return;
-    }
-
+    if (!trimmed) { setErrorMsg("Please write something before submitting."); return; }
+    if (trimmed.length > CHAR_LIMIT) { setErrorMsg(`Keep it under ${CHAR_LIMIT} characters.`); return; }
     const now = Date.now();
     if (now - lastSubmitTime < DUPLICATE_COOLDOWN_MS && trimmed === lastSubmitText) {
       setErrorMsg("You already sent that — wait a moment before resubmitting.");
       return;
     }
-
     setErrorMsg("");
-    setStatus("submitting");
+    setShowConfirm(true);
+  }, [value, lastSubmitTime, lastSubmitText]);
 
+  const handleConfirm = useCallback(async () => {
+    setShowConfirm(false);
+    setStatus("submitting");
     try {
-      const sanitized = sanitize(trimmed);
+      const sanitized = sanitize(value.trim());
       const newItem = await submitFeedback(sanitized);
       setItems((prev) => [newItem, ...prev]);
+      setLastSubmitTime(Date.now());
+      setLastSubmitText(value.trim());
       setValue("");
-      setLastSubmitTime(now);
-      setLastSubmitText(trimmed);
       textareaRef.current?.focus();
     } catch {
       setErrorMsg("Something went wrong. Please try again.");
     } finally {
       setStatus("idle");
     }
-  }, [value, lastSubmitTime, lastSubmitText]);
+  }, [value]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
       e.preventDefault();
-      handleSubmit();
+      handlePostClick();
     }
   };
 
@@ -215,20 +213,55 @@ export default function QuickFeedback() {
         transition: "background-color 200ms ease",
       }}
     >
-      <motion.div
+      <div
         ref={ref}
-        variants={stagger}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
         className="max-w-[1280px] mx-auto"
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
           display: "flex",
-          flexDirection: "column",
-          gap: "40px",
+          flexDirection: "row",
+          alignItems: "flex-start",
+          gap: "clamp(32px, 5vw, 72px)",
         }}
       >
+        {/* QR Code */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.65, ease: EASE }}
+          className="shrink-0 hidden md:block"
+          style={{
+            width: "clamp(180px, 22vw, 320px)",
+            aspectRatio: "1 / 1",
+            position: "relative",
+            borderRadius: "16px",
+            overflow: "hidden",
+          }}
+        >
+          <Image
+            src="/images/Compose - IXD 414 Draft/extended.svg"
+            alt="QR code"
+            fill
+            className="object-contain"
+            sizes="320px"
+          />
+        </motion.div>
+
+        {/* Right: title + form + comments */}
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          style={{
+            flex: "1 1 0",
+            minWidth: 0,
+            display: "flex",
+            flexDirection: "column",
+            gap: "40px",
+          }}
+        >
+
         {/* Header */}
         <motion.div variants={fadeUp} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           <p
@@ -386,7 +419,7 @@ export default function QuickFeedback() {
               ⌘ + Enter to submit
             </p>
             <motion.button
-              onClick={handleSubmit}
+              onClick={handlePostClick}
               disabled={!canSubmit}
               whileTap={canSubmit ? { scale: 0.96 } : {}}
               onMouseEnter={() => setHovered(true)}
@@ -446,7 +479,108 @@ export default function QuickFeedback() {
             </div>
           </motion.div>
         )}
-      </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Confirmation modal */}
+      <AnimatePresence>
+        {showConfirm && typeof window !== "undefined" && createPortal(
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            style={{
+              position: "fixed", inset: 0,
+              background: "rgba(0,0,0,0.5)",
+              zIndex: 9999,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "24px",
+            }}
+            onClick={() => setShowConfirm(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 12 }}
+              transition={{ duration: 0.22, ease: [0.25, 0, 0, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                backgroundColor: "var(--bg-primary)",
+                borderRadius: "20px",
+                padding: "32px",
+                maxWidth: "420px",
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                gap: "24px",
+                boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
+              }}
+            >
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <p style={{
+                  fontFamily: FONT,
+                  fontSize: "1.25rem",
+                  fontWeight: 600,
+                  letterSpacing: "-0.03em",
+                  color: "var(--text-primary)",
+                  lineHeight: "1.2",
+                }}>
+                  Post this message?
+                </p>
+                <p style={{
+                  fontFamily: FONT,
+                  fontSize: "0.9375rem",
+                  letterSpacing: "0.01em",
+                  lineHeight: "1.5",
+                  color: "var(--text-secondary, #535353)",
+                }}>
+                  By submitting, you understand this message may be publicly visible.
+                </p>
+              </div>
+              <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}>
+                <button
+                  onClick={() => setShowConfirm(false)}
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: "0.875rem",
+                    fontWeight: 500,
+                    letterSpacing: "-0.01em",
+                    color: "var(--text-secondary, #535353)",
+                    background: "rgba(0,0,0,0.06)",
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "10px 20px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleConfirm}
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: "0.875rem",
+                    fontWeight: 600,
+                    letterSpacing: "-0.01em",
+                    color: "white",
+                    backgroundColor: "#4438ca",
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "10px 20px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Post it
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>,
+          document.body
+        )}
+      </AnimatePresence>
     </section>
   );
 }

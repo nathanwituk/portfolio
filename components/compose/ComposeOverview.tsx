@@ -37,8 +37,8 @@ export default function ComposeOverview() {
         animate={inView ? "visible" : "hidden"}
         className="max-w-[1280px] mx-auto flex flex-col gap-[25px]"
         style={{
-          paddingLeft: "clamp(20px, 6.25vw, 80px)",
-          paddingRight: "clamp(20px, 6.25vw, 80px)",
+          paddingLeft: "clamp(14px, 4.375vw, 56px)",
+          paddingRight: "clamp(14px, 4.375vw, 56px)",
         }}
       >
         <motion.h2

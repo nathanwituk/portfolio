@@ -42,8 +42,8 @@ export default function ComposeHero() {
         ref={ref}
         className="max-w-[1280px] mx-auto flex flex-col lg:flex-row flex-wrap items-center justify-between gap-y-[46px]"
         style={{
-          paddingLeft: "clamp(20px, 6.25vw, 80px)",
-          paddingRight: "clamp(20px, 6.25vw, 80px)",
+          paddingLeft: "clamp(14px, 4.375vw, 56px)",
+          paddingRight: "clamp(14px, 4.375vw, 56px)",
         }}
       >
       {/* Mockup */}

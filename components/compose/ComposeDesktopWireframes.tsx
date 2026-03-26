@@ -66,8 +66,8 @@ export default function ComposeDesktopWireframes() {
       <div
         className="max-w-[1280px] mx-auto"
         style={{
-          paddingLeft: "clamp(20px, 6.25vw, 80px)",
-          paddingRight: "clamp(20px, 6.25vw, 80px)",
+          paddingLeft: "clamp(14px, 4.375vw, 56px)",
+          paddingRight: "clamp(14px, 4.375vw, 56px)",
         }}
       >
         <div className="overflow-x-auto" style={{ paddingBottom: "32px" }}>

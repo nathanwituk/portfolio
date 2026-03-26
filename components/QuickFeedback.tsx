@@ -483,9 +483,9 @@ export default function QuickFeedback() {
       </div>
 
       {/* Confirmation modal */}
-      <AnimatePresence>
-        {showConfirm && typeof window !== "undefined" && createPortal(
-          <motion.div
+      {typeof window !== "undefined" && createPortal(
+        <AnimatePresence>
+          {showConfirm && <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -577,10 +577,10 @@ export default function QuickFeedback() {
                 </button>
               </div>
             </motion.div>
-          </motion.div>,
-          document.body
-        )}
-      </AnimatePresence>
+          </motion.div>}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }

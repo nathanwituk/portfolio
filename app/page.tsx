@@ -5,6 +5,7 @@ import TickerBanner from "@/components/TickerBanner";
 import SpeedsterSection from "@/components/SpeedsterSection";
 import StudySyncSection from "@/components/StudySyncSection";
 import AboutSection from "@/components/AboutSection";
+import QuickFeedback from "@/components/QuickFeedback";
 import BackToTop from "@/components/BackToTop";
 import Footer from "@/components/Footer";
 
@@ -18,6 +19,7 @@ export default function Home() {
       <SpeedsterSection />
       <StudySyncSection />
       <AboutSection />
+      <QuickFeedback />
       <BackToTop />
       <Footer />
     </main>

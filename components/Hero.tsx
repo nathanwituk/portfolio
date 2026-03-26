@@ -319,7 +319,7 @@ function ComposeButton({ visible }: { visible: boolean }) {
         cursor: "pointer",
         userSelect: "none",
         color: "white",
-        backgroundColor: hovered ? "#e05200" : "#FF5D00",
+        backgroundColor: hovered ? "#3730a3" : "#4438ca",
         boxShadow: hovered ? "0 8px 24px rgba(0,0,0,0.22)" : "0 2px 6px rgba(0,0,0,0.0)",
         transition: "background-color 180ms ease, box-shadow 180ms ease",
         outline: "none",

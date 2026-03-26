@@ -6,6 +6,7 @@ import ComposeOverview from "@/components/compose/ComposeOverview";
 import ComposeDesignProcessDivider from "@/components/compose/ComposeDesignProcessDivider";
 import ComposeDesktopWireframes from "@/components/compose/ComposeDesktopWireframes";
 import ComposeMobileWireframes from "@/components/compose/ComposeMobileWireframes";
+import QuickFeedback from "@/components/QuickFeedback";
 
 export default function ComposePage() {
   return (
@@ -19,6 +20,7 @@ export default function ComposePage() {
       <ComposeDesignProcessDivider />
       <ComposeDesktopWireframes />
       <ComposeMobileWireframes />
+      <QuickFeedback />
       <BackToTop />
       <Footer />
     </main>

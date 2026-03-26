@@ -292,6 +292,62 @@ function MobileFoldPanel({
 }
 
 /* ─────────────────────────────────────────────
+   Compose button — shared by desktop + mobile
+───────────────────────────────────────────── */
+function ComposeNavIcon() {
+  return (
+    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" aria-hidden="true">
+      <path d="M3.59949 11.5472C3.66791 11.4113 3.76648 11.2928 3.88767 11.2008C4.00886 11.1087 4.14948 11.0456 4.29878 11.0162C4.60388 10.9613 4.90357 11.0639 5.13397 11.27M8.81131 14.249C8.51702 14.798 8.02112 15.2003 7.41183 15.311C6.80254 15.4207 6.20225 15.2165 5.74236 14.8025M8.20202 10.7165C8.34962 10.442 8.59712 10.2404 8.90131 10.1855C9.20731 10.1315 9.5061 10.2332 9.7365 10.4402M10.4619 5.12761C9.4269 6.10499 7.85283 6.88258 6.01596 7.21377C4.17998 7.54497 2.44301 7.36497 1.14253 6.80878C1.06087 6.77271 0.970337 6.76175 0.882433 6.77728C0.626837 6.82228 0.459439 7.09047 0.507139 7.37397L1.35133 12.2726C1.98132 15.9247 5.04127 17.6788 6.46055 18.3061C6.93034 18.5149 7.44873 18.541 7.95273 18.4501C8.45672 18.3592 8.93551 18.1531 9.30811 17.7931C10.4322 16.7059 12.7209 13.9871 12.0909 10.3349L11.2476 5.4363C11.1981 5.1528 10.9506 4.96021 10.695 5.00701C10.6067 5.02298 10.5261 5.06498 10.4619 5.12761Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M11.5832 13.9996C11.9099 13.9996 12.2338 13.9411 12.5371 13.8061C13.9564 13.1788 17.0164 11.4247 17.6464 7.7726L18.4905 2.87397C18.5391 2.59048 18.3709 2.32318 18.1153 2.27728C18.0274 2.26175 17.9368 2.27271 17.8552 2.30878C16.5556 2.86497 14.8177 3.04497 12.9808 2.71377C11.1449 2.38258 9.57169 1.60499 8.5358 0.627605C8.47181 0.565138 8.39066 0.523152 8.3027 0.507007C8.04711 0.460208 7.79871 0.652805 7.75011 0.9363L6.90683 5.83493C6.83213 6.26422 6.79883 6.68091 6.79883 7.08231" stroke="currentColor" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function ComposeButton({ visible }: { visible: boolean }) {
+  const [hovered, setHovered] = useState(false);
+  const FONT = "var(--font-instrument-sans), 'Instrument Sans', sans-serif";
+
+  return (
+    <motion.a
+      href="/work/compose"
+      className="group inline-flex items-center gap-[10px] rounded-[10px]"
+      style={{
+        padding: "12px 20px",
+        fontFamily: FONT,
+        fontSize: "0.875rem",
+        textDecoration: "none",
+        cursor: "pointer",
+        userSelect: "none",
+        color: "white",
+        backgroundColor: hovered ? "#e05200" : "#FF5D00",
+        boxShadow: hovered ? "0 8px 24px rgba(0,0,0,0.22)" : "0 2px 6px rgba(0,0,0,0.0)",
+        transition: "background-color 180ms ease, box-shadow 180ms ease",
+        outline: "none",
+      }}
+      initial={{ opacity: 0, y: 12 }}
+      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+      transition={{ duration: 0.5, ease: EASE }}
+      whileHover={{ scale: 1.04 }}
+      whileFocus={{ scale: 1.04 }}
+      whileTap={{ scale: 0.98 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <span className="shrink-0 flex items-center">
+        <ComposeNavIcon />
+      </span>
+      <span className="relative whitespace-nowrap">
+        Compose - IXD 414 Draft
+        <span
+          className="absolute bottom-0 left-0 w-full h-px origin-left scale-x-0 group-hover:scale-x-100"
+          style={{ transition: "transform 150ms ease-out", backgroundColor: "white" }}
+        />
+      </span>
+    </motion.a>
+  );
+}
+
+/* ─────────────────────────────────────────────
    Mobile hero text
 ───────────────────────────────────────────── */
 function MobileHeroText({ phase }: { phase: number }) {
@@ -354,6 +410,11 @@ function MobileHeroText({ phase }: { phase: number }) {
           my portfolio <span style={{ fontStyle: "normal" }}>😏</span>
         </motion.p>
       </div>
+
+      {/* Button appears after "my portfolio" settles */}
+      <div className="flex justify-center mt-8">
+        <ComposeButton visible={phase >= 4} />
+      </div>
     </div>
   );
 }
@@ -368,7 +429,8 @@ export default function Hero() {
     const t1 = setTimeout(() => setPhase(1), 0);
     const t2 = setTimeout(() => setPhase(2), 750);
     const t3 = setTimeout(() => setPhase(3), 1500);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+    const t4 = setTimeout(() => setPhase(4), 2200);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
   }, []);
 
   return (
@@ -530,6 +592,14 @@ export default function Hero() {
         >
           my portfolio <span style={{ fontStyle: "normal" }}>😏</span>
         </motion.p>
+
+        {/* Compose button — pops in after "my portfolio" settles */}
+        <div
+          className="absolute flex justify-center"
+          style={{ top: "396px", left: 0, right: 0, pointerEvents: "auto" }}
+        >
+          <ComposeButton visible={phase >= 4} />
+        </div>
         </div> {/* end inner text stage */}
       </div> {/* end flex centering wrapper */}
     </section>

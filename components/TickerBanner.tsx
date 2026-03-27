@@ -13,7 +13,7 @@ const ITEMS = Array.from({ length: 8 }, (_, i) => i);
 
 export default function TickerBanner() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-20px" });
+  const inView = useInView(ref, { once: true, margin: "0px 0px 60px 0px" });
 
   return (
     <motion.div

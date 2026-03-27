@@ -1,5 +1,4 @@
 import Nav from "@/components/Nav";
-import BackToTop from "@/components/BackToTop";
 import Footer from "@/components/Footer";
 import ComposeHero from "@/components/compose/ComposeHero";
 import ComposeOverview from "@/components/compose/ComposeOverview";
@@ -19,7 +18,6 @@ export default function ComposePage() {
       <ComposeDesignProcessDivider />
       <ComposeDesktopWireframes />
       <ComposeMobileWireframes />
-      <BackToTop />
       <Footer />
     </main>
   );

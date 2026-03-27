@@ -1,5 +1,4 @@
 import Nav from "@/components/Nav";
-import BackToTop from "@/components/BackToTop";
 import Footer from "@/components/Footer";
 import SafeRideHero from "@/components/saferide/SafeRideHero";
 import SafeRideHeuristicEvaluation from "@/components/saferide/SafeRideHeuristicEvaluation";
@@ -50,7 +49,6 @@ export default function SafeRidePage() {
       {/* 10 — Final Prototype */}
       <SafeRideFinalPrototype />
 
-      <BackToTop accentColor="#6363FF" />
       <Footer />
     </main>
   );

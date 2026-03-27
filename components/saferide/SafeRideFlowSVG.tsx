@@ -24,34 +24,34 @@ const SLIDE_SVG = 1058.3;
 // Stage  9  : purple boxes slide up
 // Stage  10 : done
 const STAGE_MS = [
-  1900,  // → 1  box 0 shake
-  2300,  // → 2  box 1 shake  (+400)
-  2700,  // → 3  box 2 shake  (+400)
-  3100,  // → 4  box 3 shake  (+400)
-  3400,  // → 5  box 0 burst  (1500ms after stage 1)
-  3800,  // → 6  box 1 burst
-  4200,  // → 7  box 2 burst
-  4600,  // → 8  box 3 burst
-  5300,  // → 9  purple slide (+700 — all bursts fully done)
-  6200,  // → 10 done         (+900)
+  600,   // → 1  box 0 shake
+  1000,  // → 2  box 1 shake  (+400)
+  1400,  // → 3  box 2 shake  (+400)
+  1800,  // → 4  box 3 shake  (+400)
+  2100,  // → 5  box 0 burst  (1500ms after stage 1)
+  2500,  // → 6  box 1 burst
+  2900,  // → 7  box 2 burst
+  3300,  // → 8  box 3 burst
+  4000,  // → 9  purple slide (+700 — all bursts fully done)
+  4900,  // → 10 done         (+900)
 ];
 
 // ── Escalating shake keyframes (1.5 s, linear) ─────────────────────────────
 // 24 values → each step ≈ 65 ms; amplitude grows from ±1 px to ±23 px
 const SHAKE_X = [
-  0, -1, 1.5, -1.5, 2,
-  -3, 3.5, -4, 4.5,
-  -6, 7, -8, 8.5,
-  -11, 12, -14, 15,
-  -18, 20, -23, 23, -23, 23, 0,
+  0, -2, 3, -3, 4,
+  -6, 7, -8, 9,
+  -11, 13, -15, 16,
+  -20, 22, -26, 28,
+  -32, 35, -38, 38, -38, 38, 0,
 ] as number[];
 
 const SHAKE_Y = [
-  0, 0, -0.5, 0.5, 0,
-  -1, 1, -1.5, 1.5,
-  -2, 2.5, -3, 3,
-  -4, 4.5, -5, 5.5,
-  -6, 6.5, -7, 7, -6, 6, 0,
+  0, 0, -1, 1, 0,
+  -2, 2, -3, 3,
+  -4, 5, -6, 6,
+  -8, 9, -10, 11,
+  -12, 13, -14, 14, -12, 12, 0,
 ] as number[];
 
 // ── Seeded LCG — deterministic particles every render ───────────────────────
@@ -99,7 +99,7 @@ const boxVariants = {
 
 export default function SafeRideFlowSVG() {
   const svgRef = useRef<SVGSVGElement>(null);
-  const inView  = useInView(svgRef, { once: true, margin: "-80px" });
+  const inView  = useInView(svgRef, { once: true, margin: "0px 0px 220px 0px" });
   const s = inView ? "visible" : "hidden";
 
   const [stage, setStage]               = useState(0);

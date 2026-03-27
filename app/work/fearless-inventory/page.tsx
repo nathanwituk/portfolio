@@ -4,7 +4,6 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import BackToTop from "@/components/BackToTop";
 import CaseStudyHero from "@/components/case-study/CaseStudyHero";
 import SectionDivider from "@/components/case-study/SectionDivider";
 import FeatureHighlights from "@/components/case-study/FeatureHighlights";
@@ -353,7 +352,6 @@ export default function FearlessInventoryPage() {
         beautyImageSrc="/images/fearless-inventory/Beauty Sections/CoffeeCreamerListView-Edit.png"
       />
 
-      <BackToTop accentColor="#6f7142" />
 
       <Footer />
 

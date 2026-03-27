@@ -201,93 +201,99 @@ function MobileFoldPanel({
   cropRight?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-48px" });
+  const inView = useInView(ref, { once: true, margin: "0px 0px 80px 0px" });
 
   return (
-    <div ref={ref} className="w-full">
-      <motion.div
-        className="relative w-full overflow-hidden"
-        style={{ aspectRatio: "4 / 5" }}
-        initial={{ opacity: 0, y: 44 }}
-        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 44 }}
-        transition={{ duration: 0.75, ease: EASE, delay: revealDelay }}
-      >
-        <video
-          src={panel.videoSrc}
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-          className="absolute inset-0 h-full object-cover"
-          style={cropRight > 0
-            ? { width: `${100 + cropRight}%`, objectPosition: "left center", left: 0, right: "auto" }
-            : { width: "100%" }
-          }
-        />
-      </motion.div>
+    <motion.div
+      ref={ref}
+      className="relative w-full overflow-hidden"
+      style={{ aspectRatio: "4 / 5.5" }}
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
+      transition={{ duration: 0.7, ease: EASE, delay: revealDelay }}
+    >
+      {/* Video — shifts up when card reveals, mirroring desktop hover */}
+      <motion.video
+        src={panel.videoSrc}
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+        className="absolute inset-0 h-full object-cover"
+        style={cropRight > 0
+          ? { width: `${100 + cropRight}%`, objectPosition: "left center", left: 0, right: "auto" }
+          : { width: "100%" }
+        }
+        animate={{ y: inView ? "-12%" : "0%" }}
+        transition={{ duration: 0.7, ease: HOVER_EASE, delay: revealDelay + 0.1 }}
+      />
 
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-        transition={{ duration: 0.6, ease: HOVER_EASE, delay: revealDelay + 0.22 }}
-        style={{
-          backgroundColor: "var(--bg-primary)",
-          transition: "background-color 200ms ease, color 200ms ease",
-          padding: "24px 20px 32px",
-        }}
-      >
-        <div className="flex flex-col" style={{ gap: "18px" }}>
-          <div className="flex flex-col" style={{ gap: "4px" }}>
+      {/* Text card — slides up from below, same as desktop hover */}
+      <div className="absolute left-0 right-0 overflow-hidden" style={{ bottom: 0, height: "260px" }}>
+        <motion.div
+          className="absolute bottom-0 left-0 right-0"
+          initial={{ y: "100%" }}
+          animate={{ y: inView ? "0%" : "100%" }}
+          transition={{ duration: 0.65, ease: HOVER_EASE, delay: revealDelay + 0.18 }}
+          style={{
+            backgroundColor: "var(--bg-primary)",
+            transition: "background-color 200ms ease, color 200ms ease",
+            padding: "18px 20px 28px",
+          }}
+        >
+          <div className="flex flex-col" style={{ gap: "16px" }}>
+            <div className="flex flex-col" style={{ gap: "4px" }}>
+              <p
+                className="font-semibold uppercase leading-[1.1]"
+                style={{
+                  fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                  fontSize: "0.75rem",
+                  letterSpacing: "-0.48px",
+                  color: "var(--text-tertiary)",
+                }}
+              >
+                {panel.category}
+              </p>
+              <p
+                className="font-normal leading-none"
+                style={{
+                  fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                  fontSize: "1.75rem",
+                  letterSpacing: "-1.11px",
+                  color: "var(--text-primary)",
+                  transition: "color 200ms ease",
+                }}
+              >
+                {panel.title}
+              </p>
+            </div>
             <p
-              className="font-semibold uppercase leading-[1.1]"
+              className="font-normal"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "0.75rem",
-                letterSpacing: "-0.48px",
-                color: "var(--text-tertiary)",
-              }}
-            >
-              {panel.category}
-            </p>
-            <p
-              className="font-normal leading-none"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1.75rem",
-                letterSpacing: "-1.11px",
+                fontSize: "14px",
+                letterSpacing: "0.28px",
+                lineHeight: "1.4",
                 color: "var(--text-primary)",
                 transition: "color 200ms ease",
               }}
             >
-              {panel.title}
+              {panel.description}
             </p>
+            <FigmaButton
+              href={panel.href}
+              external={false}
+              accentColor={panel.accentColor}
+              accentColorHover={panel.accentColorHover}
+              inkColor={panel.inkColor}
+            >
+              See Project
+            </FigmaButton>
           </div>
-          <p
-            className="font-normal"
-            style={{
-              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-              fontSize: "14px",
-              letterSpacing: "0.28px",
-              lineHeight: "1.4",
-              color: "var(--text-primary)",
-              transition: "color 200ms ease",
-            }}
-          >
-            {panel.description}
-          </p>
-          <FigmaButton
-            href={panel.href}
-            external={false}
-            accentColor={panel.accentColor}
-            accentColorHover={panel.accentColorHover}
-            inkColor={panel.inkColor}
-          >
-            See Project
-          </FigmaButton>
-        </div>
-      </motion.div>
-    </div>
+        </motion.div>
+      </div>
+    </motion.div>
   );
 }
 

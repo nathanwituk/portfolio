@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const TEXT =
-  "**While the concept explores speeding behavior in a playful way, the project is intended as a design study on how gamification and data visualization can make hidden behavioral patterns more visible to users.**";
+  "This project explores speeding behavior through gamification and data visualization, revealing patterns users typically overlook.";
 
 const WORDS = TEXT.split(" ");
 
@@ -73,7 +73,7 @@ export default function SpeedsterStatement() {
             letterSpacing: "-0.05em",
             color: "#ff5d00", // fallback — motion spans override
           }}
-          aria-label={TEXT.replace(/\*\*/g, "")}
+          aria-label={TEXT}
         >
           {WORDS.map((word, i) => (
             <AnimatedWord

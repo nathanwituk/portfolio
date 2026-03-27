@@ -1,5 +1,4 @@
 import Nav from "@/components/Nav";
-import BackToTop from "@/components/BackToTop";
 import Footer from "@/components/Footer";
 import SpeedsterHero from "@/components/speedster/SpeedsterHero";
 import SpeedsterKeyPoints from "@/components/speedster/SpeedsterKeyPoints";
@@ -40,7 +39,6 @@ export default function SpeedsterPage() {
         accentColor="#ff5d00"
         accentColorHover="#e05200"
       />
-      <BackToTop />
       <Footer />
     </main>
   );

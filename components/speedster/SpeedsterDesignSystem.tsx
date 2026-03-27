@@ -36,7 +36,7 @@ const TYPE_SCALE = [
 
 export default function SpeedsterDesignSystem() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "0px 0px 80px 0px" });
 
   return (
     <section

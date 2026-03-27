@@ -13,7 +13,7 @@ const fadeIn = {
 
 export default function GuerrillaTestingHeader() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const inView = useInView(ref, { once: true, margin: "0px 0px 80px 0px" });
 
   return (
     <section className="w-full bg-[#6f7142]" style={{ paddingTop: "56px", paddingBottom: "56px" }}>

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
+const FONT = "var(--font-instrument-sans), 'Instrument Sans', sans-serif";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -15,7 +16,6 @@ const containerVariants = {
   visible: { transition: { staggerChildren: 0.1 } },
 };
 
-// Giant name slides up from below footer overflow-clip
 const nameReveal = {
   hidden: { y: "100%", x: "-50%" },
   visible: {
@@ -25,9 +25,25 @@ const nameReveal = {
   },
 };
 
+function BackToTopArrow() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M7 17L17 7M17 7H7M17 7V17"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function Footer() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const inView = useInView(ref, { once: true, margin: "0px 0px 80px 0px" });
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <footer
@@ -38,123 +54,149 @@ export default function Footer() {
         transition: "background-color 200ms ease, color 200ms ease",
       }}
     >
-      {/* ── Contact + Social columns ── */}
       <motion.div
         ref={ref}
         variants={containerVariants}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
         className="px-5 md:px-[80px]"
-        style={{
-          paddingTop: "60px",
-          paddingBottom: "60px",
-        }}
+        style={{ paddingTop: "60px", paddingBottom: "60px" }}
       >
-        <div
-          className="flex flex-col md:flex-row shrink-0"
-          style={{ maxWidth: "552px", gap: "28px" }}
+        {/* ── Top row: Contact + Social (left) | Back to Top (right) ── */}
+        <motion.div
+          variants={fadeUp}
+          className="flex flex-row items-start justify-between"
+          style={{ gap: "24px" }}
         >
-          {/* Contact */}
-          <motion.div
-            variants={fadeUp}
-            className="flex flex-col"
-            style={{ flex: "1 0 0", gap: "30px" }}
+          {/* Left: Contact + Social */}
+          <div
+            className="flex flex-col md:flex-row shrink-0"
+            style={{ gap: "28px" }}
           >
-            <p
-              className="font-semibold uppercase"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "0.9375rem",
-                letterSpacing: "-0.6px",
-                lineHeight: "1.1",
-                color: "#ff5d00",
-              }}
-            >
-              Contact
-            </p>
-            <a
-              href="mailto:nathan.wituk@ku.edu"
-              className="font-normal leading-none underline decoration-solid hover:text-[#ff5d00] transition-colors duration-200"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "0.9375rem",
-                letterSpacing: "-1px",
-                color: "var(--text-primary)",
-              }}
-            >
-              nathan.wituk@ku.edu
-            </a>
-          </motion.div>
-
-          {/* Social */}
-          <motion.div
-            variants={fadeUp}
-            className="flex flex-col"
-            style={{ flex: "1 0 0", gap: "30px" }}
-          >
-            <p
-              className="font-semibold uppercase"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "0.9375rem",
-                letterSpacing: "-0.6px",
-                lineHeight: "1.1",
-                color: "#ff5d00",
-              }}
-            >
-              Social
-            </p>
-            <div className="flex flex-col" style={{ gap: "10px" }}>
+            {/* Contact */}
+            <div className="flex flex-col" style={{ gap: "30px" }}>
+              <p
+                className="font-semibold uppercase"
+                style={{
+                  fontFamily: FONT,
+                  fontSize: "0.9375rem",
+                  letterSpacing: "-0.6px",
+                  lineHeight: "1.1",
+                  color: "#ff5d00",
+                }}
+              >
+                Contact
+              </p>
               <a
-                href="https://www.behance.net/nathanwituk"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:nathan.wituk@ku.edu"
                 className="font-normal leading-none underline decoration-solid hover:text-[#ff5d00] transition-colors duration-200"
                 style={{
-                  fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                  fontFamily: FONT,
                   fontSize: "0.9375rem",
                   letterSpacing: "-1px",
                   color: "var(--text-primary)",
                 }}
               >
-                Behance
-              </a>
-              <a
-                href="https://www.linkedin.com/in/nathan-wituk/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-normal leading-none underline decoration-solid hover:text-[#ff5d00] transition-colors duration-200"
-                style={{
-                  fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "0.9375rem",
-                  letterSpacing: "-1px",
-                  color: "var(--text-primary)",
-                }}
-              >
-                LinkedIn
+                nathan.wituk@ku.edu
               </a>
             </div>
-          </motion.div>
-        </div>
+
+            {/* Social */}
+            <div className="flex flex-col" style={{ gap: "30px" }}>
+              <p
+                className="font-semibold uppercase"
+                style={{
+                  fontFamily: FONT,
+                  fontSize: "0.9375rem",
+                  letterSpacing: "-0.6px",
+                  lineHeight: "1.1",
+                  color: "#ff5d00",
+                }}
+              >
+                Social
+              </p>
+              <div className="flex flex-col" style={{ gap: "10px" }}>
+                <a
+                  href="https://www.behance.net/nathanwituk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-normal leading-none underline decoration-solid hover:text-[#ff5d00] transition-colors duration-200"
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: "0.9375rem",
+                    letterSpacing: "-1px",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  Behance
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/nathan-wituk/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-normal leading-none underline decoration-solid hover:text-[#ff5d00] transition-colors duration-200"
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: "0.9375rem",
+                    letterSpacing: "-1px",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Back to Top */}
+          <button
+            onClick={scrollToTop}
+            className="group flex items-center shrink-0 cursor-pointer bg-transparent border-none p-0 outline-none"
+            style={{ gap: "12px" }}
+            aria-label="Back to top"
+          >
+            <p
+              className="font-semibold uppercase"
+              style={{
+                fontFamily: FONT,
+                fontSize: "0.9375rem",
+                letterSpacing: "-0.6px",
+                lineHeight: "1.1",
+                color: "#ff5d00",
+                transition: "opacity 150ms ease",
+              }}
+            >
+              Back to Top
+            </p>
+            <span
+              className="flex items-center justify-center transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1"
+              style={{ color: "var(--text-primary)" }}
+            >
+              <BackToTopArrow />
+            </span>
+          </button>
+        </motion.div>
+
+        {/* ── "Website done in Claude Code" ── */}
+        <motion.p
+          variants={fadeUp}
+          style={{
+            fontFamily: FONT,
+            fontSize: "0.8125rem",
+            letterSpacing: "-0.03em",
+            color: "var(--text-tertiary)",
+            marginTop: "48px",
+            transition: "color 200ms ease",
+          }}
+        >
+          Website designed &amp; built in Claude Code
+        </motion.p>
       </motion.div>
 
-      {/* ── Giant "Nathan.Wituk" ──
-          Figma: bottom-[195.27px], left-[calc(50%-664px)], translate-y-full
-          We animate it from translateY(100%) → translateY(0).
-          The container has overflow-hidden so the entrance is a reveal.
-          left: calc(50% - 664px) = slightly past the left edge at 1280px wide.
-      ── */}
-      {/* Parent height = font-size so overflow-hidden clips the reveal correctly.
-          motion.p is absolutely positioned with left:50% + x:-50% so the
-          text center is always exactly at the viewport center — guaranteed
-          equal bleed on N (left) and K (right) at every viewport width. */}
+      {/* ── Giant "Nathan.Wituk" ── */}
       <div
         className="absolute overflow-hidden w-full"
-        style={{
-          bottom: "0",
-          left: "0",
-          height: "18.5vw",
-        }}
+        style={{ bottom: "0", left: "0", height: "18.5vw" }}
       >
         <motion.p
           variants={nameReveal}
@@ -165,7 +207,7 @@ export default function Footer() {
             position: "absolute",
             left: "50%",
             bottom: 0,
-            fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+            fontFamily: FONT,
             fontSize: "18.5vw",
             letterSpacing: "-0.06em",
             lineHeight: "1",

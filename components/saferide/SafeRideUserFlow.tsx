@@ -75,7 +75,7 @@ function RestartButton({ onClick }: { onClick: React.MouseEventHandler<HTMLButto
 
 export default function SafeRideUserFlow() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "0px 0px 220px 0px" });
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [restartKey, setRestartKey] = useState(0);
 

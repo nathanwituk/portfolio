@@ -7,7 +7,7 @@ const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
 export default function BackToTop({ accentColor = "#ff5d00" }: { accentColor?: string }) {
   const ref = useRef<HTMLButtonElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const inView = useInView(ref, { once: true, margin: "0px 0px 80px 0px" });
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

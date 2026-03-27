@@ -1,5 +1,4 @@
 import Nav                  from "@/components/Nav";
-import BackToTop             from "@/components/BackToTop";
 import Footer                from "@/components/Footer";
 import HeroSection           from "@/components/saferide/HeroSection";
 import KeyFeatures           from "@/components/saferide/KeyFeatures";
@@ -28,7 +27,6 @@ export default function StudySyncCaseStudy() {
       <WireframeDescription />
       <WireframeContent />
       <FullPrototype />
-      <BackToTop accentColor="#b2e639" />
       <Footer />
     </main>
   );

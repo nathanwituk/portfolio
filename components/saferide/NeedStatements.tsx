@@ -66,7 +66,7 @@ export default function NeedStatements() {
   const [isHovered, setIsHovered] = useState(false);
   const [isActive,  setIsActive]  = useState(false);
 
-  const inView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const inView = useInView(sectionRef, { once: true, margin: "0px 0px 80px 0px" });
 
   useEffect(() => {
     if (!inView || hasRun.current) return;

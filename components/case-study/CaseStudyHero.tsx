@@ -103,7 +103,7 @@ export default function CaseStudyHero({
         <motion.div variants={fadeUp} className="flex flex-col gap-[6px]">
           <SectionLabel>{label}</SectionLabel>
           <p
-            className="font-normal leading-[1.1]"
+            className="font-normal leading-[1.05]"
             style={{
               fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
               fontSize: "clamp(3.5rem, 8.2vw, 6.5625rem)",
@@ -119,7 +119,7 @@ export default function CaseStudyHero({
         {/* Body */}
         <motion.div variants={fadeUp}>
           <p
-            className="font-normal leading-[0]"
+            className="font-normal leading-[1.4]"
             style={{
               fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
               fontSize: "0.875rem",

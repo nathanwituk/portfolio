@@ -11,7 +11,7 @@ export default function SpeedsterDesignProcessDivider() {
         style={{
           fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
           fontSize: "1.875rem",
-          letterSpacing: "-0.02em",
+          letterSpacing: "-0.03em",
           color: "#ffffff",
         }}
       >

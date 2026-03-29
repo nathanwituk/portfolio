@@ -93,8 +93,8 @@ export default function AboutSection() {
             style={{
               fontFamily: FONT,
               fontSize: "0.9375rem",
-              letterSpacing: "0.01em",
-              lineHeight: "1.55",
+              letterSpacing: "0.02em",
+              lineHeight: "1.4",
               color: "var(--text-primary)",
               transition: "color 200ms ease",
               flex: "2 1 0",

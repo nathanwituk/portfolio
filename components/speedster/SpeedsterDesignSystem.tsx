@@ -69,8 +69,8 @@ export default function SpeedsterDesignSystem() {
               className="font-semibold leading-none uppercase"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "1rem",
-                letterSpacing: "-0.03em",
+                fontSize: "0.6875rem",
+                letterSpacing: "0.08em",
                 color: "var(--text-tertiary)",
                 transition: "color 200ms ease",
               }}
@@ -82,7 +82,7 @@ export default function SpeedsterDesignSystem() {
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
                 fontSize: "1.875rem",
-                letterSpacing: "-0.02em",
+                letterSpacing: "-0.03em",
                 color: "var(--text-primary)",
                 transition: "color 200ms ease",
               }}
@@ -96,7 +96,7 @@ export default function SpeedsterDesignSystem() {
             className="font-normal leading-[1.4]"
             style={{
               fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-              fontSize: "1rem",
+              fontSize: "0.875rem",
               letterSpacing: "0.02em",
               color: "var(--text-primary)",
               transition: "color 200ms ease",

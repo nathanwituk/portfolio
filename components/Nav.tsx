@@ -49,6 +49,15 @@ function ComposeIcon() {
   );
 }
 
+function HavenIcon() {
+  return (
+    <svg width="16" height="19" viewBox="0 0 16 19" fill="none" aria-hidden="true">
+      <path d="M7.64976 0.5C0.104262 5.41364 -3.68496 18.0352 7.64976 18.0352C18.9845 18.0352 15.1952 5.41364 7.64976 0.5Z" stroke="currentColor" strokeLinejoin="round"/>
+      <path d="M7.63229 5.84528C5.56992 7.47742 4.78237 9.08948 4.78237 11.5327C4.4773 11.1458 3.68893 10.2155 3.53588 9.81433C2.35086 12.1566 3.53588 16.1931 7.63229 16.0514C8.92542 16.0514 9.82257 15.7591 10.412 15.2728C12.8182 13.8591 12.4843 10.7735 11.5399 8.24111C11.5399 8.8208 10.5999 10.8654 10.3844 11.289C10.5404 8.8208 9.60007 7.47742 7.63229 5.84528Z" stroke="currentColor" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
 function SafeRideIcon() {
   return (
     <svg width="19" height="20" viewBox="0 0 19 20" fill="none" aria-hidden="true">
@@ -106,11 +115,18 @@ const navLinks = [
     hoverColor: "#6363FF",
     comingSoon: false,
   },
+  {
+    label: "Haven — Wellness App",
+    href: "/work/haven",
+    icon: HavenIcon,
+    hoverColor: "#9747ff",
+    comingSoon: false,
+  },
 ];
 
 // ── Component ───────────────────────────────────────────────────────────────
 
-const NAV_H = 46; // px — must match h-[46px] on the <nav> element
+const NAV_H = 60; // px — must match h-[60px] on the <nav> element
 
 export default function Nav() {
   const pathname = usePathname();
@@ -170,7 +186,7 @@ export default function Nav() {
       }}
     >
       {/* ── Desktop nav ── */}
-      <nav className="flex items-center justify-between h-[46px] px-5 md:pl-[80px] md:pr-[40px]">
+      <nav className="flex items-center justify-between h-[60px] px-5 md:pl-[80px] md:pr-[40px]">
 
         {/* Wordmark */}
         <a href="/" className="shrink-0 flex items-center" style={{ height: "20.543px" }}>
@@ -188,73 +204,70 @@ export default function Nav() {
           </span>
         </a>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center">
-          {navLinks.map(({ label, href, icon: Icon, hoverColor, activeLabelColor, comingSoon }, i) => {
-            const isHovered = hoveredIndex === i;
-            const isGreyed = comingSoon;
-            const isActive = !isGreyed && pathname.startsWith(href);
-            // Pill state: active page — filled capsule, white (or custom) text/icon
-            // Hover state: accent color text/icon + underline, no pill
-            const color = isActive ? (activeLabelColor ?? "#f5f5f5") : isHovered ? hoverColor : "var(--nav-text-muted)";
+        {/* Desktop links — hover reveals project name to the LEFT of icon group */}
+        <div className="hidden md:flex items-center" style={{ gap: "16px" }}>
 
-            return (
-              <a
-                key={label}
-                href={href}
-                className="flex items-center"
+          {/* Hover label — appears left of icons on any icon hover */}
+          <AnimatePresence mode="wait">
+            {hoveredIndex !== null && (
+              <motion.span
+                key={hoveredIndex}
                 style={{
-                  height: "28px",
-                  paddingLeft: "18px",
-                  paddingRight: "18px",
-                  gap: "10px",
-                  color,
-                  backgroundColor: isActive ? hoverColor : "transparent",
-                  borderRadius: isActive ? "14px" : "0",
-                  pointerEvents: isGreyed ? "none" : "auto",
-                  opacity: isGreyed ? 0.45 : 1,
-                  transition: "color 0.15s ease, background-color 0.15s ease",
+                  fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.04em",
+                  lineHeight: "1",
+                  color: navLinks[hoveredIndex].hoverColor,
+                  whiteSpace: "nowrap",
+                  pointerEvents: "none",
                 }}
-                onMouseEnter={() => !isGreyed && setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
+                initial={{ opacity: 0, x: 6 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 6 }}
+                transition={{ duration: 0.15, ease: [0.25, 0, 0, 1] as [number, number, number, number] }}
               >
-                {/* Icon inherits color via currentColor */}
-                <span className="shrink-0 flex items-center">
-                  <Icon />
-                </span>
-                <span
-                  className="whitespace-nowrap"
+                {navLinks[hoveredIndex].label}
+              </motion.span>
+            )}
+          </AnimatePresence>
+
+          {/* Icon group — active icon filled with accent color, no persistent label */}
+          <div className="flex items-center" style={{ gap: "12px" }}>
+            {navLinks.map(({ label, href, icon: Icon, hoverColor, activeLabelColor, comingSoon }, i) => {
+              const isHovered = hoveredIndex === i;
+              const isActive = !comingSoon && pathname.startsWith(href);
+              const color = isActive
+                ? (activeLabelColor ?? "#f5f5f5")
+                : isHovered
+                ? hoverColor
+                : "var(--nav-text-muted)";
+
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  className="flex items-center justify-center"
                   style={{
-                    fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                    fontSize: "1rem",
-                    letterSpacing: "-0.48px",
-                    lineHeight: "1.1",
-                    textDecoration: !isActive && isHovered ? "underline" : "none",
+                    height: "28px",
+                    paddingLeft: isActive ? "8px" : "4px",
+                    paddingRight: isActive ? "8px" : "4px",
+                    color,
+                    backgroundColor: isActive ? hoverColor : "transparent",
+                    borderRadius: "14px",
+                    pointerEvents: comingSoon ? "none" : "auto",
+                    opacity: comingSoon ? 0.45 : 1,
+                    transition: "color 0.15s ease, background-color 0.15s ease",
                   }}
+                  onMouseEnter={() => !comingSoon && setHoveredIndex(i)}
+                  onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  {label}
-                </span>
-                {comingSoon && (
-                  <span
-                    className="shrink-0"
-                    style={{
-                      fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                      fontSize: "0.625rem",
-                      letterSpacing: "0.05em",
-                      lineHeight: "1",
-                      textTransform: "uppercase",
-                      color: "var(--text-tertiary)",
-                      backgroundColor: "var(--bg-secondary)",
-                      padding: "3px 7px",
-                      borderRadius: "4px",
-                    }}
-                  >
-                    Soon
+                  <span className="flex items-center justify-center">
+                    <Icon />
                   </span>
-                )}
-              </a>
-            );
-          })}
+                </a>
+              );
+            })}
+          </div>
         </div>
 
         {/* Hamburger — mobile only */}

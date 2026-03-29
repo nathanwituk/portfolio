@@ -83,8 +83,8 @@ export default function SpeedsterSection() {
               className="font-semibold uppercase"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "0.75rem",
-                letterSpacing: "-0.48px",
+                fontSize: "0.6875rem",
+                letterSpacing: "0.08em",
                 lineHeight: "1.1",
                 color: "var(--text-tertiary)",
               }}

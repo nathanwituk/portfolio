@@ -29,7 +29,7 @@ function BackToTopArrow() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
-        d="M7 17L17 7M17 7H7M17 7V17"
+        d="M12 19V5M12 5L6 11M12 5L18 11"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
@@ -156,42 +156,46 @@ export default function Footer() {
             aria-label="Back to top"
           >
             <p
-              className="font-semibold uppercase"
+              className="font-semibold uppercase group-hover:underline"
               style={{
                 fontFamily: FONT,
                 fontSize: "0.9375rem",
                 letterSpacing: "-0.6px",
                 lineHeight: "1.1",
                 color: "#ff5d00",
-                transition: "opacity 150ms ease",
               }}
             >
               Back to Top
             </p>
             <span
-              className="flex items-center justify-center transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1"
-              style={{ color: "var(--text-primary)" }}
+              className="flex items-center justify-center transition-transform duration-200 group-hover:-translate-y-1"
+              style={{ color: "#ff5d00" }}
             >
               <BackToTopArrow />
             </span>
           </button>
         </motion.div>
 
-        {/* ── "Website done in Claude Code" ── */}
-        <motion.p
-          variants={fadeUp}
-          style={{
-            fontFamily: FONT,
-            fontSize: "0.8125rem",
-            letterSpacing: "-0.03em",
-            color: "var(--text-tertiary)",
-            marginTop: "48px",
-            transition: "color 200ms ease",
-          }}
-        >
-          Website designed &amp; built in Claude Code
-        </motion.p>
       </motion.div>
+
+      {/* ── Attribution — bottom-right, above giant name ── */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6, ease: EASE, delay: 0.4 }}
+        className="absolute px-5 md:px-[80px]"
+        style={{
+          right: 0,
+          bottom: "calc(18.5vw + 14px)",
+          fontFamily: FONT,
+          fontSize: "0.6875rem",
+          letterSpacing: "0.02em",
+          color: "rgba(0,0,0,0.25)",
+          textAlign: "right",
+        }}
+      >
+        Designed and built by Nathan Wituk using Claude Code
+      </motion.p>
 
       {/* ── Giant "Nathan.Wituk" ── */}
       <div

@@ -12,7 +12,7 @@ export default function SectionLabel({
 }: SectionLabelProps) {
   return (
     <p
-      className={`font-semibold uppercase leading-none tracking-[0em] text-[1rem] shrink-0 w-full ${
+      className={`font-semibold uppercase leading-none text-[0.6875rem] tracking-[0.08em] shrink-0 w-full ${
         variant === "light" ? "text-white" : ""
       } ${className}`}
       style={{

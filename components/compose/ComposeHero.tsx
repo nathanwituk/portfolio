@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
+import TagPill from "@/components/ui/TagPill";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 const FONT = "var(--font-instrument-sans), 'Instrument Sans', sans-serif";
@@ -77,8 +78,8 @@ export default function ComposeHero() {
             className="font-semibold uppercase leading-[1.1]"
             style={{
               fontFamily: FONT,
-              fontSize: "1rem",
-              letterSpacing: "-0.48px",
+              fontSize: "0.6875rem",
+              letterSpacing: "0.08em",
               color: "var(--text-tertiary)",
               transition: "color 200ms ease",
             }}
@@ -86,7 +87,7 @@ export default function ComposeHero() {
             DESIGNING WITH SYSTEMS
           </p>
           <p
-            className="font-normal leading-[1.1]"
+            className="font-normal leading-[1.05]"
             style={{
               fontFamily: FONT,
               fontSize: "clamp(3.5rem, 8.2vw, 6.5625rem)",
@@ -121,28 +122,7 @@ export default function ComposeHero() {
         {/* Tags */}
         <motion.div variants={fadeUp} className="flex flex-wrap gap-[15px]">
           {TAGS.map((tag) => (
-            <div
-              key={tag}
-              className="flex items-center justify-center shrink-0 rounded-[29px]"
-              style={{
-                backgroundColor: "#4438ca",
-                paddingLeft: "22px",
-                paddingRight: "22px",
-                paddingTop: "5px",
-                paddingBottom: "5px",
-              }}
-            >
-              <p
-                className="font-semibold uppercase whitespace-nowrap text-white leading-[1.1]"
-                style={{
-                  fontFamily: FONT,
-                  fontSize: "1rem",
-                  letterSpacing: "-0.48px",
-                }}
-              >
-                {tag}
-              </p>
-            </div>
+            <TagPill key={tag} color="#4438ca">{tag}</TagPill>
           ))}
         </motion.div>
       </motion.div>

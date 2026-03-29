@@ -373,8 +373,8 @@ export default function ComposeMobileWireframes() {
                     className="font-semibold uppercase leading-none"
                     style={{
                       fontFamily: FONT,
-                      fontSize: "0.613rem",
-                      letterSpacing: "-0.48px",
+                      fontSize: "0.6875rem",
+                      letterSpacing: "0.08em",
                       color: "#a4a4a4",
                     }}
                   >
@@ -397,7 +397,7 @@ export default function ComposeMobileWireframes() {
                       className="list-disc text-left"
                       style={{
                         fontFamily: FONT,
-                        fontSize: "0.613rem",
+                        fontSize: "0.6875rem",
                         letterSpacing: "0.02em",
                         lineHeight: "1.4",
                         color: "var(--text-primary)",

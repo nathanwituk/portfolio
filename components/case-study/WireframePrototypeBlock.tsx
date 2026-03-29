@@ -81,7 +81,7 @@ export default function WireframePrototypeBlock({
 
           <motion.p
             variants={fadeUp}
-            className="font-normal leading-[1.5]"
+            className="font-normal leading-[1.4]"
             style={{
               fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
               fontSize: "0.875rem",

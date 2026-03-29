@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import TagPill from "@/components/ui/TagPill";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 
@@ -69,8 +70,8 @@ export default function SafeRideHero() {
             className="font-semibold uppercase leading-none"
             style={{
               fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-              fontSize: "1rem",
-              letterSpacing: "-0.03em",
+              fontSize: "0.6875rem",
+              letterSpacing: "0.08em",
               color: "var(--text-tertiary)",
               transition: "color 200ms ease",
             }}
@@ -113,21 +114,7 @@ export default function SafeRideHero() {
         {/* Tags */}
         <motion.div variants={fadeUp} className="flex flex-wrap gap-[15px]">
           {TAGS.map((tag) => (
-            <span
-              key={tag}
-              className="font-semibold uppercase leading-none whitespace-nowrap"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "0.875rem",
-                letterSpacing: "-0.03em",
-                color: "#ffffff",
-                backgroundColor: "#6363ff",
-                padding: "5px 22px",
-                borderRadius: "29px",
-              }}
-            >
-              {tag}
-            </span>
+            <TagPill key={tag} color="#6363ff">{tag}</TagPill>
           ))}
         </motion.div>
       </motion.div>

@@ -49,7 +49,7 @@ export default function InsightsSection({ rows }: Props) {
           <div className="flex items-center gap-[10px] flex-1">
             <img src="/images/fearless-inventory/Lightbulb-Icon.svg" alt="" aria-hidden="true" width={32} height={34} className="shrink-0" />
             <p
-              className="font-semibold leading-none tracking-[-0.03em] text-[1rem]"
+              className="font-semibold leading-none tracking-[0.08em] text-[0.6875rem]"
               style={{ fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif", color: "var(--text-tertiary)", transition: "color 200ms ease" }}
             >
               Strong Design Insight
@@ -58,7 +58,7 @@ export default function InsightsSection({ rows }: Props) {
           <div className="flex items-center gap-[10px] flex-1">
             <img src="/images/fearless-inventory/InformationInsight-Icon-Olive.svg" alt="" aria-hidden="true" width={30} height={37} className="shrink-0" />
             <p
-              className="font-semibold leading-none tracking-[-0.03em] text-[1rem]"
+              className="font-semibold leading-none tracking-[0.08em] text-[0.6875rem]"
               style={{ fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif", color: "var(--text-tertiary)", transition: "color 200ms ease" }}
             >
               Areas for Improvement

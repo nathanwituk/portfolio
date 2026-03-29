@@ -126,8 +126,8 @@ export default function ComposeDesktopWireframes() {
                     className="font-semibold uppercase leading-none"
                     style={{
                       fontFamily: FONT,
-                      fontSize: "0.613rem",
-                      letterSpacing: "-0.48px",
+                      fontSize: "0.6875rem",
+                      letterSpacing: "0.08em",
                       color: "#a4a4a4",
                     }}
                   >

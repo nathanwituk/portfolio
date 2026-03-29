@@ -1,0 +1,36 @@
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import HavenHero from "@/components/haven/HavenHero";
+import HavenProblem from "@/components/haven/HavenProblem";
+import HavenHMW from "@/components/haven/HavenHMW";
+import HavenResearch from "@/components/haven/HavenResearch";
+import HavenClassification from "@/components/haven/HavenClassification";
+import HavenInsights from "@/components/haven/HavenInsights";
+import HavenSolutionsGrid from "@/components/haven/HavenSolutionsGrid";
+import HavenResearchFindings from "@/components/haven/HavenResearchFindings";
+import HavenCompetition from "@/components/haven/HavenCompetition";
+import HavenCompetitiveAnalysis from "@/components/haven/HavenCompetitiveAnalysis";
+import HavenStructure from "@/components/haven/HavenStructure";
+
+export default function HavenPage() {
+  return (
+    <main
+      className="flex flex-col min-h-screen overflow-x-hidden"
+      style={{ backgroundColor: "#ffffff" }}
+    >
+      <Nav />
+      <HavenHero />
+      <HavenProblem />
+      <HavenHMW />
+      <HavenResearch />
+      <HavenClassification />
+      <HavenInsights />
+      <HavenSolutionsGrid />
+      <HavenResearchFindings />
+      <HavenCompetition />
+      <HavenCompetitiveAnalysis />
+      <HavenStructure />
+      <Footer />
+    </main>
+  );
+}

@@ -137,8 +137,8 @@ function FoldPanel({
                 className="font-semibold uppercase leading-[1.1]"
                 style={{
                   fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "0.75rem",
-                  letterSpacing: "-0.48px",
+                  fontSize: "0.6875rem",
+                  letterSpacing: "0.08em",
                   color: "var(--text-tertiary)",
                 }}
               >
@@ -248,8 +248,8 @@ function MobileFoldPanel({
                 className="font-semibold uppercase leading-[1.1]"
                 style={{
                   fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "0.75rem",
-                  letterSpacing: "-0.48px",
+                  fontSize: "0.6875rem",
+                  letterSpacing: "0.08em",
                   color: "var(--text-tertiary)",
                 }}
               >

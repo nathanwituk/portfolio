@@ -79,6 +79,7 @@ export default function HavenUserPersonaDetails() {
               <div
                 style={{
                   display: "inline-flex",
+                  alignSelf: "flex-start",
                   alignItems: "center",
                   justifyContent: "center",
                   padding: "8px 20px",

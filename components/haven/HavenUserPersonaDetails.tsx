@@ -47,7 +47,7 @@ export default function HavenUserPersonaDetails() {
   const inView = useInView(ref, { once: true, margin: "0px 0px 80px 0px" });
 
   return (
-    <section style={{ backgroundColor: ACCENT, marginTop: "-200px" }}>
+    <section style={{ backgroundColor: ACCENT, marginTop: "-50px" }}>
       <motion.div
         ref={ref}
         variants={stagger}

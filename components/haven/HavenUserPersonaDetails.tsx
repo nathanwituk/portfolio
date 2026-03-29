@@ -47,7 +47,7 @@ export default function HavenUserPersonaDetails() {
   const inView = useInView(ref, { once: true, margin: "0px 0px 80px 0px" });
 
   return (
-    <section style={{ backgroundColor: ACCENT }}>
+    <section style={{ backgroundColor: ACCENT, marginTop: "-200px" }}>
       <motion.div
         ref={ref}
         variants={stagger}
@@ -63,14 +63,18 @@ export default function HavenUserPersonaDetails() {
           alignItems: "flex-start",
         }}
       >
-        {/* Cards: full width row */}
+        {/* Cards: full width row, equal height */}
         <motion.div
           variants={stagger}
           className="flex flex-row flex-wrap w-full"
-          style={{ gap: "clamp(12px, 1.5vw, 16px)" }}
+          style={{ gap: "clamp(12px, 1.5vw, 16px)", alignItems: "stretch" }}
         >
           {CARDS.map((card) => (
-            <motion.div key={card.label} variants={fadeUp} style={{ flex: "1 1 180px", minWidth: "180px" }}>
+            <motion.div
+              key={card.label}
+              variants={fadeUp}
+              style={{ flex: "1 1 180px", minWidth: "180px", display: "flex", flexDirection: "column" }}
+            >
               {/* Tab label */}
               <div
                 style={{
@@ -97,9 +101,10 @@ export default function HavenUserPersonaDetails() {
                 </span>
               </div>
 
-              {/* Content card */}
+              {/* Content card — flex: 1 so all three boxes reach the same height */}
               <div
                 style={{
+                  flex: 1,
                   backgroundColor: DARK,
                   borderRadius: "0 12px 12px 12px",
                   padding: "clamp(14px, 1.8vw, 20px)",

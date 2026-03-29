@@ -11,6 +11,12 @@ import HavenResearchFindings from "@/components/haven/HavenResearchFindings";
 import HavenCompetition from "@/components/haven/HavenCompetition";
 import HavenCompetitiveAnalysis from "@/components/haven/HavenCompetitiveAnalysis";
 import HavenStructure from "@/components/haven/HavenStructure";
+import HavenUserPersona from "@/components/haven/HavenUserPersona";
+import HavenUserPersonaDetails from "@/components/haven/HavenUserPersonaDetails";
+import HavenDesignProcess from "@/components/haven/HavenDesignProcess";
+import HavenWireframesOnboarding from "@/components/haven/HavenWireframesOnboarding";
+import HavenWireframes from "@/components/haven/HavenWireframes";
+import HavenHomeScreens from "@/components/haven/HavenHomeScreens";
 
 export default function HavenPage() {
   return (
@@ -30,6 +36,12 @@ export default function HavenPage() {
       <HavenCompetition />
       <HavenCompetitiveAnalysis />
       <HavenStructure />
+      <HavenUserPersona />
+      <HavenUserPersonaDetails />
+      <HavenDesignProcess />
+      <HavenWireframesOnboarding />
+      <HavenWireframes />
+      <HavenHomeScreens />
       <Footer />
     </main>
   );

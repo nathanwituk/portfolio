@@ -34,7 +34,6 @@ const pillText = {
   fontWeight: 600 as const,
   letterSpacing: "-0.02em",
   textTransform: "uppercase" as const,
-  whiteSpace: "nowrap" as const,
   color: "#ffffff",
 };
 
@@ -133,16 +132,10 @@ export default function HavenUserPersona() {
               ].map(({ label, value }, i) => (
                 <div
                   key={i}
-                  className="flex items-center"
-                  style={{
-                    paddingTop: i === 0 ? 0 : "clamp(10px, 1.2vw, 14px)",
-                    paddingBottom: "clamp(10px, 1.2vw, 14px)",
-                    borderBottom: i < 3 ? "1px dashed rgba(255,255,255,0.15)" : "none",
-                    gap: "8px",
-                  }}
+                  className="flex items-center justify-between"
+                  style={{ paddingTop: i === 0 ? 0 : "10px", gap: "8px" }}
                 >
                   <span style={{ ...labelText, flexShrink: 0 }}>{label}</span>
-                  <span style={{ flex: 1, borderBottom: "1px dotted rgba(255,255,255,0.2)", height: "1px", display: "block" }} />
                   <span style={{ ...labelText, fontStyle: "italic", flexShrink: 0 }}>{value}</span>
                 </div>
               ))}
@@ -159,8 +152,6 @@ export default function HavenUserPersona() {
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr",
                   gap: "8px",
-                  height: "100%",
-                  alignContent: "center",
                 }}
               >
                 {TRAITS.map((trait) => (

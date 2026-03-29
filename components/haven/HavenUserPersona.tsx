@@ -62,13 +62,13 @@ export default function HavenUserPersona() {
           gap: "clamp(40px, 6vw, 80px)",
         }}
       >
-        {/* Left: text */}
+        {/* Left: combined text block */}
         <motion.div
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           className="flex flex-col"
-          style={{ gap: "clamp(16px, 2.5vw, 28px)", flex: "0 0 auto", maxWidth: "460px" }}
+          style={{ gap: "clamp(16px, 2.5vw, 24px)", flex: "0 0 auto", maxWidth: "460px" }}
         >
           <motion.p
             variants={fadeUp}
@@ -83,7 +83,7 @@ export default function HavenUserPersona() {
             className="font-normal leading-[1.05]"
             style={{ fontFamily: FONT, fontSize: "clamp(1.75rem, 3vw, 2.5rem)", letterSpacing: "-0.03em", color: "#ffffff" }}
           >
-            User Persona
+            Emily Clifton
           </motion.h2>
 
           <motion.p
@@ -93,6 +93,13 @@ export default function HavenUserPersona() {
             Meet Emily Clifton! A Sophomore in college studying pre-med. With the balance between
             lectures and labs that can last hours, she has started to feel burnout and needs a way
             to cope with this stressed feeling so it doesn&apos;t worsen.
+          </motion.p>
+
+          <motion.p
+            variants={fadeUp}
+            style={{ fontFamily: FONT, fontSize: "0.9375rem", fontStyle: "italic", letterSpacing: "0.01em", lineHeight: 1.4, color: "rgba(255,255,255,0.75)" }}
+          >
+            &ldquo;Pre-med is my favorite thing ever but even your favorite things can get tiring.&rdquo;
           </motion.p>
         </motion.div>
 
@@ -104,20 +111,6 @@ export default function HavenUserPersona() {
           className="flex flex-col flex-1"
           style={{ gap: "clamp(16px, 2.5vw, 24px)", minWidth: 0 }}
         >
-          {/* Name + quote */}
-          <motion.div variants={fadeUp} className="flex flex-col" style={{ gap: "8px" }}>
-            <p
-              style={{ fontFamily: FONT, fontSize: "clamp(1.5rem, 3vw, 2.25rem)", fontWeight: 400, letterSpacing: "-0.03em", color: "#ffffff" }}
-            >
-              Emily Clifton
-            </p>
-            <p
-              style={{ fontFamily: FONT, fontSize: "0.9375rem", fontStyle: "italic", letterSpacing: "0.01em", color: "rgba(255,255,255,0.85)", lineHeight: 1.4 }}
-            >
-              &ldquo;Pre-med is my favorite thing ever but even your favorite things can get tiring.&rdquo;
-            </p>
-          </motion.div>
-
           <div className="flex flex-col md:flex-row" style={{ gap: "clamp(12px, 2vw, 20px)" }}>
             {/* Info card */}
             <motion.div
@@ -147,13 +140,7 @@ export default function HavenUserPersona() {
               style={{ backgroundColor: CARD_BG, borderRadius: "20px", padding: "clamp(16px, 2vw, 24px)", flex: "1 1 0", minWidth: "180px" }}
               className="flex flex-col"
             >
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "8px",
-                }}
-              >
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
                 {TRAITS.map((trait) => (
                   <span
                     key={trait}

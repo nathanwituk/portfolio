@@ -57,55 +57,17 @@ export default function HavenUserPersonaDetails() {
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
-          paddingTop: "clamp(48px, 8vw, 100px)",
+          paddingTop: "clamp(24px, 4vw, 48px)",
           paddingBottom: "clamp(48px, 8vw, 100px)",
           gap: "clamp(32px, 5vw, 56px)",
           alignItems: "flex-start",
         }}
       >
-        {/* Left: heading + bio */}
+        {/* Cards: full width row */}
         <motion.div
           variants={stagger}
-          className="flex flex-col"
-          style={{ gap: "clamp(20px, 3vw, 32px)", flex: "1 1 0", minWidth: 0 }}
-        >
-          <motion.h2
-            variants={fadeUp}
-            className="font-normal leading-[1.05]"
-            style={{
-              fontFamily: FONT,
-              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-              letterSpacing: "-0.05em",
-              color: "#ffffff",
-            }}
-          >
-            Emily Clifton
-          </motion.h2>
-
-          <motion.p
-            variants={fadeUp}
-            style={{
-              fontFamily: FONT,
-              fontSize: "0.9375rem",
-              letterSpacing: "0.02em",
-              lineHeight: 1.55,
-              color: "rgba(255,255,255,0.9)",
-              maxWidth: "520px",
-            }}
-          >
-            Emily is a sophomore in college in the pre-med track. With how often Emily has to go to
-            labs and lectures, she often feels burnt out and overwhelmed. Emily has been seeking a way
-            to catch her burnout before it gets worse and try her best to take preventative action.
-            She often feels like she forgets to do her habits and coping skills with how busy her
-            classes make her life.
-          </motion.p>
-        </motion.div>
-
-        {/* Right: 3 cards */}
-        <motion.div
-          variants={stagger}
-          className="flex flex-row flex-wrap"
-          style={{ gap: "clamp(12px, 1.5vw, 16px)", flex: "1 1 0", minWidth: 0 }}
+          className="flex flex-row flex-wrap w-full"
+          style={{ gap: "clamp(12px, 1.5vw, 16px)" }}
         >
           {CARDS.map((card) => (
             <motion.div key={card.label} variants={fadeUp} style={{ flex: "1 1 180px", minWidth: "180px" }}>

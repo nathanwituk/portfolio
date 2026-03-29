@@ -57,8 +57,8 @@ export default function KeyFeatures() {
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
-          paddingTop: "88px",
-          paddingBottom: "88px",
+          paddingTop: "var(--section-pt)",
+          paddingBottom: "var(--section-pb)",
         }}
       >
         <motion.div

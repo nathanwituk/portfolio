@@ -33,7 +33,7 @@ export default function InsightsSection({ rows }: Props) {
     <section
       className="w-full px-5 md:px-[80px]"
       style={{
-        paddingTop: "88px",
+        paddingTop: "var(--section-pt)",
         paddingBottom: "65px",
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease, color 200ms ease",

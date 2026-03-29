@@ -254,7 +254,7 @@ export default function FinalPrototypeBlock({
       <section
         id={id}
         className="w-full"
-        style={{ backgroundColor: bg, paddingTop: "80px", paddingBottom: "80px", transition: "background-color 200ms ease, color 200ms ease" }}
+        style={{ backgroundColor: bg, paddingTop: "var(--section-pt)", paddingBottom: "var(--section-pb)", transition: "background-color 200ms ease, color 200ms ease" }}
       >
         <div
           ref={ref}

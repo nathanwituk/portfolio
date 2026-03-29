@@ -25,8 +25,8 @@ export default function ComposeOverview() {
       className="w-full"
       style={{
         backgroundColor: "#f7f7f7",
-        paddingTop: "80px",
-        paddingBottom: "80px",
+        paddingTop: "var(--section-pt)",
+        paddingBottom: "var(--section-pb)",
         transition: "background-color 200ms ease",
       }}
     >

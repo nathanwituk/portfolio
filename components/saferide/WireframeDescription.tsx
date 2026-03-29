@@ -23,7 +23,7 @@ export default function WireframeDescription() {
     <section
       className="w-full"
       style={{
-        paddingTop: "88px",
+        paddingTop: "var(--section-pt)",
         paddingBottom: "48px",
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease",

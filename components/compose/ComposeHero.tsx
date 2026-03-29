@@ -33,8 +33,8 @@ export default function ComposeHero() {
     <section
       className="w-full"
       style={{
-        paddingTop: "72px",
-        paddingBottom: "48px",
+        paddingTop: "var(--section-pt)",
+        paddingBottom: "var(--section-pb)",
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease, color 200ms ease",
       }}

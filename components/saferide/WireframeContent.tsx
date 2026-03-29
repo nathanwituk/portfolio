@@ -36,7 +36,7 @@ export default function WireframeContent() {
       className="w-full"
       style={{
         paddingTop: "40px",
-        paddingBottom: "88px",
+        paddingBottom: "var(--section-pb)",
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease",
       }}

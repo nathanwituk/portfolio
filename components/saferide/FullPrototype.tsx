@@ -33,8 +33,8 @@ export default function FullPrototype() {
     <section
       className="w-full"
       style={{
-        paddingTop: "88px",
-        paddingBottom: "88px",
+        paddingTop: "var(--section-pt)",
+        paddingBottom: "var(--section-pb)",
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease",
       }}

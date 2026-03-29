@@ -60,8 +60,8 @@ export default function HavenStructure() {
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
-          paddingTop: "clamp(48px, 8vw, 100px)",
-          paddingBottom: "clamp(48px, 8vw, 100px)",
+          paddingTop: "var(--section-pt)",
+          paddingBottom: "var(--section-pb)",
           gap: "clamp(32px, 5vw, 80px)",
           alignItems: "flex-start",
         }}

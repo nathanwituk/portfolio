@@ -60,7 +60,7 @@ export default function SpeedsterProblemSolution() {
       style={{
         backgroundColor: "var(--bg-primary)",
         paddingTop: "91px",
-        paddingBottom: "80px",
+        paddingBottom: "var(--section-pb)",
         transition: "background-color 200ms ease",
       }}
     >

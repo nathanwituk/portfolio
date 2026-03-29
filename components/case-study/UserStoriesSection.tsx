@@ -141,7 +141,7 @@ export default function UserStoriesSection({ stories }: Props) {
       className="w-full px-5 md:px-[72px]"
       style={{
         paddingTop: "40px",
-        paddingBottom: "88px",
+        paddingBottom: "var(--section-pb)",
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease, color 200ms ease",
       }}

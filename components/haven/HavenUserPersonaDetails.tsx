@@ -58,7 +58,7 @@ export default function HavenUserPersonaDetails() {
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
           paddingTop: "clamp(24px, 4vw, 48px)",
-          paddingBottom: "clamp(48px, 8vw, 100px)",
+          paddingBottom: "var(--section-pb)",
           gap: "clamp(32px, 5vw, 56px)",
           alignItems: "flex-start",
         }}

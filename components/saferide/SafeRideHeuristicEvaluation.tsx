@@ -44,8 +44,8 @@ export default function SafeRideHeuristicEvaluation() {
       className="w-full"
       style={{
         backgroundColor: "var(--bg-primary)",
-        paddingTop: "80px",
-        paddingBottom: "80px",
+        paddingTop: "var(--section-pt)",
+        paddingBottom: "var(--section-pb)",
         transition: "background-color 200ms ease",
       }}
     >

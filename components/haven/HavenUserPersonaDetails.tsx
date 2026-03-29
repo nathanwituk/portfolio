@@ -53,13 +53,13 @@ export default function HavenUserPersonaDetails() {
         variants={stagger}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        className="max-w-[1280px] mx-auto flex flex-col lg:flex-row"
+        className="max-w-[1280px] mx-auto flex flex-col"
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
           paddingTop: "clamp(48px, 8vw, 100px)",
           paddingBottom: "clamp(48px, 8vw, 100px)",
-          gap: "clamp(40px, 6vw, 80px)",
+          gap: "clamp(32px, 5vw, 56px)",
           alignItems: "flex-start",
         }}
       >
@@ -74,7 +74,7 @@ export default function HavenUserPersonaDetails() {
             className="font-normal leading-[1.05]"
             style={{
               fontFamily: FONT,
-              fontSize: "clamp(3rem, 8.2vw, 6.5625rem)",
+              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
               letterSpacing: "-0.05em",
               color: "#ffffff",
             }}
@@ -104,11 +104,11 @@ export default function HavenUserPersonaDetails() {
         {/* Right: 3 cards */}
         <motion.div
           variants={stagger}
-          className="flex flex-col"
-          style={{ gap: "clamp(12px, 1.5vw, 16px)", flex: "0 0 auto", width: "clamp(260px, 30vw, 380px)" }}
+          className="flex flex-row flex-wrap"
+          style={{ gap: "clamp(12px, 1.5vw, 16px)", flex: "1 1 0", minWidth: 0 }}
         >
           {CARDS.map((card) => (
-            <motion.div key={card.label} variants={fadeUp}>
+            <motion.div key={card.label} variants={fadeUp} style={{ flex: "1 1 180px", minWidth: "180px" }}>
               {/* Tab label */}
               <div
                 style={{

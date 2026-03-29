@@ -77,7 +77,7 @@ export default function HavenStructure() {
             className="font-normal leading-[1.05]"
             style={{
               fontFamily: FONT,
-              fontSize: "clamp(3.5rem, 8.2vw, 6.5625rem)",
+              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
               letterSpacing: "-0.05em",
               color: DARK,
             }}

@@ -55,7 +55,7 @@ export default function HavenCompetition() {
         <motion.h2
           variants={fadeUp}
           className="font-normal leading-[1.05]"
-          style={{ fontFamily: FONT, fontSize: "clamp(3.5rem, 8.2vw, 6.5625rem)", letterSpacing: "-0.05em", color: "#ffffff" }}
+          style={{ fontFamily: FONT, fontSize: "clamp(1.75rem, 3vw, 2.5rem)", letterSpacing: "-0.03em", color: "#ffffff" }}
         >
           The competition.
         </motion.h2>

@@ -34,7 +34,6 @@ export default function HavenDesignProcess() {
           paddingTop: "clamp(48px, 8vw, 100px)",
           paddingBottom: "clamp(48px, 8vw, 100px)",
           gap: "clamp(24px, 3.5vw, 40px)",
-          maxWidth: "760px",
         }}
       >
         <motion.p
@@ -50,7 +49,7 @@ export default function HavenDesignProcess() {
           className="font-normal leading-[1.05]"
           style={{
             fontFamily: FONT,
-            fontSize: "clamp(3.5rem, 8.2vw, 6.5625rem)",
+            fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
             letterSpacing: "-0.05em",
             color: "#ffffff",
           }}

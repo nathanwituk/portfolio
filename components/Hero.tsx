@@ -363,7 +363,7 @@ function MobileHeroText({ phase }: { phase: number }) {
     <div
       className="flex flex-col items-center justify-center"
       style={{
-        minHeight: "calc(100dvh - 46px - 25vw)",
+        minHeight: "calc(100dvh - 46px - 150px)",
       }}
     >
       <div
@@ -441,7 +441,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full lg:overflow-hidden lg:h-[723px]"
+      className="relative w-full lg:overflow-hidden lg:min-h-[85vh]"
       style={{
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease",

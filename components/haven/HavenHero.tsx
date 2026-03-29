@@ -32,7 +32,7 @@ export default function HavenHero() {
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
           paddingTop: "clamp(48px, 8vw, 100px)",
-          paddingBottom: "clamp(48px, 8vw, 100px)",
+          paddingBottom: "clamp(20px, 2.5vw, 32px)",
           gap: "clamp(32px, 5vw, 80px)",
         }}
       >

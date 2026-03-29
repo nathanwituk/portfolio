@@ -18,11 +18,11 @@ const stagger = {
 };
 
 const APP_ICONS = [
-  { src: "https://www.figma.com/api/mcp/asset/18a21efb-6788-4761-a112-cd114e8f7eed", alt: "Calm", color: "#d9f4ff" },
-  { src: "https://www.figma.com/api/mcp/asset/40816758-dfa0-4a37-928f-8561f1ae577a", alt: "Headspace", color: "#fdd9be" },
-  { src: "https://www.figma.com/api/mcp/asset/c5379429-c638-48ea-a4a4-29a8edab6f05", alt: "Stoic", color: "#ffffff" },
-  { src: "https://www.figma.com/api/mcp/asset/b274890a-07f2-4da9-a294-98107e28e723", alt: "Finch", color: "#e0e2ea" },
-  { src: "https://www.figma.com/api/mcp/asset/ac4e0aa2-0be3-4688-8dd1-a1321f1c2c99", alt: "Forest", color: "#effad1" },
+  { src: "/images/Haven/CalmApp.svg", alt: "Calm", color: "#d9f4ff" },
+  { src: "/images/Haven/HeadspaceApp.svg", alt: "Headspace", color: "#fdd9be" },
+  { src: "/images/Haven/StoicApp.svg", alt: "Stoic", color: "#ffffff" },
+  { src: "/images/Haven/FinchApp.svg", alt: "Finch", color: "#e0e2ea" },
+  { src: "/images/Haven/ForestApp.svg", alt: "Forest", color: "#effad1" },
 ];
 
 const ROWS = [

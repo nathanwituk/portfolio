@@ -17,11 +17,11 @@ const stagger = {
 };
 
 const APPS = [
-  { src: "https://www.figma.com/api/mcp/asset/ee2f4e4f-e2e3-4cf8-8730-003569f019aa", alt: "Calm" },
-  { src: "https://www.figma.com/api/mcp/asset/502acc9e-0a59-4d53-88a6-96853225abef", alt: "Headspace" },
-  { src: "https://www.figma.com/api/mcp/asset/3bc5bec7-ff68-4cba-a0a1-fd0488ccfa3f", alt: "Stoic" },
-  { src: "https://www.figma.com/api/mcp/asset/89ea57fe-3d87-444c-b19b-c58fad4c3aaa", alt: "Finch" },
-  { src: "https://www.figma.com/api/mcp/asset/a746f381-8226-480f-8049-eb7b70895b2b", alt: "Forest" },
+  { src: "/images/Haven/CalmApp.svg", alt: "Calm" },
+  { src: "/images/Haven/HeadspaceApp.svg", alt: "Headspace" },
+  { src: "/images/Haven/StoicApp.svg", alt: "Stoic" },
+  { src: "/images/Haven/FinchApp.svg", alt: "Finch" },
+  { src: "/images/Haven/ForestApp.svg", alt: "Forest" },
 ];
 
 export default function HavenCompetition() {

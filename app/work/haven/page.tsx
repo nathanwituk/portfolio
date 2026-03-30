@@ -17,6 +17,7 @@ import HavenDesignProcess from "@/components/haven/HavenDesignProcess";
 import HavenWireframesOnboarding from "@/components/haven/HavenWireframesOnboarding";
 import HavenWireframes from "@/components/haven/HavenWireframes";
 import HavenHomeScreens from "@/components/haven/HavenHomeScreens";
+import HavenUserTesting from "@/components/haven/HavenUserTesting";
 
 export default function HavenPage() {
   return (
@@ -42,6 +43,7 @@ export default function HavenPage() {
       <HavenWireframesOnboarding />
       <HavenWireframes />
       <HavenHomeScreens />
+      <HavenUserTesting />
       <Footer />
     </main>
   );

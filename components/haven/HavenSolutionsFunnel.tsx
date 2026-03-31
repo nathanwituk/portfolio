@@ -195,7 +195,7 @@ function SolutionCard({
   progress: MotionValue<number>;
   index: number;
 }) {
-  const d       = index * 0.05;
+  const d       = index * 0.03;
   const opacity = useTransform(progress, [0.74 + d, 0.88 + d], [0, 1]);
   const scale   = useTransform(progress, [0.74 + d, 0.88 + d], [0.72, 1]);
   const y       = useTransform(progress, [0.74 + d, 0.88 + d], [28, 0]);

@@ -6,7 +6,7 @@ import HavenHMW from "@/components/haven/HavenHMW";
 import HavenResearch from "@/components/haven/HavenResearch";
 import HavenClassification from "@/components/haven/HavenClassification";
 import HavenInsights from "@/components/haven/HavenInsights";
-import HavenSolutionsGrid from "@/components/haven/HavenSolutionsGrid";
+import HavenSolutionsFunnel from "@/components/haven/HavenSolutionsFunnel";
 import HavenResearchFindings from "@/components/haven/HavenResearchFindings";
 import HavenCompetition from "@/components/haven/HavenCompetition";
 import HavenCompetitiveAnalysis from "@/components/haven/HavenCompetitiveAnalysis";
@@ -17,7 +17,11 @@ import HavenDesignProcess from "@/components/haven/HavenDesignProcess";
 import HavenWireframesOnboarding from "@/components/haven/HavenWireframesOnboarding";
 import HavenWireframes from "@/components/haven/HavenWireframes";
 import HavenHomeScreens from "@/components/haven/HavenHomeScreens";
+import HavenFinalPrototype from "@/components/haven/HavenFinalPrototype";
 import HavenUserTesting from "@/components/haven/HavenUserTesting";
+import HavenUserTestingResults from "@/components/haven/HavenUserTestingResults";
+import HavenTakeaways from "@/components/haven/HavenTakeaways";
+import HavenWhereWeWentWrong from "@/components/haven/HavenWhereWeWentWrong";
 
 export default function HavenPage() {
   return (
@@ -32,7 +36,7 @@ export default function HavenPage() {
       <HavenResearch />
       <HavenClassification />
       <HavenInsights />
-      <HavenSolutionsGrid />
+      <HavenSolutionsFunnel />
       <HavenResearchFindings />
       <HavenCompetition />
       <HavenCompetitiveAnalysis />
@@ -40,10 +44,14 @@ export default function HavenPage() {
       <HavenUserPersona />
       <HavenUserPersonaDetails />
       <HavenDesignProcess />
-      <HavenWireframesOnboarding />
       <HavenWireframes />
+      <HavenWireframesOnboarding />
       <HavenHomeScreens />
+      <HavenFinalPrototype />
       <HavenUserTesting />
+      <HavenUserTestingResults />
+      <HavenTakeaways />
+      <HavenWhereWeWentWrong />
       <Footer />
     </main>
   );

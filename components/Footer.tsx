@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { AnimatePresence, motion, useInView } from "framer-motion";
+import { useProgress } from "@/contexts/ProgressContext";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 const FONT = "var(--font-instrument-sans), 'Instrument Sans', sans-serif";
@@ -42,11 +43,21 @@ function BackToTopArrow() {
 export default function Footer() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px 80px 0px" });
+  const { badgeUnlocked, badgeAnimationPlayed, markBadgeAnimationPlayed } = useProgress();
+
+  // Mark animation played once the badge is shown for the first time
+  useEffect(() => {
+    if (badgeUnlocked && !badgeAnimationPlayed) {
+      const t = setTimeout(markBadgeAnimationPlayed, 1200);
+      return () => clearTimeout(t);
+    }
+  }, [badgeUnlocked, badgeAnimationPlayed, markBadgeAnimationPlayed]);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <footer
+      id="footer"
       className="relative w-full overflow-hidden"
       style={{
         minHeight: "545px",
@@ -176,6 +187,44 @@ export default function Footer() {
           </button>
         </motion.div>
 
+        {/* ── Badge: unlocked when all milestones complete ── */}
+        <AnimatePresence>
+          {badgeUnlocked && (
+            <motion.div
+              initial={badgeAnimationPlayed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: [0.25, 0, 0, 1], delay: badgeAnimationPlayed ? 0 : 0.3 }}
+              style={{ marginTop: "36px" }}
+            >
+              <p
+                style={{
+                  fontFamily: FONT,
+                  fontSize: "0.6875rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase" as const,
+                  color: "#ff5d00",
+                  lineHeight: 1.1,
+                }}
+              >
+                ✦ 100% Explored — Badge Unlocked
+              </p>
+              <p
+                style={{
+                  fontFamily: FONT,
+                  fontSize: "0.8125rem",
+                  fontWeight: 400,
+                  letterSpacing: "0.01em",
+                  color: "var(--text-tertiary)",
+                  lineHeight: 1.4,
+                  marginTop: "6px",
+                }}
+              >
+                You've seen everything. Thanks for exploring.
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
 
       {/* ── Attribution — bottom-right, above giant name ── */}

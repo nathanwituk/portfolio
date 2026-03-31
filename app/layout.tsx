@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 import { EyeTrackingProvider } from "@/contexts/EyeTrackingContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ProgressProvider } from "@/contexts/ProgressContext";
 import ErrorReporter from "@/components/ErrorReporter";
+import MilestoneObserver from "@/components/ui/MilestoneObserver";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -38,10 +40,13 @@ export default function RootLayout({
       </head>
       <body className={`${instrumentSans.variable} antialiased`}>
         <ThemeProvider>
-          <EyeTrackingProvider>
-            <ErrorReporter />
-            {children}
-          </EyeTrackingProvider>
+          <ProgressProvider>
+            <EyeTrackingProvider>
+              <ErrorReporter />
+              <MilestoneObserver />
+              {children}
+            </EyeTrackingProvider>
+          </ProgressProvider>
         </ThemeProvider>
       </body>
     </html>

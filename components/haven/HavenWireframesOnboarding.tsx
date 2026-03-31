@@ -28,7 +28,7 @@ export default function HavenWireframesOnboarding() {
         variants={stagger}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-center"
+        className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-start lg:items-center"
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",

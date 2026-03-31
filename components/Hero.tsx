@@ -441,6 +441,7 @@ export default function Hero() {
 
   return (
     <section
+      id="hero-section"
       className="relative w-full lg:overflow-hidden lg:min-h-[85vh]"
       style={{
         backgroundColor: "var(--bg-primary)",

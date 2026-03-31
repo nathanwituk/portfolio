@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import ExplorationProgress from "@/components/ui/ExplorationProgress";
 
 // ── Inline SVG icons — all strokes use currentColor ────────────────────────
 
@@ -173,7 +174,7 @@ export default function Nav() {
       <div style={{ height: NAV_H }} aria-hidden="true" />
 
     <motion.header
-      className="fixed top-0 left-0 right-0 z-50 w-full border-b"
+      className="fixed top-0 left-0 right-0 z-50 w-full"
       animate={{ y: visible ? 0 : "-110%" }}
       transition={{ duration: 0.28, ease: [0.25, 0, 0, 1] }}
       style={{
@@ -375,6 +376,7 @@ export default function Nav() {
           </motion.div>
         )}
       </AnimatePresence>
+      <ExplorationProgress />
     </motion.header>
     </>
   );

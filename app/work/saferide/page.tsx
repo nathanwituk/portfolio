@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import PageMilestone from "@/components/ui/PageMilestone";
 import SafeRideHero from "@/components/saferide/SafeRideHero";
 import SafeRideHeuristicEvaluation from "@/components/saferide/SafeRideHeuristicEvaluation";
 import SafeRideInterview from "@/components/saferide/SafeRideInterview";
@@ -18,6 +19,7 @@ export default function SafeRidePage() {
       style={{ backgroundColor: "var(--bg-primary)" }}
     >
       <Nav />
+      <PageMilestone id="saferide_viewed" />
 
       {/* 1 — Hero / Title */}
       <SafeRideHero />

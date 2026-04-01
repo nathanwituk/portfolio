@@ -11,7 +11,6 @@ import WireframePrototypeBlock from "@/components/case-study/WireframePrototypeB
 import SpeedsterDesignProcessDivider from "@/components/speedster/SpeedsterDesignProcessDivider";
 import SpeedsterFirstPrototype from "@/components/speedster/SpeedsterFirstPrototype";
 import SpeedsterDesignSystem from "@/components/speedster/SpeedsterDesignSystem";
-import SpeedsterVariantsComponents from "@/components/speedster/SpeedsterVariantsComponents";
 import SpeedsterFullPrototype from "@/components/speedster/SpeedsterFullPrototype";
 
 export default function SpeedsterPage() {
@@ -28,7 +27,6 @@ export default function SpeedsterPage() {
       <SpeedsterDesignProcessDivider />
       <SpeedsterFirstPrototype />
       <SpeedsterDesignSystem />
-      <SpeedsterVariantsComponents />
       <SpeedsterFullPrototype />
       <WireframePrototypeBlock
         sectionLabel="Speedster Final"

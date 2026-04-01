@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { PROJECT_ASSETS } from "@/lib/assets";
 import FigmaButton from "@/components/ui/FigmaButton";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
@@ -22,13 +21,13 @@ const textLine = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
 };
 
-export default function SpeedsterSection() {
+export default function SafeRideSection() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px 80px 0px" });
 
   return (
     <section
-      id="speedster"
+      id="saferide"
       className="flex items-center justify-center w-full"
       style={{ backgroundColor: "var(--bg-primary)", transition: "background-color 200ms ease, color 200ms ease" }}
     >
@@ -51,15 +50,15 @@ export default function SpeedsterSection() {
           animate={inView ? "visible" : "hidden"}
           className="relative shrink-0 w-full lg:w-[490.891px]"
         >
-          <div className="relative overflow-hidden" style={{ aspectRatio: "490.891 / 424.5", borderRadius: "7.344px" }}>
+          <div className="relative overflow-hidden flex items-center justify-center" style={{ aspectRatio: "490.891 / 424.5", borderRadius: "7.344px" }}>
             <video
-              src={PROJECT_ASSETS.speedsterSection2Video}
+              src="/videos/SafeRide/FinalDemoVideoSafeRideHero.mp4"
               autoPlay
               muted
               loop
               playsInline
               aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover"
+              style={{ width: "70%", height: "70%", objectFit: "contain" }}
             />
           </div>
         </motion.div>
@@ -89,7 +88,7 @@ export default function SpeedsterSection() {
                 color: "var(--text-tertiary)",
               }}
             >
-              Digital Rebrand &amp; UX
+              User Safety &amp; Redesign
             </motion.p>
             <motion.p
               variants={textLine}
@@ -103,7 +102,7 @@ export default function SpeedsterSection() {
                 transition: "color 200ms ease",
               }}
             >
-              Speedster
+              SafeRide
             </motion.p>
           </div>
 
@@ -121,16 +120,18 @@ export default function SpeedsterSection() {
                 transition: "color 200ms ease",
               }}
             >
-              Exploring a new approach to time and spatial awareness through
-              the design of a minimal, intuitive tool inspired by calendars,
-              clocks, and compasses.
+              The project shows how design solutions can be easily executed in
+              new ways by eliminating how many tasks a user must complete before
+              the desired end goal is achieved. In this study, I used interviews
+              and evaluations to better understand how user goals were being met,
+              and how to make them easier to attain.
             </motion.p>
             <motion.div variants={textLine}>
               <FigmaButton
-                href="/work/speedster"
+                href="/work/saferide"
                 external={false}
-                accentColor="#ff5d00"
-                accentColorHover="#e05200"
+                accentColor="#6363ff"
+                accentColorHover="#4f4fcc"
               >
                 See Project
               </FigmaButton>

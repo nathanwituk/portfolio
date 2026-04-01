@@ -96,7 +96,7 @@ export default function SafeRideSection() {
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
                 fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)",
-                letterSpacing: "-1.11px",
+                letterSpacing: "-0.03em",
                 lineHeight: "1",
                 color: "var(--text-primary)",
                 transition: "color 200ms ease",
@@ -113,8 +113,8 @@ export default function SafeRideSection() {
               className="font-normal"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "14px",
-                letterSpacing: "0.28px",
+                fontSize: "0.875rem",
+                letterSpacing: "0.02em",
                 lineHeight: "1.4",
                 color: "var(--text-primary)",
                 transition: "color 200ms ease",

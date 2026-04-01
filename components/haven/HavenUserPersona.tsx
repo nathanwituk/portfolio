@@ -30,9 +30,9 @@ const SLIDERS: { left: string; right: string; pct: number }[] = [
 
 const pillText = {
   fontFamily: FONT,
-  fontSize: "0.8125rem",
+  fontSize: "0.875rem",
   fontWeight: 600 as const,
-  letterSpacing: "-0.02em",
+  letterSpacing: "-0.03em",
   textTransform: "uppercase" as const,
   color: "#ffffff",
 };

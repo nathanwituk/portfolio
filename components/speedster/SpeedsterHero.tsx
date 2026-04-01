@@ -129,7 +129,7 @@ export default function SpeedsterHero() {
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
                 fontSize: "0.875rem",
-                letterSpacing: "0.08em",
+                letterSpacing: "-0.03em",
                 color: "#ffffff",
                 backgroundColor: "#ff5d00",
                 padding: "5px 22px",

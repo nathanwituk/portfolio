@@ -54,7 +54,7 @@ export default function WireframePrototypesBanner() {
         {/* Purpose text right */}
         <div className="flex flex-col gap-[12px]">
           <p
-            className="font-normal text-white leading-none tracking-[-0.02em]"
+            className="font-normal text-white leading-none tracking-[-0.03em]"
             style={{
               fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
               fontSize: "1.25rem",
@@ -67,7 +67,7 @@ export default function WireframePrototypesBanner() {
             style={{
               fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
               fontSize: "0.875rem",
-              letterSpacing: "0.01em",
+              letterSpacing: "0.02em",
             }}
           >
             Wireframe prototypes allow me to test workflows, structure, and interactions early.

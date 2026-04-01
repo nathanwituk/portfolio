@@ -187,7 +187,7 @@ export default function BrandingSection({
                   style={{
                     fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
                     fontSize: "1.875rem",
-                    letterSpacing: "-0.6px",
+                    letterSpacing: "-0.03em",
                     color: "var(--text-primary)",
                     transition: "color 200ms ease",
                   }}
@@ -202,8 +202,8 @@ export default function BrandingSection({
               className="flex flex-col gap-[8px] font-normal"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "14px",
-                letterSpacing: "0.28px",
+                fontSize: "0.875rem",
+                letterSpacing: "0.02em",
                 lineHeight: "1.4",
                 color: "var(--text-primary)",
                 transition: "color 200ms ease",

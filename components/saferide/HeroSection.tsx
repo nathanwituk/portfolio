@@ -121,8 +121,8 @@ export default function HeroSection() {
               className="font-semibold uppercase leading-none whitespace-nowrap"
               style={{
                 fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "0.6875rem",
-                letterSpacing: "0.08em",
+                fontSize: "0.875rem",
+                letterSpacing: "-0.03em",
                 color: "#000000",
                 backgroundColor: "#b2e639",
                 padding: "5px 22px",

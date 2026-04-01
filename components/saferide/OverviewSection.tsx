@@ -74,19 +74,6 @@ export default function OverviewSection() {
             The dashboard will give users the ability to connect their Canvas, Blackboard, or
             Google Classroom account in order to input data needed for key visualizations.
           </p>
-          <p
-            className="font-normal leading-[1.5]"
-            style={{
-              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-              fontSize: "0.875rem",
-              letterSpacing: "0.02em",
-              color: "var(--text-primary)",
-              transition: "color 200ms ease",
-            }}
-          >
-            These visuals help students break down how well they&apos;re doing in classes and in
-            their degree progress, making it easy to stay on top of deadlines and academic goals.
-          </p>
         </motion.div>
       </motion.div>
     </section>

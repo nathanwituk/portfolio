@@ -37,8 +37,8 @@ export default function SafeRidePersonaBanner() {
           className="font-semibold uppercase leading-none"
           style={{
             fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-            fontSize: "1rem",
-            letterSpacing: "-0.03em",
+            fontSize: "0.6875rem",
+            letterSpacing: "0.08em",
             color: "white",
           }}
         >
@@ -49,7 +49,7 @@ export default function SafeRidePersonaBanner() {
           style={{
             fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
             fontSize: "1.875rem",
-            letterSpacing: "-0.02em",
+            letterSpacing: "-0.03em",
             color: "white",
           }}
         >

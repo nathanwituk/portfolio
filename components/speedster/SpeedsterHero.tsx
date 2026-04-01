@@ -54,11 +54,11 @@ export default function SpeedsterHero() {
           playsInline
           style={{
             position: "absolute",
-            top: 0,
+            top: "50%",
             left: "50%",
-            transform: "translateX(-50%)",
+            transform: "translate(-50%, -50%)",
             width: "200%",
-            height: "100%",
+            height: "140%",
             objectFit: "cover",
             objectPosition: "center center",
           }}

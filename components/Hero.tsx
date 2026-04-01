@@ -259,7 +259,7 @@ function MobileFoldPanel({
                 className="font-normal leading-none"
                 style={{
                   fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                  fontSize: "1.75rem",
+                  fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)",
                   letterSpacing: "-1.11px",
                   color: "var(--text-primary)",
                   transition: "color 200ms ease",

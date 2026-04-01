@@ -34,7 +34,7 @@ export const PROJECT_ASSETS = {
    * Crop 25% from each side before displaying (show center 50% of width).
    * Format: .mov
    */
-  speedsterHeroVideo: "/videos/speedster/speedster-hero-mockup.mp4",
+  speedsterHeroVideo: "/videos/speedster/V2_UpdateMarch23_speedster-hero-mockup.mp4",
 
   /**
    * Speedster — homepage second section video (replaces grey box).

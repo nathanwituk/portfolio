@@ -86,6 +86,7 @@ const navLinks = [
     icon: ComposeIcon,
     hoverColor: "#4438ca",
     comingSoon: false,
+    dimmed: true,
   },
   {
     label: "Speedster",
@@ -234,7 +235,7 @@ export default function Nav() {
 
           {/* Icon group — active icon filled with accent color, no persistent label */}
           <div className="flex items-center" style={{ gap: "12px" }}>
-            {navLinks.map(({ label, href, icon: Icon, hoverColor, activeLabelColor, comingSoon }, i) => {
+            {navLinks.map(({ label, href, icon: Icon, hoverColor, activeLabelColor, comingSoon, dimmed }, i) => {
               const isHovered = hoveredIndex === i;
               const isActive = !comingSoon && pathname.startsWith(href);
               const color = isActive
@@ -256,8 +257,8 @@ export default function Nav() {
                     backgroundColor: isActive ? hoverColor : "transparent",
                     borderRadius: "14px",
                     pointerEvents: comingSoon ? "none" : "auto",
-                    opacity: comingSoon ? 0.45 : 1,
-                    transition: "color 0.15s ease, background-color 0.15s ease",
+                    opacity: comingSoon ? 0.45 : dimmed ? 0.4 : 1,
+                    transition: "color 0.15s ease, background-color 0.15s ease, opacity 0.15s ease",
                   }}
                   onMouseEnter={() => !comingSoon && setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}
@@ -314,7 +315,7 @@ export default function Nav() {
             transition={{ duration: 0.35, ease: [0.25, 0, 0, 1] as [number, number, number, number] }}
           >
             <div className="flex flex-col gap-[20px] px-5 py-4">
-              {navLinks.map(({ label, href, icon: Icon, hoverColor, activeLabelColor, comingSoon }, i) => {
+              {navLinks.map(({ label, href, icon: Icon, hoverColor, activeLabelColor, comingSoon, dimmed }, i) => {
                 const isActive = !comingSoon && pathname.startsWith(href);
                 return (
                 <motion.a
@@ -329,12 +330,12 @@ export default function Nav() {
                     color: isActive ? (activeLabelColor ?? "#f5f5f5") : comingSoon ? "var(--nav-text-muted)" : hoverColor,
                     backgroundColor: isActive ? hoverColor : "transparent",
                     borderRadius: isActive ? "9px" : "0",
-                    opacity: comingSoon ? 0.45 : 1,
+                    opacity: comingSoon ? 0.45 : dimmed ? 0.4 : 1,
                     pointerEvents: comingSoon ? "none" : "auto",
                   }}
                   onClick={() => setMenuOpen(false)}
                   initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: comingSoon ? 0.45 : 1, x: 0 }}
+                  animate={{ opacity: comingSoon ? 0.45 : dimmed ? 0.4 : 1, x: 0 }}
                   transition={{ delay: i * 0.06, duration: 0.25 }}
                 >
                   <span className="shrink-0 flex items-center">

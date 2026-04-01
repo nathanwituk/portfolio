@@ -314,37 +314,49 @@ function MobileHeroText({ phase }: { phase: number }) {
         className="relative w-full overflow-hidden"
         style={{ height: "280px" }}
       >
-        {/* "Welcome to" — enters large, shrinks when "my portfolio" appears */}
-        <motion.p
-          className="absolute whitespace-nowrap"
-          style={{ fontFamily: FONT, letterSpacing: "0.5px", lineHeight: 1, color: "var(--text-primary)", transition: "color 200ms ease", left: 0, right: 0, textAlign: "center" }}
-          initial={{ opacity: 0, y: 320, fontSize: "3.5rem" }}
-          animate={
-            phase === 0
-              ? { opacity: 0, y: 320, fontSize: "3.5rem" }
-              : phase === 1
-              ? { opacity: 1, y: 96,  fontSize: "3.5rem" }
-              : { opacity: 1, y: 102, fontSize: "1.5rem" }
-          }
-          transition={CENTER_TRANS}
-        >
-          Welcome to
-        </motion.p>
+        {/* Wrapper: sized to widest child so the group centers as a unit */}
+        <div style={{
+          position: "absolute",
+          top: "90px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "inline-flex",
+          flexDirection: "column",
+          gap: "8px",
+          alignItems: "flex-start",
+        }}>
+          {/* "Welcome to" — enters large, shrinks when "my portfolio" appears */}
+          <motion.p
+            className="whitespace-nowrap"
+            style={{ fontFamily: FONT, letterSpacing: "0.5px", lineHeight: 1, color: "var(--text-primary)", transition: "color 200ms ease" }}
+            initial={{ opacity: 0, y: 220, fontSize: "3.5rem" }}
+            animate={
+              phase === 0
+                ? { opacity: 0, y: 220, fontSize: "3.5rem" }
+                : phase === 1
+                ? { opacity: 1, y: 0, fontSize: "3.5rem" }
+                : { opacity: 1, y: 0, fontSize: "1.5rem" }
+            }
+            transition={CENTER_TRANS}
+          >
+            Welcome to
+          </motion.p>
 
-        {/* "my portfolio 😏" — semibold italic, Figma sizing */}
-        <motion.p
-          className="absolute whitespace-nowrap"
-          style={{ fontFamily: FONT, fontSize: "3.25rem", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.29, fontStyle: "italic", color: "var(--text-primary)", transition: "color 200ms ease", left: 0, right: 0, textAlign: "center" }}
-          initial={{ opacity: 0, y: 320 }}
-          animate={
-            phase < 2
-              ? { opacity: 0, y: 320 }
-              : { opacity: 1, y: 122 }
-          }
-          transition={CENTER_TRANS}
-        >
-          my portfolio <span style={{ fontStyle: "normal" }}>😏</span>
-        </motion.p>
+          {/* "my portfolio 😏" — semibold italic, Figma sizing */}
+          <motion.p
+            className="whitespace-nowrap"
+            style={{ fontFamily: FONT, fontSize: "3.25rem", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.29, fontStyle: "italic", color: "var(--text-primary)", transition: "color 200ms ease" }}
+            initial={{ opacity: 0, y: 220 }}
+            animate={
+              phase < 2
+                ? { opacity: 0, y: 220 }
+                : { opacity: 1, y: 0 }
+            }
+            transition={CENTER_TRANS}
+          >
+            my portfolio <span style={{ fontStyle: "normal" }}>😏</span>
+          </motion.p>
+        </div>
       </div>
 
     </div>
@@ -459,8 +471,7 @@ export default function Hero() {
             lineHeight: "1",
             color: "var(--text-primary)",
             left: 0,
-            right: 0,
-            textAlign: "center",
+            textAlign: "left",
           }}
           initial={{ opacity: 0, y: 600, fontSize: "62px" }}
           animate={
@@ -487,8 +498,7 @@ export default function Hero() {
             fontStyle: "italic",
             color: "var(--text-primary)",
             left: 0,
-            right: 0,
-            textAlign: "center",
+            textAlign: "left",
           }}
           initial={{ opacity: 0, y: 600 }}
           animate={

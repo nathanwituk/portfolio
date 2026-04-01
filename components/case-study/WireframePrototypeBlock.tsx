@@ -49,11 +49,11 @@ export default function WireframePrototypeBlock({
   return (
     <section
       className="w-full"
-      style={{ backgroundColor: bg, paddingTop: "var(--section-pt)", paddingBottom: "var(--section-pb)", transition: "background-color 200ms ease, color 200ms ease" }}
+      style={{ backgroundColor: bg, paddingTop: "calc(var(--section-pt) + 50px)", paddingBottom: "var(--section-pb)", transition: "background-color 200ms ease, color 200ms ease" }}
     >
       <div
         ref={ref}
-        className="flex flex-col md:flex-row items-center gap-[48px] max-w-[1280px] mx-auto"
+        className="flex flex-col md:flex-row items-start md:items-center gap-[48px] max-w-[1280px] mx-auto"
         style={{ paddingLeft: "clamp(20px, 6.25vw, 80px)", paddingRight: "clamp(20px, 6.25vw, 80px)" }}
       >
         {/* Left: text column */}
@@ -61,8 +61,8 @@ export default function WireframePrototypeBlock({
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="flex flex-col gap-[20px] shrink-0"
-          style={{ width: "clamp(280px, 35vw, 388px)" }}
+          className="flex flex-col gap-[20px] shrink-0 w-full md:w-auto"
+          style={{ maxWidth: "388px" }}
         >
           <motion.div variants={fadeUp} className="flex flex-col gap-[6px]">
             <SectionLabel variant="muted">{sectionLabel}</SectionLabel>
@@ -103,7 +103,7 @@ export default function WireframePrototypeBlock({
           variants={slideIn}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="flex-1 min-w-0 rounded-[16px] overflow-hidden flex items-center justify-center"
+          className="flex-1 min-w-0 self-center md:self-auto rounded-[16px] overflow-hidden flex items-center justify-center"
           style={{
             backgroundColor: "var(--bg-secondary)",
             minHeight: "300px",

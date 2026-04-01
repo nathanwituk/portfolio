@@ -114,7 +114,7 @@ export default function SpeedsterFullPrototype() {
             style={{
               position: "relative",
               width: "100%",
-              maxWidth: "340px",
+              maxWidth: "255px",
               borderRadius: "55px",
               overflow: "hidden",
             }}

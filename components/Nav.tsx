@@ -376,7 +376,7 @@ export default function Nav() {
           </motion.div>
         )}
       </AnimatePresence>
-      <ExplorationProgress />
+      {process.env.NODE_ENV === "development" && <ExplorationProgress />}
     </motion.header>
     </>
   );

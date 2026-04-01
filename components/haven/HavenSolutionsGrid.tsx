@@ -76,84 +76,201 @@ export default function HavenSolutionsGrid() {
         animate={inView ? "visible" : "hidden"}
         className="max-w-[1280px] mx-auto flex flex-col"
         style={{
-          paddingLeft: "clamp(20px, 6.25vw, 80px)",
-          paddingRight: "clamp(20px, 6.25vw, 80px)",
           paddingTop: "calc(var(--section-pt) + 25px)",
           paddingBottom: "calc(var(--section-pb) + 25px)",
           gap: "clamp(16px, 2.5vw, 24px)",
         }}
       >
-        {/* Header row */}
-        <motion.div
-          variants={fadeUp}
-          className="flex flex-col lg:flex-row"
-          style={{ gap: "clamp(10px, 1.5vw, 16px)" }}
-        >
-          <div
-            className="flex-1 flex items-center justify-center"
-            style={{
-              backgroundColor: DARK,
-              borderRadius: "16px",
-              padding: "clamp(14px, 2vw, 20px) clamp(24px, 3vw, 40px)",
-            }}
-          >
-            <p style={{ ...pillLabel, color: "#ffffff" }}>Solutions from Research</p>
-          </div>
-          <div
-            className="lg:w-[30%] flex items-center justify-center"
-            style={{
-              backgroundColor: DARK,
-              borderRadius: "16px",
-              padding: "clamp(14px, 2vw, 20px) clamp(24px, 3vw, 40px)",
-            }}
-          >
-            <p style={{ ...pillLabel, color: "#ffffff" }}>Solutions to Implement</p>
-          </div>
-        </motion.div>
 
-        {/* Cards row */}
-        <div className="flex flex-col lg:flex-row" style={{ gap: "clamp(10px, 1.5vw, 16px)", alignItems: "flex-start" }}>
-          {/* Research cards — 3-column grid */}
-          <div
-            className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            style={{ gap: "clamp(8px, 1.2vw, 12px)" }}
-          >
-            {RESEARCH_CARDS.map((text, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
+        {/* ── Mobile layout ── */}
+        <div className="flex flex-col lg:hidden" style={{ gap: "40px" }}>
+
+          {/* Solutions from Research */}
+          <motion.div variants={fadeUp} className="flex flex-col" style={{ gap: "16px" }}>
+            {/* Header pill */}
+            <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+              <div
                 style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                   backgroundColor: DARK,
-                  borderRadius: "14px",
-                  padding: "clamp(14px, 1.8vw, 18px)",
+                  borderRadius: "20px",
+                  padding: "14px 32px",
                 }}
               >
-                <p style={{ ...cardText, color: "#ffffff", margin: 0 }}>{text}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Solutions to implement cards — 1 column */}
-          <div
-            className="lg:w-[30%] flex flex-col"
-            style={{ gap: "clamp(8px, 1.2vw, 12px)" }}
-          >
-            {SOLUTION_CARDS.map((text, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
+                <p style={{ ...pillLabel, color: "#ffffff", margin: 0 }}>Solutions from Research</p>
+              </div>
+            </div>
+            {/* Horizontal scroll rail */}
+            <div
+              style={{
+                overflowX: "auto",
+                scrollbarWidth: "none",
+                WebkitOverflowScrolling: "touch",
+              }}
+            >
+              <div
                 style={{
-                  backgroundColor: ACCENT,
-                  border: "2px solid #ffffff",
-                  borderRadius: "14px",
-                  padding: "clamp(14px, 1.8vw, 18px)",
+                  display: "flex",
+                  gap: "10px",
+                  paddingLeft: "20px",
+                  paddingRight: "20px",
+                  width: "max-content",
                 }}
               >
-                <p style={{ ...cardText, color: "#ffffff", margin: 0 }}>{text}</p>
-              </motion.div>
-            ))}
+                {RESEARCH_CARDS.map((text, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      width: "300px",
+                      flexShrink: 0,
+                      backgroundColor: DARK,
+                      borderRadius: "20px",
+                      padding: "17px",
+                      boxShadow: "0 0 30px rgba(0,0,0,0.05)",
+                    }}
+                  >
+                    <p style={{ ...cardText, color: "#ffffff", margin: 0 }}>{text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Solutions to Implement */}
+          <motion.div variants={fadeUp} className="flex flex-col" style={{ gap: "16px" }}>
+            {/* Header pill — full width */}
+            <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: DARK,
+                  borderRadius: "20px",
+                  padding: "18px 40px",
+                }}
+              >
+                <p style={{ ...pillLabel, color: "#ffffff", margin: 0 }}>Solutions to Implement</p>
+              </div>
+            </div>
+            {/* Vertical stack — full width */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                paddingLeft: "20px",
+                paddingRight: "20px",
+              }}
+            >
+              {SOLUTION_CARDS.map((text, i) => (
+                <div
+                  key={i}
+                  style={{
+                    backgroundColor: ACCENT,
+                    border: "2px solid #ffffff",
+                    borderRadius: "20px",
+                    padding: "25px",
+                    boxShadow: "0 0 30px rgba(0,0,0,0.05)",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: "1.125rem",
+                      fontWeight: 500,
+                      letterSpacing: "0.02em",
+                      lineHeight: 1.4,
+                      color: "#ffffff",
+                      margin: 0,
+                    }}
+                  >
+                    {text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── Desktop layout ── */}
+        <div className="hidden lg:flex flex-col" style={{ gap: "clamp(16px, 2.5vw, 24px)", paddingLeft: "clamp(20px, 6.25vw, 80px)", paddingRight: "clamp(20px, 6.25vw, 80px)" }}>
+          {/* Header row */}
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-row"
+            style={{ gap: "clamp(10px, 1.5vw, 16px)" }}
+          >
+            <div
+              className="flex-1 flex items-center justify-center"
+              style={{
+                backgroundColor: DARK,
+                borderRadius: "16px",
+                padding: "clamp(14px, 2vw, 20px) clamp(24px, 3vw, 40px)",
+              }}
+            >
+              <p style={{ ...pillLabel, color: "#ffffff" }}>Solutions from Research</p>
+            </div>
+            <div
+              className="lg:w-[30%] flex items-center justify-center"
+              style={{
+                backgroundColor: DARK,
+                borderRadius: "16px",
+                padding: "clamp(14px, 2vw, 20px) clamp(24px, 3vw, 40px)",
+              }}
+            >
+              <p style={{ ...pillLabel, color: "#ffffff" }}>Solutions to Implement</p>
+            </div>
+          </motion.div>
+
+          {/* Cards row */}
+          <div className="flex flex-row" style={{ gap: "clamp(10px, 1.5vw, 16px)", alignItems: "flex-start" }}>
+            {/* Research cards — 3-column grid */}
+            <div
+              className="flex-1 grid grid-cols-3"
+              style={{ gap: "clamp(8px, 1.2vw, 12px)" }}
+            >
+              {RESEARCH_CARDS.map((text, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  style={{
+                    backgroundColor: DARK,
+                    borderRadius: "14px",
+                    padding: "clamp(14px, 1.8vw, 18px)",
+                  }}
+                >
+                  <p style={{ ...cardText, color: "#ffffff", margin: 0 }}>{text}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Solutions to implement cards — 1 column */}
+            <div
+              className="lg:w-[30%] flex flex-col"
+              style={{ gap: "clamp(8px, 1.2vw, 12px)" }}
+            >
+              {SOLUTION_CARDS.map((text, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  style={{
+                    backgroundColor: ACCENT,
+                    border: "2px solid #ffffff",
+                    borderRadius: "14px",
+                    padding: "clamp(14px, 1.8vw, 18px)",
+                  }}
+                >
+                  <p style={{ ...cardText, color: "#ffffff", margin: 0 }}>{text}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
+
       </motion.div>
     </section>
   );

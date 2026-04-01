@@ -59,10 +59,19 @@ html.dark {
 }
 
 html {
-  scroll-behavior: smooth;
   /* Fluid base font size: 16px at 1280px, 18px at 1440px, 20px at 1920px.
      All rem values scale proportionally — the single source of truth for viewport scaling. */
   font-size: clamp(14px, 1.25vw, 20px);
+}
+
+/* Scope smooth scrolling to pointer devices only.
+   On iOS/Android, scroll-behavior: smooth fights the native rubber-band
+   overscroll animation when scrolling past the top, causing a visible
+   freeze-then-snap. Touch devices use native momentum scrolling instead. */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {

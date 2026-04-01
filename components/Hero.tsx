@@ -339,7 +339,7 @@ function MobileHeroText({ phase }: { phase: number }) {
           animate={
             phase < 2
               ? { opacity: 0, y: 320 }
-              : { opacity: 1, y: 132 }
+              : { opacity: 1, y: 122 }
           }
           transition={CENTER_TRANS}
         >
@@ -494,7 +494,7 @@ export default function Hero() {
           animate={
             phase < 2
               ? { opacity: 0, y: 600 }
-              : { opacity: 1, y: 290 }
+              : { opacity: 1, y: 280 }
           }
           transition={CENTER_TRANS}
         >

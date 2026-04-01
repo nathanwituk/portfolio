@@ -307,7 +307,8 @@ function MobileHeroText({ phase }: { phase: number }) {
     <div
       className="flex flex-col items-center justify-center"
       style={{
-        minHeight: "calc(100dvh - 46px - 150px)",
+        paddingTop: "clamp(48px, 10vh, 80px)",
+        paddingBottom: "clamp(48px, 10vh, 80px)",
       }}
     >
       <div

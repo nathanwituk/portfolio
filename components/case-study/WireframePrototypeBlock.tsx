@@ -103,11 +103,10 @@ export default function WireframePrototypeBlock({
           variants={slideIn}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="flex-1 rounded-[16px] overflow-hidden flex items-center justify-center"
+          className="flex-1 min-w-0 rounded-[16px] overflow-hidden flex items-center justify-center"
           style={{
             backgroundColor: "var(--bg-secondary)",
             minHeight: "300px",
-            width: "100%",
           }}
         >
           {embedSrc ? (

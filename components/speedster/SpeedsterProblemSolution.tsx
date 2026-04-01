@@ -29,6 +29,20 @@ function ArrowRightIcon() {
   );
 }
 
+function ArrowDownIcon() {
+  return (
+    <svg width="44" height="44" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+      <path
+        d="M26 12V40M26 40L14 28M26 40L38 28"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function SpeedsterProblemSolution() {
   const sectionRef = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
@@ -45,13 +59,6 @@ export default function SpeedsterProblemSolution() {
   // Shine sweeps left→right across the circle as the arrow flips (peaks at midpoint)
   const shineX = useTransform(scrollYProgress, [0, 0.25, 0.5], ["-120%", "0%", "120%"]);
   const shineOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.65], [0, 0.55, 0.55, 0]);
-
-  // Proposed solution fades in after the arrow finishes flipping
-  const solutionOpacity = useTransform(scrollYProgress, [0.5, 0.8], [0, 1]);
-
-  // Shine continues from the circle and sweeps across the proposed solution text
-  const solutionShineX = useTransform(scrollYProgress, [0.5, 0.72, 0.88], ["-100%", "60%", "220%"]);
-  const solutionShineOpacity = useTransform(scrollYProgress, [0.5, 0.6, 0.82, 0.92], [0, 0.4, 0.4, 0]);
 
   return (
     <section
@@ -76,7 +83,7 @@ export default function SpeedsterProblemSolution() {
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="flex flex-col md:flex-row items-start gap-[40px] md:gap-0"
+          className="flex flex-col md:flex-row items-start gap-0 md:gap-0"
         >
           {/* Problem statement */}
           <motion.div
@@ -110,7 +117,28 @@ export default function SpeedsterProblemSolution() {
             </p>
           </motion.div>
 
-          {/* Center arrow circle — visible on md+ */}
+          {/* Mobile-only: down arrow between sections */}
+          <motion.div
+            variants={fadeUp}
+            className="md:hidden flex items-center justify-center w-full"
+            style={{ padding: "32px 0" }}
+          >
+            <div
+              style={{
+                width: "80px",
+                height: "80px",
+                borderRadius: "50%",
+                backgroundColor: "#ff5d00",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <ArrowDownIcon />
+            </div>
+          </motion.div>
+
+          {/* Desktop-only: center arrow circle */}
           <motion.div
             variants={fadeUp}
             className="hidden md:flex items-center justify-center shrink-0 self-start"
@@ -154,22 +182,7 @@ export default function SpeedsterProblemSolution() {
           <motion.div
             variants={fadeUp}
             className="flex flex-col gap-[12px] flex-1"
-            style={{ opacity: solutionOpacity, position: "relative", overflow: "hidden" }}
           >
-            {/* Shine sweep continuing from the arrow */}
-            <motion.div
-              style={{
-                position: "absolute",
-                top: "-10%",
-                left: "-30%",
-                width: "60%",
-                height: "120%",
-                background: "linear-gradient(105deg, transparent 20%, rgba(255,93,0,0.18) 50%, transparent 80%)",
-                x: solutionShineX,
-                opacity: solutionShineOpacity,
-                pointerEvents: "none",
-              }}
-            />
             <h2
               className="font-normal leading-[1.1]"
               style={{

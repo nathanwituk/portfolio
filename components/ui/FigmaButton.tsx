@@ -92,6 +92,7 @@ interface FigmaButtonProps {
   accentColorHover?: string;
   inkColor?: string;  // color of eye strokes, text, and underline (default: "white")
   external?: boolean;
+  showIcon?: boolean;
 }
 
 export default function FigmaButton({
@@ -102,6 +103,7 @@ export default function FigmaButton({
   accentColorHover = "#838653",
   inkColor = "white",
   external = true,
+  showIcon = true,
 }: FigmaButtonProps) {
   const eyeRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -145,7 +147,7 @@ export default function FigmaButton({
         outline: "none",
       }}
     >
-      <div
+      {showIcon && <div
         ref={eyeRef}
         className="shrink-0 flex items-center justify-center"
         style={{ width: EYE_W, height: EYE_H }}
@@ -223,7 +225,7 @@ export default function FigmaButton({
             transition={{ duration: frame.pupilDur, ease: EASE }}
           />
         </svg>
-      </div>
+      </div>}
 
       <span className="relative">
         {children}

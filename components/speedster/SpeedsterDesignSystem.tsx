@@ -50,7 +50,7 @@ export default function SpeedsterDesignSystem() {
     >
       <div
         ref={ref}
-        className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-[60px]"
+        className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-[30px]"
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
@@ -61,7 +61,7 @@ export default function SpeedsterDesignSystem() {
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="flex flex-col gap-[40px] shrink-0"
+          className="flex flex-col gap-[20px] shrink-0"
           style={{ maxWidth: "440px" }}
         >
           <motion.div variants={fadeUp} className="flex flex-col gap-[6px]">
@@ -113,9 +113,10 @@ export default function SpeedsterDesignSystem() {
           variants={slideIn}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="flex-1 flex gap-[32px] items-start"
+          className="flex-1 min-w-0 overflow-hidden"
           style={{ maxWidth: "580px" }}
         >
+        <div className="flex gap-[32px] items-start" style={{ zoom: 0.9 }}>
           {/* Colors */}
           <div className="flex flex-col gap-[10px]">
             <p style={{ fontSize: "0.75rem", color: "var(--text-secondary)", fontFamily: "var(--font-instrument-sans), sans-serif" }}>Colors</p>
@@ -200,6 +201,7 @@ export default function SpeedsterDesignSystem() {
               <div style={{ height: "20px", borderRadius: "20px", backgroundColor: "rgba(255,255,255,0.15)", width: "80px" }} />
             </div>
           </div>
+        </div>
         </motion.div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import TagPill from "@/components/ui/TagPill";
+import FigmaButton from "@/components/ui/FigmaButton";
 
 const EASE = [0.25, 0, 0, 1] as [number, number, number, number];
 const FONT = "var(--font-instrument-sans), 'Instrument Sans', sans-serif";
@@ -124,6 +125,19 @@ export default function ComposeHero() {
           {TAGS.map((tag) => (
             <TagPill key={tag} color="#4438ca">{tag}</TagPill>
           ))}
+        </motion.div>
+
+        {/* Desktop Prototype button */}
+        <motion.div variants={fadeUp}>
+          <FigmaButton
+            href="/work/compose/prototype"
+            external={false}
+            showIcon={false}
+            accentColor="#4438ca"
+            accentColorHover="#3730a3"
+          >
+            Desktop Prototype
+          </FigmaButton>
         </motion.div>
       </motion.div>
       </div>

@@ -92,12 +92,91 @@ export default function SpeedsterResearchOverview() {
         transition: "background-color 200ms ease",
       }}
     >
+      {/* ── Mobile: horizontal scroll rail ── */}
       <motion.div
         ref={ref}
         variants={stagger}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        className="max-w-[1280px] mx-auto flex flex-col md:flex-row gap-[50px] items-stretch justify-center"
+        className="md:hidden overflow-x-auto"
+        style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+      >
+        <div
+          className="flex items-stretch"
+          style={{ gap: "16px", paddingLeft: "20px", paddingRight: "20px", width: "max-content" }}
+        >
+          {CARDS.map((card, i) => (
+            <motion.div
+              key={i}
+              variants={fadeUp}
+              className="flex flex-col gap-[40px] shrink-0 rounded-[20px]"
+              style={{
+                width: "72vw",
+                backgroundColor: "var(--bg-secondary)",
+                padding: "21px 29px",
+                transition: "background-color 200ms ease",
+              }}
+            >
+              {/* Label + icon + title */}
+              <div className="flex flex-col gap-[10px]">
+                <p
+                  className="font-semibold leading-none uppercase"
+                  style={{
+                    fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                    fontSize: "0.6875rem",
+                    letterSpacing: "0.08em",
+                    color: "var(--text-tertiary)",
+                    transition: "color 200ms ease",
+                  }}
+                >
+                  IDEATION
+                </p>
+                <div className="flex items-center gap-[10px]">
+                  {card.icon}
+                  <h3
+                    className="font-normal leading-none whitespace-nowrap"
+                    style={{
+                      fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                      fontSize: "1.875rem",
+                      letterSpacing: "-0.03em",
+                      color: "var(--text-primary)",
+                      transition: "color 200ms ease",
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Bullets */}
+              <ul className="flex flex-col gap-0 list-disc" style={{ paddingLeft: "1.25rem" }}>
+                {card.bullets.map((b, j) => (
+                  <li
+                    key={j}
+                    className="font-normal leading-[1.4]"
+                    style={{
+                      fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                      fontSize: "0.6875rem",
+                      letterSpacing: "0.02em",
+                      color: "var(--text-primary)",
+                      transition: "color 200ms ease",
+                    }}
+                  >
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* ── Desktop: original flex row ── */}
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        className="hidden md:flex max-w-[1280px] mx-auto flex-row gap-[50px] items-stretch justify-center"
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",

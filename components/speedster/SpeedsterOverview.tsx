@@ -25,7 +25,7 @@ export default function SpeedsterOverview() {
       style={{
         backgroundColor: "var(--bg-primary)",
         paddingTop: "var(--section-pt)",
-        paddingBottom: "var(--section-pb)",
+        paddingBottom: "calc(var(--section-pb) * 1.2)",
         transition: "background-color 200ms ease",
       }}
     >

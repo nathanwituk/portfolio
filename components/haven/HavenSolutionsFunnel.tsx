@@ -356,35 +356,198 @@ export default function HavenSolutionsFunnel() {
     offset: ["start start", "end end"],
   });
 
-  if (prefersReduced) return <FallbackLayout />;
-
   return (
-    <section
-      ref={sectionRef}
-      style={{ backgroundColor: "#ffffff", height: "360vh", position: "relative" }}
-    >
-      {/* Sticky full-viewport frame */}
-      <div
+    <>
+      {/* ── Mobile static layout (no scroll animation) ── */}
+      <section
+        className="lg:hidden"
         style={{
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-          overflow: "hidden",
+          backgroundColor: "#ffffff",
+          paddingTop: "calc(var(--section-pt) + 25px)",
+          paddingBottom: "calc(var(--section-pb) + 25px)",
         }}
       >
-        <ResearchLabel progress={scrollYProgress} />
+        <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
 
-        {RESEARCH_CARDS.map((text, i) => (
-          <ScatterCard
-            key={i}
-            text={text}
-            progress={scrollYProgress}
-            data={CARD_DATA[i]}
-          />
-        ))}
+          {/* Solutions from Research */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: DARK,
+                  borderRadius: "20px",
+                  padding: "14px 32px",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: "0.6875rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase" as const,
+                    color: "#ffffff",
+                    margin: 0,
+                  }}
+                >
+                  Solutions from Research
+                </p>
+              </div>
+            </div>
+            <div
+              style={{
+                overflowX: "auto",
+                scrollbarWidth: "none" as const,
+                WebkitOverflowScrolling: "touch" as const,
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  paddingLeft: "20px",
+                  paddingRight: "20px",
+                  width: "max-content",
+                }}
+              >
+                {RESEARCH_CARDS.map((text, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      width: "300px",
+                      flexShrink: 0,
+                      backgroundColor: DARK,
+                      borderRadius: "20px",
+                      padding: "17px",
+                      boxShadow: "0 0 30px rgba(0,0,0,0.05)",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontFamily: FONT,
+                        fontSize: "0.875rem",
+                        fontWeight: 400,
+                        letterSpacing: "0.02em",
+                        lineHeight: 1.4,
+                        color: "#ffffff",
+                        margin: 0,
+                      }}
+                    >
+                      {text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
 
-        <SolutionsLayer progress={scrollYProgress} />
-      </div>
-    </section>
+          {/* Solutions to Implement */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: DARK,
+                  borderRadius: "20px",
+                  padding: "18px 40px",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: "0.6875rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase" as const,
+                    color: "#ffffff",
+                    margin: 0,
+                  }}
+                >
+                  Solutions to Implement
+                </p>
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                paddingLeft: "20px",
+                paddingRight: "20px",
+              }}
+            >
+              {SOLUTION_CARDS.map((text, i) => (
+                <div
+                  key={i}
+                  style={{
+                    backgroundColor: ACCENT,
+                    border: "2px solid #ffffff",
+                    borderRadius: "20px",
+                    padding: "25px",
+                    boxShadow: "0 0 30px rgba(0,0,0,0.05)",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: "1.25rem",
+                      fontWeight: 500,
+                      letterSpacing: "0.02em",
+                      lineHeight: 1.4,
+                      color: "#ffffff",
+                      margin: 0,
+                    }}
+                  >
+                    {text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── Desktop layout ── */}
+      {prefersReduced ? (
+        <div className="hidden lg:block">
+          <FallbackLayout />
+        </div>
+      ) : (
+        <section
+          ref={sectionRef}
+          className="hidden lg:block"
+          style={{ backgroundColor: "#ffffff", height: "360vh", position: "relative" }}
+        >
+          {/* Sticky full-viewport frame */}
+          <div
+            style={{
+              position: "sticky",
+              top: 0,
+              height: "100vh",
+              overflow: "hidden",
+            }}
+          >
+            <ResearchLabel progress={scrollYProgress} />
+
+            {RESEARCH_CARDS.map((text, i) => (
+              <ScatterCard
+                key={i}
+                text={text}
+                progress={scrollYProgress}
+                data={CARD_DATA[i]}
+              />
+            ))}
+
+            <SolutionsLayer progress={scrollYProgress} />
+          </div>
+        </section>
+      )}
+    </>
   );
 }

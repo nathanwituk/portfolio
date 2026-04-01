@@ -10,9 +10,6 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
 };
 
-// Valid 7 days — replace with local asset if expired
-const RILEY_IMG = "https://www.figma.com/api/mcp/asset/6296fea2-d813-40f6-9897-772791eaf3a4";
-
 const PILLS = ["No Job", "18 years old", "Finance Major", "Alpha Chi Omega"];
 
 const GRID_ITEMS = [
@@ -77,32 +74,13 @@ export default function SafeRidePersonaChart() {
             transition: "background-color 200ms ease",
           }}
         >
-          {/* Top: photo + name + pills */}
+          {/* Top: name + pills */}
           <div
-            className="flex flex-col md:flex-row items-start md:items-center gap-[28px] md:gap-[60px]"
             style={{
               padding: "40px clamp(20px, 4vw, 60px)",
               borderBottom: "1px solid color-mix(in srgb, var(--nav-border) 50%, transparent)",
             }}
           >
-            {/* Photo */}
-            <div
-              className="shrink-0"
-              style={{
-                width: "120px",
-                height: "120px",
-                borderRadius: "20px",
-                overflow: "hidden",
-              }}
-            >
-              <img
-                src={RILEY_IMG}
-                alt="Riley Thompson"
-                style={{ width: "100%", height: "168%", objectFit: "cover", objectPosition: "top", marginTop: "-40%" }}
-              />
-            </div>
-
-            {/* Name + pills */}
             <div className="flex flex-col gap-[18px]">
               <div className="flex flex-col gap-[6px]">
                 <p

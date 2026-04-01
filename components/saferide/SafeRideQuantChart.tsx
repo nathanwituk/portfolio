@@ -84,8 +84,8 @@ export default function SafeRideQuantChart() {
       className="w-full"
       style={{
         backgroundColor: "var(--bg-primary)",
-        paddingTop: "var(--section-pt)",
-        paddingBottom: "var(--section-pb)",
+        paddingTop: "30px",
+        paddingBottom: "calc(var(--section-pb) + 25px)",
         transition: "background-color 200ms ease",
       }}
     >

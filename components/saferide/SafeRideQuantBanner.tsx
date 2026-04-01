@@ -26,8 +26,8 @@ export default function SafeRideQuantBanner() {
         animate={inView ? "visible" : "hidden"}
         className="max-w-[1280px] mx-auto flex flex-col gap-[6px] justify-center"
         style={{
-          paddingTop: "50px",
-          paddingBottom: "50px",
+          paddingTop: "75px",
+          paddingBottom: "30px",
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
           minHeight: "120px",

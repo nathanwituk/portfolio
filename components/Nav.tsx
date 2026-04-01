@@ -123,6 +123,7 @@ const navLinks = [
     icon: HavenIcon,
     hoverColor: "#9747ff",
     comingSoon: false,
+    dimmed: true,
   },
 ];
 

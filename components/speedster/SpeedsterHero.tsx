@@ -28,7 +28,7 @@ export default function SpeedsterHero() {
     <section
       className="w-full flex flex-col lg:flex-row flex-wrap items-center justify-between gap-y-[46px] px-5 md:px-[80px]"
       style={{
-        paddingTop: "110px",
+        paddingTop: "70px",
         paddingBottom: "110px",
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease",
@@ -54,7 +54,7 @@ export default function SpeedsterHero() {
           playsInline
           style={{
             position: "absolute",
-            top: "30%",
+            top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             width: "200%",

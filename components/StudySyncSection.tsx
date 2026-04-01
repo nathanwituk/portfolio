@@ -29,110 +29,105 @@ export default function StudySyncSection() {
   return (
     <section
       id="study-sync"
+      ref={ref}
       className="lg:hidden w-full"
       style={{
         backgroundColor: "var(--bg-primary)",
         transition: "background-color 200ms ease, color 200ms ease",
       }}
     >
-      <div
-        ref={ref}
-        className="flex flex-col lg:flex-row items-center justify-between w-full mx-auto px-5 md:px-[80px] py-12 lg:py-[40px]"
-        style={{ maxWidth: "1280px", gap: "46px" }}
+      {/* ── Video — flush to left edge, no horizontal padding ── */}
+      <motion.div
+        variants={videoVariant}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        className="w-full"
       >
-        {/* ── Left: text — below video on mobile, left on desktop ── */}
-        <motion.div
-          variants={textStagger}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="flex flex-col order-last lg:order-first"
-          style={{ flex: "1 0 0", gap: "37px", minWidth: "0" }}
+        <div
+          className="relative overflow-hidden w-full"
+          style={{ aspectRatio: "490 / 424", borderRadius: "0 7.344px 7.344px 0" }}
         >
-          {/* Category + Title */}
-          <motion.div variants={fadeUp} className="flex flex-col" style={{ gap: "6px" }}>
-            <p
-              className="font-semibold uppercase"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "0.6875rem",
-                letterSpacing: "0.08em",
-                lineHeight: "1.1",
-                color: "var(--text-tertiary)",
-              }}
-            >
-              User Interface &amp; Experience
-            </p>
-            <p
-              className="font-normal"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)",
-                letterSpacing: "-1.11px",
-                lineHeight: "1",
-                color: "var(--text-primary)",
-                transition: "color 200ms ease",
-              }}
-            >
-              Study Sync Dashboard
-            </p>
-          </motion.div>
+          <video
+            src={PROJECT_ASSETS.studySyncVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+      </motion.div>
 
-          {/* Description */}
-          <motion.div variants={fadeUp}>
-            <p
-              className="font-normal"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "14px",
-                letterSpacing: "0.28px",
-                lineHeight: "1.4",
-                color: "var(--text-primary)",
-                transition: "color 200ms ease",
-              }}
-            >
-              Designing an intuitive quick-glance dashboard for college students
-              who have trouble tracking and managing their academic schedule and
-              workload.
-            </p>
-          </motion.div>
-
-          {/* CTA */}
-          <motion.div variants={fadeUp}>
-            <FigmaButton
-              href="/work/studysync"
-              external={false}
-              accentColor="#b2e639"
-              accentColorHover="#c5f53f"
-              inkColor="#000000"
-            >
-              See Project
-            </FigmaButton>
-          </motion.div>
-        </motion.div>
-
-        {/* ── Right: video — above text on mobile, right on desktop ── */}
-        <motion.div
-          variants={videoVariant}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="shrink-0 order-first lg:order-last w-full lg:w-auto"
-        >
-          <div
-            className="relative overflow-hidden w-full lg:w-[490px]"
-            style={{ aspectRatio: "490 / 424", borderRadius: "7.344px" }}
+      {/* ── Text — padded to match the rest of the page ── */}
+      <motion.div
+        variants={textStagger}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        className="flex flex-col px-5 md:px-[80px] pt-8 pb-12"
+        style={{ gap: "37px" }}
+      >
+        {/* Category + Title */}
+        <motion.div variants={fadeUp} className="flex flex-col" style={{ gap: "6px" }}>
+          <p
+            className="font-semibold uppercase"
+            style={{
+              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+              fontSize: "0.6875rem",
+              letterSpacing: "0.08em",
+              lineHeight: "1.1",
+              color: "var(--text-tertiary)",
+            }}
           >
-            <video
-              src={PROJECT_ASSETS.studySyncVideo}
-              autoPlay
-              muted
-              loop
-              playsInline
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
+            User Interface &amp; Experience
+          </p>
+          <p
+            className="font-normal"
+            style={{
+              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+              fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)",
+              letterSpacing: "-1.11px",
+              lineHeight: "1",
+              color: "var(--text-primary)",
+              transition: "color 200ms ease",
+            }}
+          >
+            Study Sync Dashboard
+          </p>
         </motion.div>
-      </div>
+
+        {/* Description */}
+        <motion.div variants={fadeUp}>
+          <p
+            className="font-normal"
+            style={{
+              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+              fontSize: "14px",
+              letterSpacing: "0.28px",
+              lineHeight: "1.4",
+              color: "var(--text-primary)",
+              transition: "color 200ms ease",
+            }}
+          >
+            Designing an intuitive quick-glance dashboard for college students
+            who have trouble tracking and managing their academic schedule and
+            workload.
+          </p>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div variants={fadeUp}>
+          <FigmaButton
+            href="/work/studysync"
+            external={false}
+            accentColor="#b2e639"
+            accentColorHover="#c5f53f"
+            inkColor="#000000"
+          >
+            View Project
+          </FigmaButton>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

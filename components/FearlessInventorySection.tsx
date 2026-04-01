@@ -117,7 +117,7 @@ export default function FearlessInventorySection() {
               accentColor="#6f7142"
               accentColorHover="#838653"
             >
-              See Project
+              View Project
             </FigmaButton>
           </motion.div>
 

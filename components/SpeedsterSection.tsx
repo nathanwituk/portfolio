@@ -133,7 +133,7 @@ export default function SafeRideSection() {
                 accentColor="#6363ff"
                 accentColorHover="#4f4fcc"
               >
-                See Project
+                View Project
               </FigmaButton>
             </motion.div>
           </div>

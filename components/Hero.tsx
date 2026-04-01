@@ -178,7 +178,7 @@ function FoldPanel({
                 accentColorHover={panel.accentColorHover}
                 inkColor={panel.inkColor}
               >
-                See Project
+                View Project
               </FigmaButton>
             </div>
           </div>
@@ -288,7 +288,7 @@ function MobileFoldPanel({
               accentColorHover={panel.accentColorHover}
               inkColor={panel.inkColor}
             >
-              See Project
+              View Project
             </FigmaButton>
           </div>
         </motion.div>

@@ -113,6 +113,7 @@ export default function WireframePrototypeBlock({
           {embedSrc ? (
             <iframe
               src={embedSrc}
+              loading="lazy"
               style={{ border: "1px solid rgba(0,0,0,0.1)", width: "100%", height: "450px", display: "block" }}
               allowFullScreen
             />

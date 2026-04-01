@@ -280,6 +280,7 @@ export default function BrandingSection({
                 alt="Branding system"
                 width={svgWidth}
                 height={svgHeight}
+                loading="lazy"
                 style={{ display: "block", height: `${svgHeight}px`, width: `${svgWidth}px`, maxWidth: "none" }}
               />
             ) : (

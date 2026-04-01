@@ -96,37 +96,38 @@ export default function StudySyncSection() {
           </p>
         </motion.div>
 
-        {/* Description */}
-        <motion.div variants={fadeUp}>
-          <p
-            className="font-normal"
-            style={{
-              fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-              fontSize: "14px",
-              letterSpacing: "0.28px",
-              lineHeight: "1.4",
-              color: "var(--text-primary)",
-              transition: "color 200ms ease",
-            }}
-          >
-            Designing an intuitive quick-glance dashboard for college students
-            who have trouble tracking and managing their academic schedule and
-            workload.
-          </p>
-        </motion.div>
+        {/* Description + CTA */}
+        <div className="flex flex-col" style={{ gap: "22px" }}>
+          <motion.div variants={fadeUp}>
+            <p
+              className="font-normal"
+              style={{
+                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                fontSize: "14px",
+                letterSpacing: "0.28px",
+                lineHeight: "1.4",
+                color: "var(--text-primary)",
+                transition: "color 200ms ease",
+              }}
+            >
+              Designing an intuitive quick-glance dashboard for college students
+              who have trouble tracking and managing their academic schedule and
+              workload.
+            </p>
+          </motion.div>
 
-        {/* CTA */}
-        <motion.div variants={fadeUp}>
-          <FigmaButton
-            href="/work/studysync"
-            external={false}
-            accentColor="#b2e639"
-            accentColorHover="#c5f53f"
-            inkColor="#000000"
-          >
-            View Project
-          </FigmaButton>
-        </motion.div>
+          <motion.div variants={fadeUp}>
+            <FigmaButton
+              href="/work/studysync"
+              external={false}
+              accentColor="#b2e639"
+              accentColorHover="#c5f53f"
+              inkColor="#000000"
+            >
+              View Project
+            </FigmaButton>
+          </motion.div>
+        </div>
       </motion.div>
     </section>
   );

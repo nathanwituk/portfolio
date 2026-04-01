@@ -85,41 +85,41 @@ export default function FearlessInventorySection() {
             </p>
           </motion.div>
 
-          {/* Description — 14px, positive tracking +0.28px, leading 1.4
-              "should have" is bold within the paragraph */}
-          <motion.div variants={fadeUp}>
-            <p
-              className="font-normal"
-              style={{
-                fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
-                fontSize: "14px",
-                letterSpacing: "0.28px",
-                lineHeight: "1.4",
-                color: "var(--text-primary)",
-                transition: "color 200ms ease",
-              }}
-            >
-              This project focuses on designing a digital inventory tool that
-              helps warehouse workers quickly compare what the system says they{" "}
-              <strong className="font-bold">should have</strong> with what&apos;s
-              actually sitting on the shelf. The goal is to make the inventory
-              process faster, reduce mistakes, and create a clear workflow for
-              recording counts and updating product inventory for the coffee
-              warehouse.
-            </p>
-          </motion.div>
+          {/* Description + CTA */}
+          <div className="flex flex-col" style={{ gap: "22px" }}>
+            <motion.div variants={fadeUp}>
+              <p
+                className="font-normal"
+                style={{
+                  fontFamily: "var(--font-instrument-sans), 'Instrument Sans', sans-serif",
+                  fontSize: "14px",
+                  letterSpacing: "0.28px",
+                  lineHeight: "1.4",
+                  color: "var(--text-primary)",
+                  transition: "color 200ms ease",
+                }}
+              >
+                This project focuses on designing a digital inventory tool that
+                helps warehouse workers quickly compare what the system says they{" "}
+                <strong className="font-bold">should have</strong> with what&apos;s
+                actually sitting on the shelf. The goal is to make the inventory
+                process faster, reduce mistakes, and create a clear workflow for
+                recording counts and updating product inventory for the coffee
+                warehouse.
+              </p>
+            </motion.div>
 
-          {/* CTA */}
-          <motion.div variants={fadeUp}>
-            <FigmaButton
-              href="/work/fearless-inventory"
-              external={false}
-              accentColor="#6f7142"
-              accentColorHover="#838653"
-            >
-              View Project
-            </FigmaButton>
-          </motion.div>
+            <motion.div variants={fadeUp}>
+              <FigmaButton
+                href="/work/fearless-inventory"
+                external={false}
+                accentColor="#6f7142"
+                accentColorHover="#838653"
+              >
+                View Project
+              </FigmaButton>
+            </motion.div>
+          </div>
 
         </motion.div>
 

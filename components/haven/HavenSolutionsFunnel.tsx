@@ -316,8 +316,8 @@ function FallbackLayout() {
           maxWidth: "1280px", margin: "0 auto",
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
-          paddingTop: "var(--section-pt)",
-          paddingBottom: "var(--section-pb)",
+          paddingTop: "calc(var(--section-pt) + 25px)",
+          paddingBottom: "calc(var(--section-pb) + 25px)",
           display: "flex", flexDirection: "column", gap: "clamp(14px, 2vw, 20px)",
         }}
       >

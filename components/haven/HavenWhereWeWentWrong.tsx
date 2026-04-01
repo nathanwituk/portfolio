@@ -38,8 +38,8 @@ export default function HavenWhereWeWentWrong() {
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
-          paddingTop: "var(--section-pt)",
-          paddingBottom: "var(--section-pb)",
+          paddingTop: "calc(var(--section-pt) + 25px)",
+          paddingBottom: "calc(var(--section-pb) + 25px)",
           gap: "clamp(20px, 2.5vw, 32px)",
         }}
       >

@@ -39,8 +39,8 @@ export default function HavenCompetition() {
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
-          paddingTop: "var(--section-pt)",
-          paddingBottom: "var(--section-pb)",
+          paddingTop: "calc(var(--section-pt) + 25px)",
+          paddingBottom: "calc(var(--section-pb) + 25px)",
           gap: "clamp(24px, 3.5vw, 48px)",
         }}
       >

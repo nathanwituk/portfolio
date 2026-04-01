@@ -31,8 +31,8 @@ export default function HavenHero() {
         style={{
           paddingLeft: "clamp(20px, 6.25vw, 80px)",
           paddingRight: "clamp(20px, 6.25vw, 80px)",
-          paddingTop: "var(--section-pt)",
-          paddingBottom: "clamp(20px, 2.5vw, 32px)",
+          paddingTop: "calc(var(--section-pt) + 25px)",
+          paddingBottom: "calc(clamp(20px, 2.5vw, 32px) + 25px)",
           gap: "clamp(32px, 5vw, 80px)",
         }}
       >

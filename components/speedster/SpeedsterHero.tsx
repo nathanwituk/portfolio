@@ -42,26 +42,24 @@ export default function SpeedsterHero() {
         className="shrink-0 w-full lg:w-[520px]"
         style={{ height: "600px", position: "relative", overflow: "hidden" }}
       >
-        {/* Inner div is 200% wide, offset left by 50% → crops exactly
-            25% from each side, showing only the center 50% of the video. */}
-        <div
+        {/* width: 200% + translateX(-25%) crops 25% from each side,
+            showing only the center 50% of the video. Transform-based
+            crop is GPU-composited and renders reliably on mobile Safari
+            unlike negative absolute positioning. */}
+        <video
+          src={PROJECT_ASSETS.speedsterHeroVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
           style={{
-            position: "absolute",
-            top: 0,
-            left: "-50%",
+            display: "block",
             width: "200%",
             height: "100%",
+            objectFit: "cover",
+            transform: "translateX(-25%)",
           }}
-        >
-          <video
-            src={PROJECT_ASSETS.speedsterHeroVideo}
-            autoPlay
-            loop
-            muted
-            playsInline
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        </div>
+        />
       </motion.div>
 
       {/* Text */}

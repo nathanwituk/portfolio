@@ -39,8 +39,8 @@ export default function SpeedsterHero() {
         variants={slideIn}
         initial="hidden"
         animate="visible"
-        className="shrink-0 w-full lg:w-[520px]"
-        style={{ height: "600px", position: "relative", overflow: "hidden" }}
+        className="shrink-0 w-full lg:w-[442px]"
+        style={{ height: "510px", position: "relative", overflow: "hidden" }}
       >
         {/* Anchored to center: left:50% + translateX(-50%) aligns the
             element's midpoint with the container's midpoint, then

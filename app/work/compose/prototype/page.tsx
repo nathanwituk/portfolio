@@ -3,18 +3,18 @@
 import { useState, useEffect, useRef } from "react";
 
 // ── Nav icons (local — permanent) ─────────────────────────────────────────
-const IMG_MAIN_DASH     = "/images/compose/icons/main-dash.png";
-const IMG_PROJECTS      = "/images/compose/icons/project.png";
-const IMG_PROFILE       = "/images/compose/icons/profile.png";
-const IMG_SETTINGS      = "/images/compose/icons/settings.png";
-const IMG_PLUS_NEW      = "/images/compose/icons/plus.png";
-const IMG_PLUS          = "/images/compose/icons/plus.png";
-const IMG_PLUS_TILE     = "/images/compose/icons/plus.png";
-const IMG_ADD_ICON      = "/images/compose/icons/plus.png";
-const IMG_PLUS_CIRCLE   = "/images/compose/icons/plus.png";
+const IMG_MAIN_DASH     = "/images/compose/icons/main-dash.svg";
+const IMG_PROJECTS      = "/images/compose/icons/project.svg";
+const IMG_PROFILE       = "/images/compose/icons/profile.svg";
+const IMG_SETTINGS      = "/images/compose/icons/settings.svg";
+const IMG_PLUS_NEW      = "/images/compose/icons/plus.svg";
+const IMG_PLUS          = "/images/compose/icons/plus.svg";
+const IMG_PLUS_TILE     = "/images/compose/icons/plus.svg";
+const IMG_ADD_ICON      = "/images/compose/icons/plus.svg";
+const IMG_PLUS_CIRCLE   = "/images/compose/icons/plus.svg";
 // ── Figma asset URLs (valid 7 days — replace if stale) ────────────────────
-const IMG_GOOGLE        = "https://www.figma.com/api/mcp/asset/be182a81-d2c1-4fa6-a5c8-3b1d5b2449a1";
-const IMG_GOOGLE_NEW    = "https://www.figma.com/api/mcp/asset/f0bbb72b-906b-4209-9874-a49159f83c78";
+const IMG_GOOGLE        = "/images/compose/icons/google-logo.svg";
+const IMG_GOOGLE_NEW    = "/images/compose/icons/google-logo.svg";
 const IMG_UPGRADE_NEW   = "https://www.figma.com/api/mcp/asset/35ae6aa9-81bb-43bc-b1d4-9b17b46a2994";
 const IMG_HISTORY_RND   = "https://www.figma.com/api/mcp/asset/ac8fa52e-436a-4f6c-ae8b-b7cf2ee46e55";
 const IMG_PROJECTS_LINE = "https://www.figma.com/api/mcp/asset/a1543df7-078e-4e17-a3d0-41113e95804f";
@@ -25,16 +25,16 @@ const IMG_CARET_DOWN    = "https://www.figma.com/api/mcp/asset/5804cbb2-1d1e-47f
 const IMG_LOADING_ICON  = "https://www.figma.com/api/mcp/asset/c3522668-4551-40e3-b2a2-4088f2f4de07";
 const IMG_LOGOUT_RND    = "https://www.figma.com/api/mcp/asset/45804497-5413-4877-ab3d-aed7e33e75ce";
 const IMG_PROFILE_ICON  = "https://www.figma.com/api/mcp/asset/becd4ada-7f28-4c43-9ac6-94616e9edba0";
-const IMG_BAND_LOGO_ED  = "https://www.figma.com/api/mcp/asset/b6149e63-fca2-49ae-868d-e01b0d565db9";
+const IMG_BAND_LOGO_ED  = "/images/compose/icons/band-logo.png";
 const IMG_DIVIDER_LINE  = "https://www.figma.com/api/mcp/asset/32185413-237f-4dbc-bd8e-cfe5eb3b2011";
-const IMG_APPLE_LOGO    = "https://www.figma.com/api/mcp/asset/e1382b42-356a-4dea-bf20-0cf7044a3dc3";
+const IMG_APPLE_LOGO    = "/images/compose/icons/apple-logo.svg";
 const IMG_EDIT_BTN_ICON = "https://www.figma.com/api/mcp/asset/7ce5aaba-ceaa-4020-a6a0-ae0545b2af43";
 const IMG_PROJECTS_TILE = "https://www.figma.com/api/mcp/asset/0232f7d4-083b-47b9-b907-e6b4f14abee9";
 const IMG_HISTORY       = "https://www.figma.com/api/mcp/asset/944e33f1-faeb-4259-b9b1-2a08904ae5e2";
 const IMG_LOGOUT        = "https://www.figma.com/api/mcp/asset/2ac9ac49-2888-4ec7-83fc-81a01d1f84dc";
 const IMG_UPGRADE       = "https://www.figma.com/api/mcp/asset/c29709ce-70a2-40b7-b222-d6ebfc183441";
 const IMG_EDIT          = "https://www.figma.com/api/mcp/asset/b169f7f2-9d1d-466b-b196-ec583cdcdfd7";
-const IMG_BAND_LOGO     = "https://www.figma.com/api/mcp/asset/83df456c-5f0a-482a-88fe-fffd5659a8b9";
+const IMG_BAND_LOGO     = "/images/compose/icons/band-logo.png";
 const IMG_CALENDAR      = "https://www.figma.com/api/mcp/asset/b0b10f69-f24d-4d14-91f0-c8f4772789b9";
 const IMG_DUPLICATE     = "https://www.figma.com/api/mcp/asset/03875553-d699-463c-be2d-56ade500f231";
 // Field category icons
@@ -1329,32 +1329,9 @@ function EditorScreen({
 
                 {/* Overview card */}
                 <div style={{ backgroundColor: "#f1f5f9", borderRadius: 12, padding: "20px 20px 16px" }}>
-                  {/* Logo + title row */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 14 }}>
-                    <div style={{ flexShrink: 0 }}>
-                      <input type="file" ref={logoInput} accept="image/*" style={{ display: "none" }} onChange={handleLogoUpload} />
-                      <img
-                        src={event.logoUrl ?? IMG_BAND_LOGO_ED}
-                        alt="Logo"
-                        onClick={() => logoInput.current?.click()}
-                        title="Click to replace logo"
-                        style={{ width: 60, height: 60, objectFit: "contain", cursor: "pointer", borderRadius: 8, border: "2px dashed transparent", transition: "border-color 150ms ease" }}
-                        onMouseEnter={e => (e.currentTarget.style.borderColor = ACCENT)}
-                        onMouseLeave={e => (e.currentTarget.style.borderColor = "transparent")}
-                      />
-                    </div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ display: "flex", flexDirection: "column" }}>
-                        <input
-                          type="text" value={event.title}
-                          onChange={e => updField("title", e.target.value)}
-                          onFocus={() => triggerHighlight("hero")}
-                          placeholder="Event title"
-                          style={{ fontFamily: ROBOTO, fontWeight: 600, fontSize: 20, color: "#0f172a", background: "none", border: "none", outline: "none", width: "100%", padding: 0 }}
-                        />
-                        <span style={{ fontFamily: ROBOTO, fontSize: 12, color: "#374151", opacity: 0.8, paddingTop: 2 }}>Event Title</span>
-                      </div>
-                    </div>
+                  {/* Card header */}
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+                    <span style={{ fontFamily: ROBOTO, fontWeight: 600, fontSize: 13, color: "#64748b", letterSpacing: "0.05em", textTransform: "uppercase" as const }}>Event Overview</span>
                     <button
                       onClick={() => duplicateEventById(activeId)}
                       style={{ display: "flex", alignItems: "center", gap: 6, backgroundColor: "#fff", border: "1px solid #cbd5e1", borderRadius: 100, padding: "5px 10px", cursor: "pointer", flexShrink: 0 }}
@@ -1364,15 +1341,33 @@ function EditorScreen({
                     </button>
                   </div>
 
-                  {/* Subtitle / description / time / location / programTitle */}
-                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap" as const }}>
-                    <TxtInput value={event.subtitle}     onChange={v => updField("subtitle", v)}     onFocus={() => triggerHighlight("hero")} placeholder="The Lawrence High School Band Presents," label="Subtitle" />
-                    <TxtInput value={event.description}  onChange={v => updField("description", v)}  onFocus={() => triggerHighlight("hero")} placeholder="Tagline or description" label="Tagline" />
-                    <div style={{ display: "flex", gap: 10, width: "100%" }}>
-                      <TxtInput value={event.time}       onChange={v => updField("time", v)}         onFocus={() => triggerHighlight("hero")} placeholder="7:30 PM" label="Time" />
-                      <TxtInput value={event.location}   onChange={v => updField("location", v)}     onFocus={() => triggerHighlight("hero")} placeholder="Venue / location" label="Location" />
+                  {/* Fields in order */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                    <TxtInput value={event.title}       onChange={v => updField("title", v)}       onFocus={() => triggerHighlight("hero")} placeholder="February Concert"                      label="Event Title" />
+                    <TxtInput value={event.subtitle}    onChange={v => updField("subtitle", v)}    onFocus={() => triggerHighlight("hero")} placeholder="The Lawrence High School Band Presents," label="School Presenting Title" />
+                    <TxtInput value={event.description} onChange={v => updField("description", v)} onFocus={() => triggerHighlight("hero")} placeholder="Spring Season"                          label="Subtitle" />
+                    <div style={{ display: "flex", gap: 10 }}>
+                      <TxtInput value={event.time}     onChange={v => updField("time", v)}     onFocus={() => triggerHighlight("hero")} placeholder="7:30 PM"         label="Time" />
+                      <TxtInput value={event.location} onChange={v => updField("location", v)} onFocus={() => triggerHighlight("hero")} placeholder="Venue / location" label="Location" />
                     </div>
-                    <TxtInput value={event.programTitle} onChange={v => updField("programTitle", v)} onFocus={() => triggerHighlight("hero")} placeholder="Program" label="Program Title (shown on mobile)" />
+
+                    {/* Upload file button */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      <span style={{ fontFamily: ROBOTO, fontSize: 11, fontWeight: 500, color: "#64748b", letterSpacing: "0.01em" }}>Program Cover / Logo</span>
+                      <input type="file" ref={logoInput} accept=".png,.jpg,.jpeg,.webp,.gif,image/*" style={{ display: "none" }} onChange={handleLogoUpload} />
+                      <button
+                        onClick={() => logoInput.current?.click()}
+                        style={{ display: "flex", alignItems: "center", gap: 10, backgroundColor: "#fff", border: "1.5px dashed #cbd5e1", borderRadius: 8, padding: "10px 14px", cursor: "pointer", width: "100%", boxSizing: "border-box" as const }}
+                      >
+                        {event.logoUrl
+                          ? <img src={event.logoUrl} alt="" style={{ width: 32, height: 32, objectFit: "contain", borderRadius: 4, flexShrink: 0 }} />
+                          : <img src={IMG_PLUS} alt="" style={{ width: 14, height: 14, opacity: 0.5, flexShrink: 0 }} />
+                        }
+                        <span style={{ fontFamily: ROBOTO, fontSize: 13, color: "#64748b" }}>
+                          {event.logoUrl ? "Replace image" : "Upload PNG, JPEG, or other image"}
+                        </span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 

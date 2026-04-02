@@ -1,0 +1,6 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Profile icon">
+<path id="Vector" d="M3 18C3 16.9391 3.42143 15.9217 4.17157 15.1716C4.92172 14.4214 5.93913 14 7 14H15C16.0609 14 17.0783 14.4214 17.8284 15.1716C18.5786 15.9217 19 16.9391 19 18C19 18.5304 18.7893 19.0391 18.4142 19.4142C18.0391 19.7893 17.5304 20 17 20H5C4.46957 20 3.96086 19.7893 3.58579 19.4142C3.21071 19.0391 3 18.5304 3 18Z" stroke="var(--stroke-0, black)" stroke-width="1.7" stroke-linejoin="round"/>
+<path id="Vector_2" d="M11 10C12.6569 10 14 8.65685 14 7C14 5.34315 12.6569 4 11 4C9.34315 4 8 5.34315 8 7C8 8.65685 9.34315 10 11 10Z" stroke="var(--stroke-0, black)" stroke-width="1.7"/>
+</g>
+</svg>

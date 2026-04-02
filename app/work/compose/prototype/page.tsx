@@ -2,10 +2,19 @@
 
 import { useState, useEffect, useRef } from "react";
 
-// ── Figma asset URLs (valid 7 days) ───────────────────────────────────────
+// ── Nav icons (local — permanent) ─────────────────────────────────────────
+const IMG_MAIN_DASH     = "/images/compose/icons/main-dash.png";
+const IMG_PROJECTS      = "/images/compose/icons/project.png";
+const IMG_PROFILE       = "/images/compose/icons/profile.png";
+const IMG_SETTINGS      = "/images/compose/icons/settings.png";
+const IMG_PLUS_NEW      = "/images/compose/icons/plus.png";
+const IMG_PLUS          = "/images/compose/icons/plus.png";
+const IMG_PLUS_TILE     = "/images/compose/icons/plus.png";
+const IMG_ADD_ICON      = "/images/compose/icons/plus.png";
+const IMG_PLUS_CIRCLE   = "/images/compose/icons/plus.png";
+// ── Figma asset URLs (valid 7 days — replace if stale) ────────────────────
 const IMG_GOOGLE        = "https://www.figma.com/api/mcp/asset/be182a81-d2c1-4fa6-a5c8-3b1d5b2449a1";
 const IMG_GOOGLE_NEW    = "https://www.figma.com/api/mcp/asset/f0bbb72b-906b-4209-9874-a49159f83c78";
-const IMG_PLUS_NEW      = "https://www.figma.com/api/mcp/asset/fc81d47d-2c03-42dd-95b7-dcbdd6b865aa";
 const IMG_UPGRADE_NEW   = "https://www.figma.com/api/mcp/asset/35ae6aa9-81bb-43bc-b1d4-9b17b46a2994";
 const IMG_HISTORY_RND   = "https://www.figma.com/api/mcp/asset/ac8fa52e-436a-4f6c-ae8b-b7cf2ee46e55";
 const IMG_PROJECTS_LINE = "https://www.figma.com/api/mcp/asset/a1543df7-078e-4e17-a3d0-41113e95804f";
@@ -20,25 +29,18 @@ const IMG_BAND_LOGO_ED  = "https://www.figma.com/api/mcp/asset/b6149e63-fca2-49a
 const IMG_DIVIDER_LINE  = "https://www.figma.com/api/mcp/asset/32185413-237f-4dbc-bd8e-cfe5eb3b2011";
 const IMG_APPLE_LOGO    = "https://www.figma.com/api/mcp/asset/e1382b42-356a-4dea-bf20-0cf7044a3dc3";
 const IMG_EDIT_BTN_ICON = "https://www.figma.com/api/mcp/asset/7ce5aaba-ceaa-4020-a6a0-ae0545b2af43";
-const IMG_ADD_ICON      = "https://www.figma.com/api/mcp/asset/d745b79f-6504-416b-9433-d53729f764f2";
 const IMG_PROJECTS_TILE = "https://www.figma.com/api/mcp/asset/0232f7d4-083b-47b9-b907-e6b4f14abee9";
-const IMG_PLUS_TILE     = "https://www.figma.com/api/mcp/asset/09e47212-80a4-45f7-bbb9-702ddf73a08e";
 const IMG_HISTORY       = "https://www.figma.com/api/mcp/asset/944e33f1-faeb-4259-b9b1-2a08904ae5e2";
-const IMG_PROJECTS      = "https://www.figma.com/api/mcp/asset/31e8c20e-f12b-45b7-8168-1186e030913c";
-const IMG_PROFILE       = "https://www.figma.com/api/mcp/asset/78bce0c5-c987-4bcc-8c56-25e1abc1e3f9";
 const IMG_LOGOUT        = "https://www.figma.com/api/mcp/asset/2ac9ac49-2888-4ec7-83fc-81a01d1f84dc";
-const IMG_PLUS          = "https://www.figma.com/api/mcp/asset/c98eb402-d304-4803-b1ac-5cbe14ba73d5";
 const IMG_UPGRADE       = "https://www.figma.com/api/mcp/asset/c29709ce-70a2-40b7-b222-d6ebfc183441";
 const IMG_EDIT          = "https://www.figma.com/api/mcp/asset/b169f7f2-9d1d-466b-b196-ec583cdcdfd7";
 const IMG_BAND_LOGO     = "https://www.figma.com/api/mcp/asset/83df456c-5f0a-482a-88fe-fffd5659a8b9";
 const IMG_CALENDAR      = "https://www.figma.com/api/mcp/asset/b0b10f69-f24d-4d14-91f0-c8f4772789b9";
 const IMG_DUPLICATE     = "https://www.figma.com/api/mcp/asset/03875553-d699-463c-be2d-56ade500f231";
-const IMG_SETTINGS      = "https://www.figma.com/api/mcp/asset/abd0e797-e3c8-4b3a-81c8-393f1cd8f921";
-// Field category icons + UI icons
+// Field category icons
 const IMG_CAT_CORE    = "https://www.figma.com/api/mcp/asset/b6547287-d285-497a-9287-1341d48af809";
 const IMG_CAT_SECTION = "https://www.figma.com/api/mcp/asset/0487798e-5f74-445d-86be-24a47982fab0";
 const IMG_CAT_MUSIC   = "https://www.figma.com/api/mcp/asset/62973c52-a44a-4c92-9123-bd5e79102feb";
-const IMG_PLUS_CIRCLE = "https://www.figma.com/api/mcp/asset/e6f15018-b29a-4b5e-ace3-fda7c0392997";
 
 // ── Design constants ──────────────────────────────────────────────────────
 const ROBOTO  = "'Roboto', -apple-system, BlinkMacSystemFont, sans-serif";
@@ -341,7 +343,7 @@ function Sidebar({
         <div onClick={onMainDash} style={{ cursor: onMainDash ? "pointer" : "default" }}>
           <NavItem
             active={mainDashActive}
-            icon={<img src={IMG_SETTINGS} alt="" style={{ width: 24, height: 24 }} />}
+            icon={<img src={IMG_MAIN_DASH} alt="" style={{ width: 24, height: 24 }} />}
             label="Main Dash"
           />
         </div>
